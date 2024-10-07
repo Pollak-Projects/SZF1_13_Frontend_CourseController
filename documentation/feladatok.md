@@ -5,7 +5,7 @@ Markdown generacio
 Markdown editor
 Sidebars - Husi
 Page navigation (bal oldali menusav) - Barta
-Tartalomjegyzek
+Tartalomjegyzek - Dávid
 Kereso funkcio - Bogyó
 Kepfeltoltes frontend
 
