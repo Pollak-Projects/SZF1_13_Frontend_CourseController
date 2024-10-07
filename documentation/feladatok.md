@@ -6,7 +6,7 @@ Markdown editor
 Sidebars - Husi
 Page navigation (bal oldali menusav) - Barta
 Tartalomjegyzek
-Kereso funkcio
+Kereso funkcio - Bogyó
 Kepfeltoltes frontend
 
 Pelda egy kesz oldalrol:
