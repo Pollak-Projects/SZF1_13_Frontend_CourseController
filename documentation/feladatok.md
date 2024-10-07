@@ -3,7 +3,7 @@ User - Imre Herceg
 Tanar - Gabor
 Markdown generacio
 Markdown editor
-Sidebars
+Sidebars - Husi
 Page navigation (bal oldali menusav) - Barta
 Tartalomjegyzek
 Kereso funkcio
