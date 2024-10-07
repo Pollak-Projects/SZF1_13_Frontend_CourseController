@@ -4,7 +4,7 @@ Tanar - Gabor
 Markdown generacio
 Markdown editor
 Sidebars
-Page navigation (bal oldali menusav)
+Page navigation (bal oldali menusav) - Barta
 Tartalomjegyzek
 Kereso funkcio
 Kepfeltoltes frontend
