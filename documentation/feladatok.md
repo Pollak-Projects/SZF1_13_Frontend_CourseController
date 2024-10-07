@@ -3,10 +3,10 @@ User - Imre Herceg
 Tanar - Gabor
 Markdown generacio
 Markdown editor
-Sidebars
+Sidebars - Husi (Smut Paladin Alexander)
 Page navigation (bal oldali menusav) - Barta
-Tartalomjegyzek
-Kereso funkcio
+Tartalomjegyzek - Dávid
+Kereso funkcio - Bogyó
 Kepfeltoltes frontend
 
 Pelda egy kesz oldalrol:
