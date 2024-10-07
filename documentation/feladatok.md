@@ -3,7 +3,7 @@ User - Imre Herceg
 Tanar - Gabor
 Markdown generacio
 Markdown editor
-Sidebars - Husi
+Sidebars - Husi (Smut Paladin Alexander)
 Page navigation (bal oldali menusav) - Barta
 Tartalomjegyzek - Dávid
 Kereso funkcio - Bogyó
