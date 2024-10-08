@@ -7,7 +7,7 @@ Sidebars - Husi (Smut Paladin Alexander)
 Page navigation (bal oldali menusav) - Barta  
 Tartalomjegyzek - Dávid  
 Kereso funkcio - Bogyó  
-Kepfeltoltes frontend
+Kepfeltoltes frontend - Kevin
 
 Pelda egy kesz oldalrol:  
 https://okt.inf.szte.hu/prog2/gyakorlat/gyak10/tananyag/
