@@ -7,7 +7,7 @@
 
 <template>
 <div>
-
+  <input type="text" :placeholder="content" class="p-[2dvh_5dvw] shadow-figmaxl text-center rounded-3xl">
 </div>
 </template>
 

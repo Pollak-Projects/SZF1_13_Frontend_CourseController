@@ -1,8 +1,10 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 
+// TODO someday replace this with an auto generated router
+// pain in the butt to batch add new routes
 const routes = [
-    { path: '/', component: () => import("../../../feke_project - Copy/frontend/src/components/HelloWorld.vue") },
-    { path: '/admin', component: () => import("../../../feke_project - Copy/frontend/src/views/Admin.vue") },
+    { path: '/', component: () => import("./views/Home.vue") },
+    { path: '/admin', component: () => import("./views/Admin.vue") },
 ]
 
 const router = createRouter({
