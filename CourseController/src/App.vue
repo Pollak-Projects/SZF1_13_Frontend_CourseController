@@ -4,13 +4,20 @@ import Navigation from "./components/Navigation.vue";
 
 <template>
   <div class="flex items-center h-[100dvh]">
-
-    <section class=" h-[96dvh] w-1/6 bg-primary  mx-[2dvh] p-[1dvh] rounded-lg">
-      <Navigation/>
-    </section>
-    <section class="h-[96dvh] w-5/6 bg-primary  mx-[2dvh] p-[1dvh] rounded-lg">
-
-    </section>
+    <div>
+      <div id="backButton"></div>
+      <div id="pageSpecificNavbar"></div>
+      <div>
+        <button>User</button>
+        <div>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/admin">Admin</RouterLink>
+        </div>
+      </div>
+    </div>
+    <main>
+      <RouterView />
+    </main>
   </div>
 
 
