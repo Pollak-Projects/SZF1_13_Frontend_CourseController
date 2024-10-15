@@ -3,8 +3,11 @@
 </script>
 
 <template>
-<p class="bg-amber-800">I RENDER</p>
-<p>I RENDER</p>
+<div>
+  <p>Modulok</p>
+  <p>Feladatok</p>
+  <p>Felhasznalok</p>
+</div>
 </template>
 
 <style scoped>

@@ -4,10 +4,17 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <div>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/admin">Admin</RouterLink>
-    </nav>
+    <div>
+      <div id="backButton"></div>
+      <div id="pageSpecificNavbar"></div>
+      <div>
+        <button>User</button>
+        <div>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/admin">Admin</RouterLink>
+        </div>
+      </div>
+    </div>
     <main>
       <RouterView />
     </main>
@@ -15,16 +22,5 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
