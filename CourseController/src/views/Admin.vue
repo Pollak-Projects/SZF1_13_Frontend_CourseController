@@ -8,9 +8,8 @@ import AdminModule from "../components/AdminModule.vue";
 <template>
   <Teleport to="#rightCol">
     <div class="m-[2dvh_2dvw]">
-<!--      TODO add a backbutton to here using prime vue -->
       <RouterLink to="/">
-
+        <Button icon="pi pi-arrow-left" aria-label="Back" />
       </RouterLink>
     </div>
   </Teleport>
