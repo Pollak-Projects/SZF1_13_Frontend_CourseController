@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@primevue/themes": "^4.1.0",
+    "@volar/language-server": "2.4.0-alpha.18",
+    "@vue/language-server": "2.0.28",
     "primeicons": "^7.0.0",
     "primevue": "^4.1.0",
     "tailwindcss-primeui": "^0.3.4",

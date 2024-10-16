@@ -9,7 +9,7 @@ const toggle = (event) => {
 
 const items = ref([
   {
-    label: 'Navigate',
+    // label: 'Navigate',
     items: [
       {
         label: 'Home',
@@ -20,7 +20,12 @@ const items = ref([
         label: 'Admin',
         icon: 'pi pi-cog',
         route: '/admin',
-      }
+      },
+      {
+        label: 'Logout',
+        icon: 'pi pi-sign-out',
+        route: '/',
+      },
     ]
   }
 ]);
