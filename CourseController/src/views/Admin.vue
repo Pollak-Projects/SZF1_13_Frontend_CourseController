@@ -1,7 +1,15 @@
 <script setup>
-
 import AdminNavbar from "../components/AdminNavbar.vue";
 import AdminModule from "../components/AdminModule.vue";
+import {provide, ref} from "vue";
+
+const isAdmin = ref(false)
+
+provide('isAdmin', isAdmin)
+
+const toggleAdmin = () => {
+  isAdmin.value = !isAdmin.value
+}
 
 </script>
 
@@ -14,7 +22,7 @@ import AdminModule from "../components/AdminModule.vue";
     </div>
   </Teleport>
   <div class="flex flex-col gap-[20dvh]">
-    <AdminNavbar />
+    <AdminNavbar v-model:isAdmin="isAdmin" />
     <div class="flex flex-col items-center justify-center backdrop-blur-md shadow-figmaxl py-[3dvh] rounded-3xl">
       <div class="flex flex-col gap-[5dvh] mb-[5dvh]">
         <p class="place-self-center">Modulok</p>
@@ -23,6 +31,7 @@ import AdminModule from "../components/AdminModule.vue";
           <AdminModule content="Bejegyzes" />
           <AdminModule content="Feltoltes" />
           <AdminModule content="Ora" />
+          <Button label="Switch admin" icon="pi pi-cog" @click="toggleAdmin"  />
         </div>
       </div>
     </div>

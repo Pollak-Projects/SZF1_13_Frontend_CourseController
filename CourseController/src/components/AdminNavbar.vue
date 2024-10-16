@@ -1,4 +1,5 @@
 <script setup>
+const isAdmin = defineModel('isAdmin')
 
 </script>
 
@@ -7,8 +8,7 @@
 <div class="flex py-[0.5dvh] rounded-b-3xl shadow-figmaxl justify-evenly">
   <p>Modulok</p>
   <p>Feladatok</p>
-<!--  TODO this should ONLY be displayed if the user is admin -->
-  <p>Felhasznalok</p>
+  <p v-if="isAdmin">Felhasznalok</p>
 </div>
 </template>
 
