@@ -31,7 +31,7 @@
     "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
        "@/*": ["./src/*"],
-       "@log": ["./src/loggers/index.logger"],
+       "@logger": ["./src/loggers/Index.logger"],
        "@controllers/*": ["./src/controllers/*"],
        "@middlewares/*": ["./src/middlewares/*"],
        "@services/*": ["./src/services/*"],

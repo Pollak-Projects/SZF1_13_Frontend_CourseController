@@ -1,5 +1,6 @@
 import express from 'express';
 import {config} from "dotenv";
+import logger from "@logger";
 const app = express();
 config(); // Dotenv init
 
@@ -8,5 +9,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server listening on port ${process.env.PORT || 3000}`)
+  logger.info(`Server listening on port ${process.env.PORT || 3000}`)
 })
