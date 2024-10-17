@@ -8,7 +8,40 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Im definitly not gonna use mysql
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
+model Tantargy {
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  name              String
+  content           String
+  thema             String
+  tanarok           Tanar[]
+  TanarOntantargyak TanarOntantargyak[]
+}
+
+// ez rossz, na mind1
+model Tanar {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  email             String?
+  tantargyak        Tantargy[]
+  TanarOntantargyak TanarOntantargyak[]
+}
+
+// ?????? ez miert letezik lol
+model TanarOntantargyak {
+  tantargy   Tantargy @relation(fields: [tantargyId], references: [id])
+  tantargyId Int // relation scalar field (used in the `@relation` attribute above)
+  tanar      Tanar    @relation(fields: [tanarId], references: [id])
+  tanarId    Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([tantargyId, tanarId])
 }
