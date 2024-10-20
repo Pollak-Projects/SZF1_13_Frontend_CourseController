@@ -1,0 +1,112 @@
+import logger from "@logger";
+import {Request, Response} from "express";
+import {PrismaClient} from "@prisma/client";
+import AdminUserDTOs from "@/dtos/AdminUserDTOs.ts";
+import {z} from "zod";
+
+const log = logger("admin:user")
+
+const orm = new PrismaClient()
+
+export default class AdminUserController {
+
+    async createUser(req: Request, res: Response)  {
+        log.http("Adding new user")
+
+        const user: z.infer<typeof AdminUserDTOs.createUserDTO> = req.body
+
+        log.silly(user)
+
+        const result = await orm.user.create({
+            data: {
+                username: user.username,
+                hashedPwd: user.hashedPwd,
+                UserData: {
+                    create: {
+                        email: user.email,
+                        birthDate: user.birthDate,
+                    },
+                },
+            },
+        }).catch((err) => {
+            log.error(err)
+        });
+
+        log.silly("Added user:", {json: result})
+
+
+        res.send(user)
+
+    }
+
+    async getUsers(req: Request, res: Response)  {
+        log.http("Getting all users")
+        const users = await orm.user.findMany({
+            include: {
+                UserData: true,
+                TanarInfo: true,
+            }
+        }).catch((err) => {
+            log.error(err)
+        });
+
+        log.silly("All users", {json: users})
+
+        res.send(users)
+    }
+
+    async updateUser(req: Request, res: Response)  {
+        log.http("Updating user")
+
+        const user: z.infer<typeof AdminUserDTOs.updateUserDTO> = req.body
+
+        const users = await orm.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                username: user.username,
+                hashedPwd: user.hashedPwd,
+                UserData: {
+                    connectOrCreate: {
+                        where: {
+                            userId: user.id,
+                            email: user.email,
+                            birthDate: user.birthDate,
+                        },
+                        create: {
+                            email: user.email,
+                            birthDate: user.birthDate,
+                        }
+                    },
+                },
+            },
+        })
+
+        log.silly("Updated user", {json: users})
+
+        res.status(200).send(users)
+    }
+
+    async deleteUser(req: Request, res: Response)  {
+        log.debug("Deleting user")
+
+        const user: z.infer<typeof AdminUserDTOs.updateUserDTO> = req.body
+
+        const deletedUser = await orm.user.delete({
+            where: {
+                id: user.id,
+            },
+            include: {
+                UserData: true,
+            }
+        })
+
+        log.silly(deletedUser)
+
+
+        res.send(deletedUser)
+    }
+
+
+}
