@@ -32,8 +32,9 @@
     "paths": {
        "@/*": ["./src/*"],
        "@logger": ["./src/loggers/Index.logger"],
-       "@controllers/*": ["./src/controllers/*"],
        "@middlewares/*": ["./src/middlewares/*"],
+       "@controllers/*": ["./src/controllers/*"],
+       "@routers/*": ["./src/routers/*"],
        "@services/*": ["./src/services/*"],
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
@@ -89,7 +90,7 @@
 
     /* Type Checking */
     "strict": true,                                      /* Enable all strict type-checking options. */
-    // "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+    "noImplicitAny": false,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,                         /* When type checking, take into account 'null' and 'undefined'. */
     // "strictFunctionTypes": true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
     // "strictBindCallApply": true,                      /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
