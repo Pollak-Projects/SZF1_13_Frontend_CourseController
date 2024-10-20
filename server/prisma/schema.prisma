@@ -4,6 +4,14 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// Run locally:
+// npx prisma init
+// prisma migrate dev --name init
+
+// To update schema:
+// prisma migrate dev
+
+// Putting everything on delete cascasde might be a bad idea lol
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,34 +22,68 @@ datasource db {
   url      = "file:./db.sqlite"
 }
 
-model Tantargy {
-  id                Int                 @id @default(autoincrement())
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  name              String
-  content           String
-  thema             String
-  tanarok           Tanar[]
-  TanarOntantargyak TanarOntantargyak[]
+model User {
+  id        String @id @default(uuid())
+  username  String
+  hashedPwd String // won't be hashed for now
+
+  UserData  UserData[]
+  TanarInfo TanarInfo[]
 }
 
-// ez rossz, na mind1
+model UserData {
+  userId String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  email     String?
+  birthDate DateTime
+}
+
+model Targy {
+  id       String @id @default(uuid())
+  name     String
+  category String
+  evf      String
+
+  TargyInfo    TargyInfo[]
+  TargyContent TargyContent[]
+}
+
+model TargyInfo {
+  targyId String
+  tanarId String
+
+  targy Targy @relation(fields: [targyId], references: [id], onDelete: Cascade)
+  tanar Tanar @relation(fields: [tanarId], references: [id], onDelete: Cascade)
+
+  @@id([tanarId, targyId])
+}
+
+model TargyContent {
+  targyId String
+
+  targy Targy @relation(fields: [targyId], references: [id], onDelete: Cascade)
+
+  gyakorlat String
+  content   String
+
+  @@id([targyId])
+}
+
 model Tanar {
-  id                Int                 @id @default(autoincrement())
-  name              String
-  email             String?
-  tantargyak        Tantargy[]
-  TanarOntantargyak TanarOntantargyak[]
+  id   String @id @default(uuid())
+  name String
+
+  TargyInfo TargyInfo[]
+  TanarInfo TanarInfo[]
 }
 
-// ?????? ez miert letezik lol
-model TanarOntantargyak {
-  tantargy   Tantargy @relation(fields: [tantargyId], references: [id])
-  tantargyId Int // relation scalar field (used in the `@relation` attribute above)
-  tanar      Tanar    @relation(fields: [tanarId], references: [id])
-  tanarId    Int // relation scalar field (used in the `@relation` attribute above)
-  assignedAt DateTime @default(now())
-  assignedBy String
+model TanarInfo {
+  tanarId String
+  userId  String
 
-  @@id([tantargyId, tanarId])
+  tanar Tanar @relation(fields: [tanarId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tanarId])
 }
