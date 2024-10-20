@@ -22,36 +22,3 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 export default setLogger;
-
-// import pretty from "pino-pretty";
-// import pino from "pino";
-// import debugLib from "debug";
-//
-// const pinoPretty = pretty({
-//     colorize: true,
-//     useOnlyCustomProps: true,
-//     hideObject: true,
-//     // @ts-ignore
-//     customPrettifiers: {
-//         ns: ns => `${ns}` ,
-//         level: (logLevel, key, log, { label, labelColorized, colors}) =>
-//             // @ts-ignore
-//             `${labelColorized} ${log.ns}`,
-//     },
-//     ignore: "pid,hostname"
-// })
-//
-//
-// const pinoLogger = pino({
-//     level: 'trace',
-// }, pinoPretty)
-//
-// const pinoLoggerSTUFF = (name: string) => {
-//     return pinoLogger.child({ "ns": name })
-// }
-//
-// const debugMain = debugLib("express:server")
-//
-//
-// export default pinoLoggerSTUFF
-// export {pinoPretty, pinoLogger, debugMain, setLogger}
