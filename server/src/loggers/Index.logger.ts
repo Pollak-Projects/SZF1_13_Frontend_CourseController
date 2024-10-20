@@ -1,6 +1,6 @@
-import devLogger, {serviceLogger} from '@/loggers/Dev.logger.ts';
-import uatLogger from '@/loggers/Uat.logger.ts';
-import productionLogger from '@/loggers/Production.logger.ts';
+import devLogger, {serviceLogger} from '@/loggers/DevLogger.ts';
+import uatLogger from '@/loggers/UatLogger.ts';
+import productionLogger from '@/loggers/ProductionLogger.ts';
 import {Logger} from "winston";
 
 let logger: Logger = devLogger
