@@ -1,9 +1,9 @@
 import logger from "@logger";
 import {Request, Response} from "express";
-import debugLib from "debug";
 
 const log = logger("admin:admin")
 
+// TODO ask feke what should this do exactly, like what tables should it update
 export default class AdminAccessController {
 
     async createAccess(req: Request, res: Response)  {

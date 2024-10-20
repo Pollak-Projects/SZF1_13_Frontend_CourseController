@@ -4,9 +4,10 @@ import AdminAccessController from "@controllers/AdminAccessController.ts";
 import AdminSubjectController from "@controllers/AdminSubjectController.ts";
 import AdminTopicController from "@controllers/AdminTopicController.ts";
 import logger from "@logger"
-import {validateParseBody} from "@middlewares/PrismaParseMiddleware.ts";
+import {validateParseBody} from "@middlewares/ValidateParseMiddleware.ts";
 import {Prisma} from "@prisma/client";
 import AdminUserDTOs from "@/dtos/AdminUserDTOs.ts";
+import AdminSubjectDTOs from "@/dtos/AdminSubjectDTOs.ts";
 
 const adminUserController = new AdminUserController()
 const adminAccessController = new AdminAccessController()
@@ -21,7 +22,7 @@ const adminUserRouter = express.Router()
 adminUserRouter.post('/', validateParseBody(AdminUserDTOs.createUserDTO), adminUserController.createUser)
 adminUserRouter.get('/', adminUserController.getUsers)
 adminUserRouter.put('/', validateParseBody(AdminUserDTOs.updateUserDTO), adminUserController.updateUser)
-adminUserRouter.delete('/', adminUserController.deleteUser)
+adminUserRouter.delete('/', validateParseBody(AdminUserDTOs.createUserDTO), adminUserController.deleteUser)
 
 const adminAccessRouter = express.Router()
 adminAccessRouter.post('/', adminAccessController.createAccess)
@@ -30,10 +31,10 @@ adminAccessRouter.put('/', adminAccessController.updateAccess)
 adminAccessRouter.delete('/', adminAccessController.deleteAccess)
 
 const adminSubjectRouter = express.Router()
-adminSubjectRouter.post('/', adminSubjectController.createSubject)
+adminSubjectRouter.post('/', validateParseBody(AdminSubjectDTOs.createSubjectDTO), adminSubjectController.createSubject)
 adminSubjectRouter.get('/', adminSubjectController.getSubjects)
-adminSubjectRouter.put('/', adminSubjectController.updateSubject)
-adminSubjectRouter.delete('/', adminSubjectController.deleteSubject)
+adminSubjectRouter.put('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.updateSubject)
+adminSubjectRouter.delete('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.deleteSubject)
 
 const adminTopicRouter = express.Router()
 adminTopicRouter.post('/', adminTopicController.createTopic)

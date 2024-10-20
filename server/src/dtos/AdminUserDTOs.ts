@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-export default  class AdminUserDTOs {
+export default class AdminUserDTOs {
     static createUserDTO = z.object({
         username: z.string(),
         hashedPwd: z.string(),

@@ -8,6 +8,7 @@ const log = logger("admin:user")
 
 const orm = new PrismaClient()
 
+// TODO refactor this to try catch
 export default class AdminUserController {
 
     async createUser(req: Request, res: Response)  {
@@ -55,6 +56,7 @@ export default class AdminUserController {
         res.send(users)
     }
 
+    // TODO this is probably wrong, will not update values
     async updateUser(req: Request, res: Response)  {
         log.http("Updating user")
 
@@ -103,7 +105,6 @@ export default class AdminUserController {
         })
 
         log.silly(deletedUser)
-
 
         res.send(deletedUser)
     }
