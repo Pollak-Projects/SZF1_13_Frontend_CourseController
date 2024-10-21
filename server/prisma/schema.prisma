@@ -28,7 +28,10 @@ model User {
   id        String @id @default(uuid())
   username  String
   hashedPwd String // won't be hashed for now
-
+  displayed_name    String
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  SubjectTeachers   SubjectTeachers[] 
   UserData  UserData[]
   TanarInfo TanarInfo[]
 }
@@ -52,6 +55,15 @@ model Targy {
   TopicInfo    Topic?         @relation(fields: [topicId], references: [id], onDelete: Cascade)
   TargyInfo    TargyInfo[]
   TargyContent TargyContent[]
+  grade             String
+  description       String
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  category_id       String
+  profession_id     String
+  category          Category            @relation(fields: [category_id], references: [id])
+  profession        Profession          @relation(fields: [profession_id], references: [id])
+  SubjectTeachers   SubjectTeachers[]
 }
 
 model TargyInfo {
