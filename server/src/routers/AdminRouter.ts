@@ -8,6 +8,7 @@ import {validateParseBody} from "@middlewares/ValidateParseMiddleware.ts";
 import {Prisma} from "@prisma/client";
 import AdminUserDTOs from "@/dtos/AdminUserDTOs.ts";
 import AdminSubjectDTOs from "@/dtos/AdminSubjectDTOs.ts";
+import AdminTopicDTOs from "@/dtos/AdminTopicDTOs.ts";
 
 const adminUserController = new AdminUserController()
 const adminAccessController = new AdminAccessController()
@@ -37,10 +38,10 @@ adminSubjectRouter.put('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO)
 adminSubjectRouter.delete('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.deleteSubject)
 
 const adminTopicRouter = express.Router()
-adminTopicRouter.post('/', adminTopicController.createTopic)
+adminTopicRouter.post('/', validateParseBody(AdminTopicDTOs.createTopicDTO), adminTopicController.createTopic)
 adminTopicRouter.get('/', adminTopicController.getTopics)
-adminTopicRouter.put('/', adminTopicController.updateTopics)
-adminTopicRouter.delete('/', adminTopicController.deleteTopic)
+adminTopicRouter.put('/', validateParseBody(AdminTopicDTOs.updateTopicDTO), adminTopicController.updateTopics)
+adminTopicRouter.delete('/', validateParseBody(AdminTopicDTOs.updateTopicDTO), adminTopicController.deleteTopic)
 
 adminRouter.use('/user', adminUserRouter)
 adminRouter.use('/access', adminAccessRouter)
