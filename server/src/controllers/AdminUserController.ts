@@ -18,25 +18,31 @@ export default class AdminUserController {
 
         log.silly(user)
 
-        const result = await orm.user.create({
-            data: {
-                username: user.username,
-                hashedPwd: user.hashedPwd,
-                UserData: {
-                    create: {
-                        email: user.email,
-                        birthDate: user.birthDate,
+        try{
+            const result = await orm.user.create({
+                data: {
+                    username: user.username,
+                    hashedPwd: user.hashedPwd,
+                    UserData: {
+                        create: {
+                            email: user.email,
+                            birthDate: user.birthDate,
+                        },
                     },
                 },
-            },
-        }).catch((err) => {
+            }).catch((err) => {
+                log.error(err)
+            });
+
+            log.silly("Added user:", {json: result})
+
+
+            res.send(user)
+        }
+        catch(err) {
             log.error(err)
-        });
-
-        log.silly("Added user:", {json: result})
-
-
-        res.send(user)
+            res.status(500).send("Internal server error")
+        }
 
     }
 
