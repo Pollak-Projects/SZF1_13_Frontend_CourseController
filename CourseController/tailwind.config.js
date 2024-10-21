@@ -2,7 +2,7 @@
 export default {
   content: {
     enabled: true,
-    content: ["./public/**/*.{js,ts,tsx,html,vue,css}",
+    content: ["./public/**/*.html",
       "./src/**/*.{js,ts,tsx,html,vue,css}",
       "./src/**/*.{js,ts,tsx,html,vue,css}",
       "./components/**/*.{js,ts,tsx,html,vue,css}",
