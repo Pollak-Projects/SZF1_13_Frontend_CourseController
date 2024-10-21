@@ -2,7 +2,11 @@
 export default {
   content: {
     enabled: true,
-    content: ["./public/**/*.html", "./src/**/*.vue", "./src/**/*.js"],
+    content: ["./public/**/*.{js,ts,tsx,html,vue,css}",
+      "./src/**/*.{js,ts,tsx,html,vue,css}",
+      "./src/**/*.{js,ts,tsx,html,vue,css}",
+      "./components/**/*.{js,ts,tsx,html,vue,css}",
+      "./slots/**/*.{js,ts,tsx,html,vue,css}",],
   },
   theme: {
     extend: {

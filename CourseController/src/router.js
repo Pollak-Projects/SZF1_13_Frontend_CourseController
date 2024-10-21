@@ -5,6 +5,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 const routes = [
     { path: '/', component: () => import("./views/Home.vue") },
     { path: '/admin', component: () => import("./views/Admin.vue") },
+    { path: '/landing', component: () => import("./views/LandingPage.vue") },
 ]
 
 const router = createRouter({

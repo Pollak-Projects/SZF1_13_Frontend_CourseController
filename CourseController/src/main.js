@@ -9,6 +9,7 @@ import Aura from '@primevue/themes/aura';
 createApp(App)
     .use(router)
     .use(PrimeVue, {
+        unstyled: true,
         theme: {
             preset: Aura,
             options: {
