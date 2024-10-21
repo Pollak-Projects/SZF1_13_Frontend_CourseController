@@ -10,7 +10,9 @@
 
 // To update schema:
 // prisma migrate dev
+// npx prisma db pull
 
+// TODO Make naming more concise, this will be painful
 // Putting everything on delete cascasde might be a bad idea lol
 generator client {
   provider = "prisma-client-js"
@@ -45,6 +47,9 @@ model Targy {
   category String
   evf      String
 
+  topicId String
+
+  TopicInfo    Topic?         @relation(fields: [topicId], references: [id], onDelete: Cascade)
   TargyInfo    TargyInfo[]
   TargyContent TargyContent[]
 }
@@ -86,4 +91,11 @@ model TanarInfo {
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, tanarId])
+}
+
+model Topic {
+  id        String @id @default(uuid())
+  topicName String
+
+  Subjects Targy[]
 }
