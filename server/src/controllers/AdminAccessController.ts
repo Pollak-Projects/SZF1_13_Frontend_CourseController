@@ -7,21 +7,21 @@ const log = logger("admin:admin")
 export default class AdminAccessController {
 
     async createAccess(req: Request, res: Response)  {
-        log.debug("I exist")
+        log.debug("Cogito, ergo sum")
         res.send('test')
     }
 
     async getAccesses(req: Request, res: Response)  {
-        log.debug("I exist")
+        log.debug("Cogito, ergo sum")
         res.send('test')
     }
 
     async updateAccess(req: Request, res: Response)  {
-        log.debug("I exist")
+        log.debug("Cogito, ergo sum")
         res.send('test')
     }
     async deleteAccess(req: Request, res: Response)  {
-        log.debug("I exist")
+        log.debug("Cogito, ergo sum")
         res.send('test')
     }
 }
