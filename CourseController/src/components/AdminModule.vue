@@ -3,6 +3,7 @@
     // Jo kerdes hogy itt miert kell type js-ben lol
     content: String
   })
+
 </script>
 
 <template>

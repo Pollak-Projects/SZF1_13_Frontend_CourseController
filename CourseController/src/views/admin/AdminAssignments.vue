@@ -1,43 +1,23 @@
 <script setup>
 
-import {provide, ref} from "vue";
-import BaseLayout from "../slots/BaseLayout.vue";
-
-const isAdmin = ref(false)
-
-provide('isAdmin', isAdmin)
-
-const toggleAdmin = () => {
-  isAdmin.value = !isAdmin.value
-}
+import BaseLayout from "../../slots/BaseLayout.vue";
+import UserIcon from "../../components/UserIcon.vue";
 
 </script>
-
 <template>
-
   <BaseLayout>
     <template #left>
       <Teleport to="#rightCol">
         <div class="m-[2dvh_2dvw]">
-          <RouterLink to="/">
+          <RouterLink to="/admin">
             <Button icon="pi pi-arrow-left" aria-label="Back" />
           </RouterLink>
         </div>
       </Teleport>
     </template>
-    <template #main>
-      <router-view/>
-
-    </template>
+    <template #main></template>
     <template #right>
       <UserIcon/>
     </template>
   </BaseLayout>
-
-
-
 </template>
-
-<style scoped>
-
-</style>

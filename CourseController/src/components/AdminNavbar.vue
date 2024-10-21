@@ -1,14 +1,15 @@
 <script setup>
+
 const isAdmin = defineModel('isAdmin')
 
 </script>
 
 <template>
-<!--  TODO add actual buttons with pages behind them-->
+
 <div class="flex py-[0.5dvh] rounded-b-3xl shadow-figmaxl justify-evenly">
-  <p>Modulok</p>
-  <p>Feladatok</p>
-  <p v-if="isAdmin">Felhasznalok</p>
+  <RouterLink to="/admin/modules">Modulok</RouterLink>
+  <RouterLink to="/admin/assignments">Feladatok</RouterLink>
+  <RouterLink v-if="isAdmin" to="/admin/users">Felhasználók</RouterLink>
 </div>
 </template>
 
