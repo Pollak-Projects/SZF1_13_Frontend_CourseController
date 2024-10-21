@@ -1,5 +1,4 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
-
 // TODO someday replace this with an auto generated router
 // pain in the butt to batch add new routes
 const routes = [
