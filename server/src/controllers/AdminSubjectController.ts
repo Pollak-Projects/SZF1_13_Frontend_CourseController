@@ -8,6 +8,7 @@ const log = logger("admin:subject")
 
 const orm = new PrismaClient()
 
+// TODO add topic variable to this controller
 export default class AdminSubjectController {
 
     async createSubject(req: Request, res: Response)  {
