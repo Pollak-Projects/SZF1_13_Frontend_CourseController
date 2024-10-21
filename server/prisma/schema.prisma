@@ -4,11 +4,98 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// Run locally:
+// npx prisma init
+// prisma migrate dev --name init
+
+// To update schema:
+// prisma migrate dev
+// npx prisma db pull
+
+// TODO Make naming more concise, this will be painful
+// Putting everything on delete cascasde might be a bad idea lol
 generator client {
   provider = "prisma-client-js"
 }
 
+// Im definitly not gonna use mysql
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./db.sqlite"
+}
+
+model User {
+  id        String @id @default(uuid())
+  username  String
+  hashedPwd String // won't be hashed for now
+
+  UserData  UserData[]
+  TanarInfo TanarInfo[]
+}
+
+model UserData {
+  userId String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  email     String?
+  birthDate DateTime
+}
+
+model Targy {
+  id       String @id @default(uuid())
+  name     String
+  category String
+  evf      String
+
+  topicId String
+
+  TopicInfo    Topic?         @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  TargyInfo    TargyInfo[]
+  TargyContent TargyContent[]
+}
+
+model TargyInfo {
+  targyId String
+  tanarId String
+
+  targy Targy @relation(fields: [targyId], references: [id], onDelete: Cascade)
+  tanar Tanar @relation(fields: [tanarId], references: [id], onDelete: Cascade)
+
+  @@id([tanarId, targyId])
+}
+
+model TargyContent {
+  targyId String
+
+  targy Targy @relation(fields: [targyId], references: [id], onDelete: Cascade)
+
+  gyakorlat String
+  content   String
+
+  @@id([targyId])
+}
+
+model Tanar {
+  id   String @id @default(uuid())
+  name String
+
+  TargyInfo TargyInfo[]
+  TanarInfo TanarInfo[]
+}
+
+model TanarInfo {
+  tanarId String
+  userId  String
+
+  tanar Tanar @relation(fields: [tanarId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tanarId])
+}
+
+model Topic {
+  id        String @id @default(uuid())
+  topicName String
+
+  Subjects Targy[]
 }
