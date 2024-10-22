@@ -20,6 +20,11 @@ const items = ref([
         label: 'Admin',
         icon: 'pi pi-cog',
         route: '/admin',
+      },
+      {
+        label: 'Szerkesztő',
+        icon: '',
+        route: '/addupdate',
       }
     ]
   }

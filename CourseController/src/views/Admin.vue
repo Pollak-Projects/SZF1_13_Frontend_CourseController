@@ -4,13 +4,6 @@ import AdminNavbar from "../components/AdminNavbar.vue";
 import AdminModule from "../components/AdminModule.vue";
 
 
-export default {
-  methods: {
-    goToAbout() {
-      this.$router.push({ name: 'About' })
-    }
-  }
-}
 
 </script>
 
@@ -33,7 +26,6 @@ export default {
           <AdminModule content="Bejegyzes" />
           <AdminModule content="Feltoltes" />
           <AdminModule content="Ora" />
-          <button @click="goToAU">AppUpdate</button>
         </div>
       </div>
     </div>

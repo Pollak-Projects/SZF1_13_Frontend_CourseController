@@ -4,6 +4,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 const routes = [
     { path: '/', component: () => import("./views/Home.vue") },
     { path: '/admin', component: () => import("./views/Admin.vue") },
+    { path: '/addupdate', component: () => import("./components/AddUpdate.vue") },
 ]
 
 const router = createRouter({
