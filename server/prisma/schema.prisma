@@ -25,89 +25,110 @@ datasource db {
 }
 
 model User {
-  id              String            @id @default(uuid())
-  username        String
-  hashedPwd       String // won't be hashed for now
-  displayed_name  String
-  created_at      DateTime          @default(now())
-  updated_at      DateTime          @updatedAt
-  SubjectTeachers SubjectTeachers[]
+  Id              String           @id @default(uuid())
+  Username        String
+  HashedPwd       String // won't be hashed for now
+  Displayed_name  String
+  Created_at      DateTime         @default(now())
+  Updated_at      DateTime         @updatedAt
+  SubjectTeachers SubjectTeacher[]
   UserData        UserData[]
-  TanarInfo       TanarInfo[]
+  TeacherInfo     TeacherInfo[]
 }
 
 model UserData {
-  userId String @id @default(uuid())
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserId String @id @default(uuid())
+  User   User   @relation(fields: [UserId], references: [Id], onDelete: Cascade)
 
-  email     String?
-  birthDate DateTime
+  Email     String?
+  BirthDate DateTime
 }
 
-model Targy {
-  id       String @id @default(uuid())
-  name     String
-  category String
-  evf      String
+model Subject {
+  Id       String @id @default(uuid())
+  Name     String
+  Category String
+  Evf      String
 
-  topicId String
+  TopicId String
 
-  TopicInfo       Topic?            @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  TargyInfo       TargyInfo[]
-  TargyContent    TargyContent[]
-  grade           String
-  description     String
-  created_at      DateTime          @default(now())
-  updated_at      DateTime          @updatedAt
-  category_id     String
-  profession_id   String
-  category        Category          @relation(fields: [category_id], references: [id])
-  profession      Profession        @relation(fields: [profession_id], references: [id])
-  SubjectTeachers SubjectTeachers[]
+  TopicInfo       Topic?           @relation(fields: [TopicId], references: [Id], onDelete: Cascade)
+  SubjectInfo     SubjectInfo[]
+  SubjectContent  SubjectContent[]
+  SubjectTeachers SubjectTeacher[]
+
+  Grade        String
+  Description  String
+  CreatedAt    DateTime   @default(now())
+  UpdatedAt    DateTime   @updatedAt
+  CategoryId   String
+  ProfessionId String
+  Profession   Profession @relation(fields: [ProfessionId], references: [Id])
 }
 
-model TargyInfo {
-  targyId String
-  tanarId String
+model SubjectInfo {
+  SubjectId String
+  TeacherId String
 
-  targy Targy @relation(fields: [targyId], references: [id], onDelete: Cascade)
-  tanar Tanar @relation(fields: [tanarId], references: [id], onDelete: Cascade)
+  Subject Subject @relation(fields: [SubjectId], references: [Id], onDelete: Cascade)
+  Teacher Teacher @relation(fields: [TeacherId], references: [Id], onDelete: Cascade)
 
-  @@id([tanarId, targyId])
+  @@id([TeacherId, SubjectId])
 }
 
-model TargyContent {
-  targyId String
+model SubjectContent {
+  SubjectId String
 
-  targy Targy @relation(fields: [targyId], references: [id], onDelete: Cascade)
+  Subject Subject @relation(fields: [SubjectId], references: [Id], onDelete: Cascade)
 
-  gyakorlat String
-  content   String
+  Exercise String
+  Content  String
 
-  @@id([targyId])
+  @@id([SubjectId])
 }
 
-model Tanar {
-  id   String @id @default(uuid())
-  name String
+model Teacher {
+  Id   String @id @default(uuid())
+  Name String
 
-  TargyInfo TargyInfo[]
-  TanarInfo TanarInfo[]
+  SubjectInfo    SubjectInfo[]
+  TeacherInfo    TeacherInfo[]
+  SubjectTeacher SubjectTeacher[]
 }
 
-model TanarInfo {
-  tanarId String
-  userId  String
+model TeacherInfo {
+  TeacherId String
+  UserId    String
 
-  tanar Tanar @relation(fields: [tanarId], references: [id], onDelete: Cascade)
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Teacher Teacher @relation(fields: [TeacherId], references: [Id], onDelete: Cascade)
+  User    User    @relation(fields: [UserId], references: [Id], onDelete: Cascade)
 
-  @@id([userId, tanarId])
+  @@id([UserId, TeacherId])
 }
 
 model Topic {
-  id        String @id @default(uuid())
-  topicName String
+  Id        String @id @default(uuid())
+  TopicName String
 
-  Subjects Targy[]
+  Subjects Subject[]
+}
+
+model SubjectTeacher {
+  TeacherId String
+  SubjectId String
+
+  Teacher Teacher @relation(fields: [TeacherId], references: [Id], onDelete: Cascade)
+  Subject Subject @relation(fields: [SubjectId], references: [Id], onDelete: Cascade)
+  User    User?   @relation(fields: [userId], references: [Id])
+  userId  String?
+
+  @@id([TeacherId, SubjectId])
+}
+
+model Profession {
+  Id String @id @default(uuid())
+
+  Name String
+
+  Subject Subject[]
 }
