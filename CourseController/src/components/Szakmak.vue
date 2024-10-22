@@ -25,6 +25,7 @@ export default {
           :class="{ active: activeIndex === index }">
         {{ item }}
       </li>
+
     </ul>
   </div>
 </template>
@@ -41,6 +42,7 @@ export default {
   margin: 0;
   position: absolute;
   top: 30%;
+  margin-left: 500px;
 }
 
 .list-item {
@@ -51,9 +53,10 @@ export default {
   padding: 10px;
   margin: 5px 0;
   text-align: center;
-  transition: transform 0.5s ease;
-  transform: translateX(70%);
-  border-radius: 30px;
+  transition: transform 0.3s ease;
+  transform: translateX(40%);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,6 +73,11 @@ export default {
 .li-hover{
   cursor: pointer;
   filter: blur(0);
+}
+
+.felirat{
+  text-align: left;
+  vertical-align: bottom;
 }
 
 </style>
