@@ -46,60 +46,76 @@ export default class AdminUserController {
 
     }
 
-    async getUsers(req: Request, res: Response)  {
+    async getUsers(req: Request, res: Response) {
         log.http("Getting all users")
-        const users = await orm.user.findMany({
-            include: {
-                UserData: true,
-                TanarInfo: true,
-            }
-        }).catch((err) => {
+        try {
+
+            const users = await orm.user.findMany({
+                include: {
+                    UserData: true,
+                    TanarInfo: true,
+                }
+            }).catch((err) => {
+                log.error(err)
+            });
+
+            log.silly("All users", {json: users})
+
+            res.send(users)
+
+        } catch (err) {
             log.error(err)
-        });
-
-        log.silly("All users", {json: users})
-
-        res.send(users)
+            res.status(500).send("Internal server error")
+        }
     }
 
     // TODO this is probably wrong, will not update values
-    async updateUser(req: Request, res: Response)  {
+    async updateUser(req: Request, res: Response) {
         log.http("Updating user")
 
         const user: z.infer<typeof AdminUserDTOs.updateUserDTO> = req.body
 
-        const users = await orm.user.update({
-            where: {
-                id: user.id,
-            },
-            data: {
-                username: user.username,
-                hashedPwd: user.hashedPwd,
-                UserData: {
-                    connectOrCreate: {
-                        where: {
-                            userId: user.id,
-                            email: user.email,
-                            birthDate: user.birthDate,
+        try {
+
+            const users = await orm.user.update({
+                where: {
+                    id: user.id,
+                },
+                data: {
+                    username: user.username,
+                    hashedPwd: user.hashedPwd,
+                    UserData: {
+                        connectOrCreate: {
+                            where: {
+                                userId: user.id,
+                                email: user.email,
+                                birthDate: user.birthDate,
+                            },
+                            create: {
+                                email: user.email,
+                                birthDate: user.birthDate,
+                            }
                         },
-                        create: {
-                            email: user.email,
-                            birthDate: user.birthDate,
-                        }
                     },
                 },
-            },
-        })
+            })
 
-        log.silly("Updated user", {json: users})
+            log.silly("Updated user", {json: users})
 
-        res.status(200).send(users)
+            res.status(200).send(users)
+        }catch (err){
+            log.error(err)
+            res.status(500).send("Internal server error")
+        }
     }
+
 
     async deleteUser(req: Request, res: Response)  {
         log.debug("Deleting user")
 
         const user: z.infer<typeof AdminUserDTOs.updateUserDTO> = req.body
+
+        try{
 
         const deletedUser = await orm.user.delete({
             where: {
@@ -113,6 +129,12 @@ export default class AdminUserController {
         log.silly(deletedUser)
 
         res.send(deletedUser)
+        }
+        catch (err) {
+            log.error(err)
+            res.status(500).send("Internal server error")
+
+        }
     }
 
 
