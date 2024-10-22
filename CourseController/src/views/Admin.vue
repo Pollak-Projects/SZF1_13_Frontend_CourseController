@@ -17,13 +17,11 @@ const toggleAdmin = () => {
 
   <BaseLayout>
     <template #left>
-      <Teleport to="#rightCol">
         <div class="m-[2dvh_2dvw]">
           <RouterLink to="/">
             <Button icon="pi pi-arrow-left" aria-label="Back" />
           </RouterLink>
         </div>
-      </Teleport>
     </template>
     <template #main>
       <router-view/>
