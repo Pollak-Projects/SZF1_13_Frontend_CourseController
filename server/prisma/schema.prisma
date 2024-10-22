@@ -10,7 +10,7 @@
 
 // To update schema:
 // prisma migrate dev
-// npx prisma db pull
+// npx prisma generate
 
 // TODO Make naming more concise, this will be painful
 // Putting everything on delete cascasde might be a bad idea lol
@@ -25,12 +25,15 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(uuid())
-  username  String
-  hashedPwd String // won't be hashed for now
-
-  UserData  UserData[]
-  TanarInfo TanarInfo[]
+  id              String            @id @default(uuid())
+  username        String
+  hashedPwd       String // won't be hashed for now
+  displayed_name  String
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  SubjectTeachers SubjectTeachers[]
+  UserData        UserData[]
+  TanarInfo       TanarInfo[]
 }
 
 model UserData {
@@ -49,9 +52,18 @@ model Targy {
 
   topicId String
 
-  TopicInfo    Topic?         @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  TargyInfo    TargyInfo[]
-  TargyContent TargyContent[]
+  TopicInfo       Topic?            @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  TargyInfo       TargyInfo[]
+  TargyContent    TargyContent[]
+  grade           String
+  description     String
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  category_id     String
+  profession_id   String
+  category        Category          @relation(fields: [category_id], references: [id])
+  profession      Profession        @relation(fields: [profession_id], references: [id])
+  SubjectTeachers SubjectTeachers[]
 }
 
 model TargyInfo {
