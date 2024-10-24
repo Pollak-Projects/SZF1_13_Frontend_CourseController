@@ -8,6 +8,7 @@
   <p>Modulok</p>
   <p>Feladatok</p>
   <p>Felhasznalok</p>
+  <p>Kijelentkezés</p>
 </div>
 </template>
 
