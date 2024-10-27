@@ -7,7 +7,6 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 
 createApp(App)
-    .use(router)
     .use(PrimeVue, {
         unstyled: true,
         theme: {
@@ -20,4 +19,5 @@ createApp(App)
             }
         }
     })
+    .use(router)
     .mount('#app')

@@ -7,10 +7,13 @@
     <div id="leftSide" class="fixed-top-right text-xl">
         <ul class=" flex space-x-4">
       <li>
-        <router-link to="/list" class="text-white underline">Megtekintés</router-link>
+        <RouterLink to="list" class="text-white underline">Megtekintés</RouterLink>
       </li>
       <li>
-        <router-link to="/login" class="text-white underline">Bejelentkezés</router-link>
+        <router-link to="login" class="text-white underline">Bejelentkezés</router-link>
+      </li>
+      <li>
+        <router-link to="admin" class="text-white underline">Admin</router-link>
       </li>
     </ul>
     </div>
