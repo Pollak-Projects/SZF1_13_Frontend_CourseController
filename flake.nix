@@ -15,6 +15,7 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             nodejs
+            openssl
             nodePackages.prisma
           ];
         };
