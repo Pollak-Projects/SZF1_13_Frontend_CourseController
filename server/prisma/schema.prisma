@@ -6,10 +6,10 @@
 
 // Run locally:
 // npx prisma init
-// prisma migrate dev --name init
+// npx prisma migrate dev --name init
 
 // To update schema:
-// prisma migrate dev
+// npx prisma migrate dev
 // npx prisma generate
 
 // TODO Make naming more concise, this will be painful
