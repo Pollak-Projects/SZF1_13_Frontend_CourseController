@@ -65,6 +65,90 @@ const toggleDropdown2 = () => {
             <p>Even more content for dropdown 1</p>
           </div>
 
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
+          <div v-if="isOpenTasks" class="flex items-center">
+            <h2 :class="['text-3xl', isOpen1 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown1" style="flex-grow: 1; cursor: pointer;">Big Tananyag 1</h2>
+            <span class="arrow" :class="{ 'open': isOpen1 }" id="nem-kijelolheto" @click.stop="toggleDropdown1">&#9660;</span>
+          </div>
+          <div v-if="isOpen1" class="dropdown-content">
+            <p>Content for dropdown 1</p>
+            <p>More content for dropdown 1</p>
+            <p>Even more content for dropdown 1</p>
+          </div>
+
           <div v-if="isOpenTasks" class="flex items-center">
             <h2 :class="['text-3xl', isOpen2 ? 'text-pink-400' : 'text-gray-500']" id="nem-kijelolheto" @click="toggleDropdown2" style="flex-grow: 1; cursor: pointer;">Big Tananyag 2</h2>
             <span class="arrow" :class="{ 'open': isOpen2 }" id="nem-kijelolheto" @click.stop="toggleDropdown2">&#9660;</span>
@@ -150,6 +234,31 @@ h2:hover {
   user-select: none;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
 
+.view-container {
+  transition: width 0.5s ease;
+  width: 70vw;
+}
+.view-container.expanded {
+  width: 95vw;
+}
+
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d346f0;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #da7be2;
+}
 
 </style>
