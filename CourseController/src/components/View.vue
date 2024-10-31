@@ -1,107 +1,98 @@
 <script setup>
 import { ref } from 'vue';
 
-const isEditingContent = ref(false);
-const isEditingContent1 = ref(false); // Új állapot a content1-hez
-const isEditingCode = ref(false);
-const content = ref(`
-  <h2 class="text-3xl text-cyan-600">HTML alapok 1.</h2>
-  <p class="break-words">Ez egy példa szöveg, amely a tartalom szerkesztésére szolgál. Itt sok információ található...</p>
-  <p class="break-words">További tartalom, hogy a div túlfolyjon...</p>
-  <p class="break-words">Még egy bekezdés, ami biztosítja, hogy a tartalom elérje a div határait.</p>
-  <p class="break-words">Még egy bekezdés...</p>
-  <p class="break-words">További tartalom, hogy a div túlfolyjon...</p>
-`);
-const content1 = ref(`
-  <h2 class="text-3xl text-cyan-600">HTML alapok 2.</h2>
-  <p class="break-words">Ez egy másik példa szöveg, amely a tartalom szerkesztésére szolgál. Itt több információ található...</p>
-  <p class="break-words">További tartalom, hogy a div túlfolyjon...</p>
-  <p class="break-words">Még egy bekezdés, ami biztosítja, hogy a tartalom elérje a div határait.</p>
-  <p class="break-words">Még egy bekezdés...</p>
-  <p class="break-words">További tartalom, hogy a div túlfolyjon...</p>
-`);
+const contents = ref([
+  {
+    id: 1,
+    title: 'HTML alapok 1.',
+    content: `...asdfghjkjksdfhvkjsdfnvjkdsbfhjkdsbjkfdsbhfhjkbdshjkfbdhjsfbhjdsbfhdsvhjfbvdshjfbgdsiukjfbhdijksubfhiudfjksbghfjkdfsbgghijuzdgsioufdhdfiuzghiuzdfh`,
+    code: `...asdasbdjkfvhdfhijkuvbndfhjbfghjdfgdfikuhjfgioudfhfijkudfhfgiuhdfijugvhdsiufghdfikughdfhjbghjdfghijkdghikudfhg`,
+    isEditingContent: false,
+    isEditingCode: false,
+  },
+  {
+    id: 2,
+    title: 'HTML alapok 2.',
+    content: `...`,
+    code: `...`,
+    isEditingContent: false,
+    isEditingCode: false,
+  },
+]);
 
-const codeSnippet = ref(`
-  <div>
-    <h1>Hello, World!</h1>
-    <p>Ez egy példa kódrészlet.</p>
-  </div>
-`);
+const lastUpdated = ref(new Date().toLocaleDateString('hu-HU')); // Aktuális dátum formázva
 
-const toggleEditContent = () => {
-  isEditingContent.value = !isEditingContent.value;
+const toggleEditContent = (index) => {
+  contents.value[index].isEditingContent = !contents.value[index].isEditingContent;
 };
 
-const toggleEditContent1 = () => {
-  isEditingContent1.value = !isEditingContent1.value; // Toggle for content1
+const toggleEditCode = (index) => {
+  contents.value[index].isEditingCode = !contents.value[index].isEditingCode;
 };
 
-const toggleEditCode = () => {
-  isEditingCode.value = !isEditingCode.value;
+const saveContent = (index, event) => {
+  contents.value[index].content = event.target.innerHTML;
+  contents.value[index].isEditingContent = false;
+  lastUpdated.value = new Date().toLocaleDateString('hu-HU');
+   // Dátum frissítése
 };
 
-const saveContent = (event) => {
-  content.value = event.target.innerHTML;
-  isEditingContent.value = false;
-};
-
-const saveContent1 = (event) => {
-  content1.value = event.target.innerHTML; // Save content1
-  isEditingContent1.value = false;
-};
-
-const saveCode = (event) => {
-  codeSnippet.value = event.target.innerHTML;
-  isEditingCode.value = false;
+const saveCode = (index, event) => {
+  contents.value[index].code = event.target.innerHTML;
+  contents.value[index].isEditingCode = false;
+  lastUpdated.value = new Date().toLocaleDateString('hu-HU'); // Dátum frissítése
 };
 </script>
-
 
 <template>
   <div class="justify-center items-center h-screen">
     <div class="mt-28 border-1 rounded-2xl border-black mx-auto bg-black bg-opacity-10 mr-28 ml-10" style="height: 75%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); overflow: auto; padding: 16px;">
-    <div>
-      <h1 class="text-center text-gray-500 text-3xl p-4">HTML Alapok</h1>
-    </div>
-    <span @click="toggleEditContent" class="edit-icon cursor-pointer">
-        ✏️
-    </span>
-      <div class="content-section">
-        <div v-if="isEditingContent" class="editor" contenteditable="true" @blur="saveContent" v-html="content"></div>
-        <div v-else v-html="content"></div>
-        <div class="edit-icon-container">
-        </div>
+      <div>
+        <h1 class="text-center text-gray-500 text-3xl p-4">HTML Alapok</h1>
       </div>
-      <span @click="toggleEditContent1" class="edit-icon cursor-pointer">
-        ✏️
-      </span>
-      <div class="content-section">
-        <div v-if="isEditingContent1" class="editor" contenteditable="true" @blur="saveContent1" v-html="content1"></div>
-        <div v-else v-html="content1"></div>
-        <div class="edit-icon-container">
-
+      <div v-for="(item, index) in contents" :key="item.id" class="content-section mb-4">
+        <div class="flex items-center mb-2">
+          <h2 class="mr-2">{{ item.title }}</h2>
+          <span @click="toggleEditContent(index)" class="edit-icon cursor-pointer">✏️</span>
         </div>
+        <div v-if="item.isEditingContent" class="editor" contenteditable="true" @blur="saveContent(index, $event)" v-html="item.content"></div>
+
+        <div v-else v-html="item.content"></div>
+
+        <div class="flex items-center justify-between mt-4">
+          <span class="mr-2">Kód:</span>
+          <span @click="toggleEditCode(index)" class="edit-icon cursor-pointer edit-codeI">✏️</span>
+        </div>
+        <div v-if="item.isEditingCode" class="code-editor" contenteditable="true" @blur="saveCode(index, $event)" v-html="item.code"></div>
+        <pre v-else class="code-snippet" v-html="item.code"></pre>
       </div>
 
-      <h2 class="text-3xl text-cyan-600">Kódrészlet:</h2>
-      <div class="code-section">
-        <span @click="toggleEditCode" class="edit-icon cursor-pointer">
-          ✏️
-        </span>
-        <div v-if="isEditingCode" class="code-editor" contenteditable="true" @blur="saveCode" v-html="codeSnippet"></div>
-        <pre v-else class="code-snippet" v-html="codeSnippet"></pre>
+      <div class="mt-10">
+        <h3 class="top">Közzétéve általa: Faur Istán</h3>
+        <h3>Közzététel időpontja: 2024. 06. 25.</h3>
+        <h3>Utoljára frissítve: {{ lastUpdated }}</h3> <!-- Dinamikus frissítési dátum -->
       </div>
-<br><br>
-      <h3 class="top">Közzétéve általa: Faur Istán</h3>
-      <h3>Közzététel idópontja: 2024. 06. 25.</h3>
-      <h3>Utoljára frissítve: 2024. 06. 25</h3>
     </div>
   </div>
 </template>
 
-
-
 <style scoped>
+.flex {
+  display: flex; /* Flexbox beállítása */
+}
+
+.items-center {
+  align-items: center; /* Vertikális középre igazítás */
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem; /* Alsó margó a cím és az editor között */
+}
+
+.mr-2 {
+  margin-right: 83.8%; /* Jobb margó a cím és az ikon között */
+}
+
 .editor, .code-editor {
   padding: 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -109,16 +100,12 @@ const saveCode = (event) => {
   background: rgba(255, 255, 255, 0.2);
   min-height: 100px; /* Minimum magasság a szerkesztéshez */
 }
-
+.edit-codeI{
+  margin-left: 11.5%
+}
 .edit-icon {
   cursor: pointer;
-  margin-left: 98%;
   font-size: 18px; /* Icon size */
-}
-
-.edit-icon-container {
-  text-align: right; /* Igazítás jobbra */
-  margin-top: 5px; /* Kicsit lejjebb hozza az ikont */
 }
 
 .code-snippet {
@@ -159,4 +146,3 @@ h3 {
   background: #da7be2;
 }
 </style>
-
