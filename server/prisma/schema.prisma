@@ -48,7 +48,6 @@ model Subject {
   Id       String @id @default(uuid())
   Name     String
   Category String
-  Evf      String
 
   TopicId String
 
