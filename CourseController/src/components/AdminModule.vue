@@ -8,7 +8,8 @@
 
 <template>
 <div>
-  <input type="text" :placeholder="content" class="p-[2dvh_5dvw] shadow-figmaxl text-center rounded-3xl">
+  <link rel="stylesheet" href="style.css">
+  <input type="select" :placeholder="content" class="bg-transparent text-center">
 </div>
 </template>
 

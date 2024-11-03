@@ -4,12 +4,12 @@ import {createRouter, createWebHistory} from 'vue-router'
 // pain in the butt to batch add new routes
 const routes = [
 
+
     //{ path: '/', component: () => import("./views/Home.vue") },
     { path: '/', component: () => import("./views/LandingPage.vue") },
-    { path: '/landing', component: () => import("./views/LandingPage.vue") },
+    { path: '/home', component: () => import("./views/Home.vue") },
+    { path: '/nextPage', component: () => import("./views/View.vue") },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import("./views/NotFound.vue") },
-
-    { path: '/', component: () => import("./views/Home.vue")},
     {
         path: '/admin',
         component: () => import("./views/Admin.vue"),
