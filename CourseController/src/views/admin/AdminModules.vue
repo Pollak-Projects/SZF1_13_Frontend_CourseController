@@ -9,6 +9,11 @@ import {provide, ref} from "vue";
 export default {
   components: {AdminModule, AdminNavbar},
   name: 'Modules',
+  methods:{
+    edit() {
+      this.$router.push('/edit');
+    }
+  },
   setup(){
     const isAdmin = ref(false)
 
@@ -64,7 +69,7 @@ export default {
 
           <!-- Buttons -->
           <Button class="rounded-lg" label="Feltoltes" />
-          <Button class="rounded-lg" label="Szerkesztes" />
+          <Button class="rounded-lg" label="Szerkesztes" @click="edit"/>
           <Button label="Mentés" />
           <Button label="Switch admin" icon="pi pi-cog" @click="toggleAdmin" />
         </div>
