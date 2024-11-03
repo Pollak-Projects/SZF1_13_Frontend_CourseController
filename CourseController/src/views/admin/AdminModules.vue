@@ -35,13 +35,8 @@ export default {
         <p class="place-self-center text-lg sm:text-xl md:text-4xl">Modulok</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[3vh] gap-x-[5vw]">
 
-          <!-- Dropdown for Bejegyzés -->
-          <select class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80 text-white">
-            <option value="" disabled selected>Válassz Bejegyzést</option>
-            <option value="post1">Bejegyzés 1</option>
-            <option value="post2">Bejegyzés 2</option>
-            <option value="post3">Bejegyzés 3</option>
-          </select>
+        <AdminModule class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80" content="Bejegyzés" />
+
 
           <!-- Dropdown for Kategória -->
           <select class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80 text-white">
