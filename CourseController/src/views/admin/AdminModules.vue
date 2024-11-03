@@ -1,5 +1,6 @@
 
 <link rel="stylesheet" href="style.css"></link>
+
 <script>
 import AdminNavbar from "../../components/AdminNavbar.vue";
 import AdminModule from "../../components/AdminModule.vue";
@@ -26,8 +27,6 @@ export default {
 
 </script>
 
-
-
 <template>
   <div class="flex flex-col gap-[10vh] sm:gap-[15vh] md:gap-[20vh]">
     <AdminNavbar v-model:isAdmin="isAdmin" />
@@ -42,9 +41,10 @@ export default {
           <Button class="rounded-lg" label="Feltoltes" />
           <Button class="rounded-lg" label="Szerkesztes" />
           <Button label="Mentés" />
-          <Button label="Switch admin" icon="pi pi-cog" @click="toggleAdmin" />
+
         </div>
       </div>
     </div>
   </div>
+
 </template>
