@@ -5,78 +5,80 @@ const contents = ref([
   {
     id: 1,
     title: 'HTML alapok 1.',
-    content: `...asdfghjkjksdfhvkjsdfnvjkdsbfhjkdsbjkfdsbhfhjkbdshjkfbdhjsfbhjdsbfhdsvhjfbvdshjfbgdsiukjfbhdijksubfhiudfjksbghfjkdfsbgghijuzdgsioufdhdfiuzghiuzdfh`,
+    content: `...asdfghjkjksdfhvkjsdfnvjkdsbfhjkasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsbjkfdsbhfhjkbdshjkfbdhjsfbhjdsbfhdsvhjfbvdshjfbgdsiukjfbhdijksubfhiudfjksbghfjkdfsbgghijuzdgsioufdhdfiuzghiuzdfh`,
     code: `...asdasbdjkfvhdfhijkuvbndfhjbfghjdfgdfikuhjfgioudfhfijkudfhfgiuhdfijugvhdsiufghdfikughdfhjbghjdfghijkdghikudfhg`,
-    isEditingContent: false,
-    isEditingCode: false,
   },
   {
     id: 2,
     title: 'HTML alapok 2.',
     content: `...`,
     code: `...`,
-    isEditingContent: false,
-    isEditingCode: false,
   },
 ]);
 
-const lastUpdated = ref(new Date().toLocaleDateString('hu-HU')); // Aktuális dátum formázva
+const lastUpdated = ref(new Date().toLocaleDateString('hu-HU'));
+const isEditing = ref(false); // Állapot a szerkesztéshez
 
-const toggleEditContent = (index) => {
-  contents.value[index].isEditingContent = !contents.value[index].isEditingContent;
-};
-
-const toggleEditCode = (index) => {
-  contents.value[index].isEditingCode = !contents.value[index].isEditingCode;
+const toggleEdit = () => {
+  isEditing.value = !isEditing.value; // Szerkesztési állapot váltása
 };
 
 const saveContent = (index, event) => {
   contents.value[index].content = event.target.innerHTML;
-  contents.value[index].isEditingContent = false;
+  isEditing.value = false; // Leállítja a szerkesztést
   lastUpdated.value = new Date().toLocaleDateString('hu-HU');
-   // Dátum frissítése
 };
 
 const saveCode = (index, event) => {
   contents.value[index].code = event.target.innerHTML;
-  contents.value[index].isEditingCode = false;
-  lastUpdated.value = new Date().toLocaleDateString('hu-HU'); // Dátum frissítése
+  isEditing.value = false; // Leállítja a szerkesztést
+  lastUpdated.value = new Date().toLocaleDateString('hu-HU');
 };
 </script>
 
 <template>
-  <div class="justify-center items-center h-screen">
-    <div class="mt-28 border-1 rounded-2xl border-black mx-auto bg-black bg-opacity-10 mr-28 ml-10" style="height: 75%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); overflow: auto; padding: 16px;">
+  <div class="justify-center items-center h-screen  view-container">
+    <div class="container mx-auto mt-28 border-1 rounded-2xl border-black bg-black bg-opacity-10" style="height: 75vh; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; padding: 16px;">
       <div>
-        <h1 class="text-center text-gray-500 text-3xl p-4">HTML Alapok</h1>
+        <h1 class="text-center text-pink-500 text-3xl p-4">HTML Alapok</h1>
       </div>
-      <div v-for="(item, index) in contents" :key="item.id" class="content-section mb-4">
-        <div class="flex items-center mb-2">
-          <h2 class="mr-2">{{ item.title }}</h2>
-          <span @click="toggleEditContent(index)" class="edit-icon cursor-pointer">✏️</span>
-        </div>
-        <div v-if="item.isEditingContent" class="editor" contenteditable="true" @blur="saveContent(index, $event)" v-html="item.content"></div>
+      <span @click="toggleEdit" class="edit-icon cursor-pointer" style="margin-left: auto;">✏️</span>
+      <div class="flex-grow overflow-auto">
+        <div v-for="(item, index) in contents" :key="item.id" class="content-section mb-4">
+          <div class="flex items-center mb-2">
+            <h2 class="mr-2">{{ item.title }}</h2>
+          </div>
+          <div v-if="isEditing" class="editor" contenteditable="true" @blur="saveContent(index, $event)" v-html="item.content"></div>
+          <div v-else class="content" v-html="item.content"></div>
 
-        <div v-else v-html="item.content"></div>
-
-        <div class="flex items-center justify-between mt-4">
-          <span class="mr-2">Kód:</span>
-          <span @click="toggleEditCode(index)" class="edit-icon cursor-pointer edit-codeI">✏️</span>
+          <div class="flex items-center justify-between mt-4">
+            <span class="mr-2">Kód:</span>
+          </div>
+          <div v-if="isEditing" class="code-editor" contenteditable="true" @blur="saveCode(index, $event)" v-html="item.code"></div>
+          <pre v-else class="code-snippet" v-html="item.code"></pre>
         </div>
-        <div v-if="item.isEditingCode" class="code-editor" contenteditable="true" @blur="saveCode(index, $event)" v-html="item.code"></div>
-        <pre v-else class="code-snippet" v-html="item.code"></pre>
       </div>
 
-      <div class="mt-10">
+      <div class="text-right mt-4">
         <h3 class="top">Közzétéve általa: Faur Istán</h3>
         <h3>Közzététel időpontja: 2024. 06. 25.</h3>
-        <h3>Utoljára frissítve: {{ lastUpdated }}</h3> <!-- Dinamikus frissítési dátum -->
+        <h3>Utoljára frissítve: {{ lastUpdated }}</h3>
       </div>
     </div>
   </div>
 </template>
 
+
+
 <style scoped>
+.view-container {
+  transition: transform 0.5s ease;
+  margin-right: 100px;
+}
+
+.flex-grow {
+  transition: flex-grow 0.5s; /* Animáció a flex-grow-ra */
+}
 .flex {
   display: flex; /* Flexbox beállítása */
 }
@@ -90,7 +92,7 @@ const saveCode = (index, event) => {
 }
 
 .mr-2 {
-  margin-right: 83.8%; /* Jobb margó a cím és az ikon között */
+  margin-right: auto; /* Jobb margó a cím és az ikon között */
 }
 
 .editor, .code-editor {
@@ -99,22 +101,26 @@ const saveCode = (index, event) => {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.2);
   min-height: 100px; /* Minimum magasság a szerkesztéshez */
+  width: 100%; /* Teljes szélesség */
+  box-sizing: border-box; /* Tartalom méretezése */
 }
-.edit-codeI{
-  margin-left: 11.5%
-}
-.edit-icon {
-  cursor: pointer;
-  font-size: 18px; /* Icon size */
+
+.content {
+  max-width: 100%; /* Maximum szélesség */
+  word-wrap: break-word; /* Szó törés engedélyezése */
+  overflow-wrap: break-word; /* Szó törés engedélyezése */
+  white-space: normal; /* Normál szókezelés */
 }
 
 .code-snippet {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 16px;
   border-radius: 8px;
-  overflow: auto;
+  overflow: auto; /* Csak a kódnál maradjon scroll */
   backdrop-filter: blur(5px);
-  white-space: pre; /* Preserve whitespace */
+  white-space: pre-wrap; /* Fehér térköz megőrzése és sortörés engedélyezése */
+  max-width: 100%; /* Maximum szélesség */
+  word-wrap: break-word; /* Szó törés engedélyezése */
 }
 
 h3 {

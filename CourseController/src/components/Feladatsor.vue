@@ -12,7 +12,7 @@
         <div v-if="isContentVisible">
           <div class="flex justify-around text-gray-500 text-3xl p-4">
             <h1 @click="toggleModule" :class="['moduls', isOpenModule ? 'text-pink-400' : 'text-gray-500']">Modulok</h1>
-            <h1 @click="toggleTasks" :class="['quest', isOpenTasks ? 'text-pink-400' : 'text-gray-500']">Feladatok</h1>
+            <h1 @click="toggleTasks" :class="['quest', isOpenTasks ? 'text-pink-400' : 'text-gray-500']" style="padding-right: 50px;">Feladatok</h1>
           </div>
           <hr>
 
@@ -20,10 +20,10 @@
             <p v-for="module in modules" :key="module.id">{{ module.title }}</p>
           </div>
 
-          <div class="dropdown-content" :style="{ maxHeight: isOpenTasks ? 'none' : '0', overflow: 'hidden' }">
+          <div class="dropdown-content" :style="{ maxHeight: isOpenTasks ? 'none' : '0', overflow: 'visible' }">
             <div v-if="isOpenTasks" v-for="task in tasks" :key="task.id" class="task-container">
-              <div class="flex items-center" @click="toggleDropdown(task.id)" style="cursor: pointer;">
-                <h2 :class="['text-3xl', openTaskId === task.id ? 'text-pink-400' : 'text-gray-500']">
+              <div class="flex items-center w-full" @click="toggleDropdown(task.id)" style="cursor: pointer;">
+                <h2 :class="['text-3xl', openTaskId === task.id ? 'text-pink-400' : 'text-gray-500', 'flex-grow', 'truncate']">
                   {{ task.title }}
                 </h2>
                 <span class="arrow" :class="{ 'open': openTaskId === task.id }" @click.stop="toggleDropdown(task.id)">&#9660;</span>
@@ -38,8 +38,6 @@
     </div>
   </div>
 </template>
-
-
 
 <script setup>
 import { ref } from 'vue';
@@ -98,8 +96,6 @@ const toggleDropdown = (taskId) => {
   transition: transform 0.5s ease;
 }
 
-
-
 .slide-in {
   transform: translateX(0);
 }
@@ -121,6 +117,12 @@ const toggleDropdown = (taskId) => {
 
 .content-area {
   padding: 16px;
+  background-color: rgba(0, 0, 0, 0.1); /* Itt állítsuk be a hátteret */
+  border-radius: 12px;
+}
+
+.flex {
+  gap: 50px; /* Növelje a távolságot a Modulok és Feladatok között */
 }
 
 .moduls, .quest {
@@ -131,33 +133,25 @@ const toggleDropdown = (taskId) => {
 .arrow {
   transition: transform 0.3s ease;
   font-size: 18px;
-  margin-left: 10dvw;
+  margin-left: 10px;
   cursor: pointer;
-  
 }
 
 .arrow.open {
   transform: rotate(90deg);
 }
 
-.arrow:hover {
-  cursor: pointer;
-}
-
 h2 {
   cursor: pointer;
   font-size: 1.5rem;
   overflow: hidden; 
-  text-overflow: ellipsis; 
-  max-width: 150px; 
+  flex-grow: 1; /* Ensures the h2 takes available space */
+  white-space: nowrap; /* Prevents wrapping */
+  text-overflow: ellipsis; /* Adds ellipsis if overflow */
 }
 
 h2:hover {
   color: #f472b6;
-}
-
-#nem-kijelolheto {
-  user-select: none;
 }
 
 ::-webkit-scrollbar {
