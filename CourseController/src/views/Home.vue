@@ -34,11 +34,11 @@ export default {
   data() {
     return {
       szakmak: [
-        "Ipari informatikai technikus",
-        "Informatikai alkalmazás",
-        "Szoftverfejlesztő",
-        "Erősáramú szakember",
-        "Közmű szakember",
+          "Ipari informatikai technikus",
+          "Informatikai alkalmazás- és rendszerüzemeltető technikus",
+          "Szoftverfejlesztő- és tesztelő",
+          "Erősáramú elektrotechnikus",
+          "Közismeret",
       ],
       kiemeltIndex: null,
       showProfileMenu: false,
