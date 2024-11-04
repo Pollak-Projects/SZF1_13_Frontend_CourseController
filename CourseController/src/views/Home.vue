@@ -20,6 +20,7 @@
           @mouseover="egerFelett(index)"
           @mouseleave="kimenet"
           :class="{ 'kiemelt': kiemeltIndex === index }"
+          :style="getButtonStyle(index)"
         >
           {{ szakma }}
         </button>
@@ -41,6 +42,20 @@ export default {
       ],
       kiemeltIndex: null,
       showProfileMenu: false,
+      buttonColors: [
+        "rgba(23, 81, 71, 1)",
+        "rgba(71, 122, 36, 1)",
+        "rgba(128, 180, 20, 1)",
+        "rgba(177, 230, 6, 1)",
+        "rgba(196, 237, 65, 1)"
+      ],
+      highlightedColors: [
+      "rgba(23, 81, 71, 1)",
+        "rgba(71, 122, 36, 1)",
+        "rgba(128, 180, 20, 1)",
+        "rgba(177, 230, 6, 1)",
+        "rgba(196, 237, 65, 1)"
+      ]
     };
   },
   methods: {
@@ -62,7 +77,14 @@ export default {
       alert("Kijelentkezés...");
       this.$router.push({ name: "Login" });
     },
-  },
+    getButtonStyle(index) {
+      return {
+        background: this.kiemeltIndex === index
+          ? this.highlightedColors[index]
+          : this.buttonColors[index]
+      };
+    }
+  }
 };
 </script>
 
@@ -79,17 +101,14 @@ body {
   position: relative;
   overflow: hidden;
 }
-
 .top-bar {
   display: flex;
   justify-content: flex-end;
   padding: 20px;
 }
-
 .profile-menu {
   position: relative;
 }
-
 .user-icon {
   font-size: 24px;
   color: white;
@@ -97,7 +116,6 @@ body {
   border: none;
   cursor: pointer;
 }
-
 .profile-dropdown {
   position: absolute;
   top: 40px;
@@ -109,7 +127,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 .profile-dropdown button {
   background: none;
   border: none;
@@ -118,11 +135,9 @@ body {
   text-align: left;
   cursor: pointer;
 }
-
 .profile-dropdown button:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-
 .cim {
   font-size: 90px;
   font-weight: bold;
@@ -131,7 +146,6 @@ body {
   top: 70%;
   transform: translateY(-50%);
 }
-
 .szakmak-listaja {
   display: flex;
   flex-direction: column;
@@ -141,25 +155,20 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
-
 .szakma-gomb {
-  background: rgb(0, 94, 55);
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 20px 30px;
+  border-radius: 30px;
   font-size: 24px;
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  width: 500px;
+  width: 300px;
   text-align: left;
-  filter: blur(4px);
+  filter: blur(3px);
   transform: translateX(50px);
-  border-bottom-left-radius: 30px;
-  border-top-left-radius: 30px ;
-} 
-
+}
 .szakma-gomb.kiemelt {
-  background: rgba(0, 94, 55);
   transform: translateX(-150px);
   filter: blur(0);
 }
