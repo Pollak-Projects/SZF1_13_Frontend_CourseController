@@ -40,11 +40,11 @@ export default {
         <p class="place-self-center text-lg sm:text-xl md:text-4xl">Modulok</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[3vh] gap-x-[5vw]">
 
-        <AdminModule class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80" content="Bejegyzés" />
-
-
+         <!-- Admin Module Component -->
+          <AdminModule class="rounded-lg p-4 sm:text-lg md:text-xl bg-black/40 shadow-lg text-white" content="Bejegyzések" />
+          
           <!-- Dropdown for Kategória -->
-          <select class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80 text-white">
+          <select class="rounded-lg p-3 bg-black/40 shadow-lg text-center text-gray-400 sm:text-lg md:text-xl">
             <option value="" disabled selected>Válassz Kategóriát</option>
             <option value="category1">Kategória 1</option>
             <option value="category2">Kategória 2</option>
@@ -52,7 +52,7 @@ export default {
           </select>
 
           <!-- Dropdown for Szakma választás -->
-          <select class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80 text-white">
+          <select class="rounded-lg p-3 bg-black/40 shadow-lg text-center text-gray-400  sm:text-lg md:text-xl">
             <option value="" disabled selected>Válassz Szakmát</option>
             <option value="profession1">Szakma 1</option>
             <option value="profession2">Szakma 2</option>
@@ -60,7 +60,7 @@ export default {
           </select>
 
           <!-- Dropdown for Évfolyam -->
-          <select class="rounded-lg p-3 place-self-center sm:text-xl md:text-1xl bg-black/40 shadow-lg shadow-black/80 text-white">
+          <select class="rounded-lg p-3 bg-black/40 shadow-lg text-center text-gray-400  sm:text-lg md:text-xl">
             <option value="" disabled selected>Válassz Évfolyamot</option>
             <option value="year1">Évfolyam 1</option>
             <option value="year2">Évfolyam 2</option>
