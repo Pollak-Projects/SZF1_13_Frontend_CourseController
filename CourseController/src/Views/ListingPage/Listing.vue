@@ -19,7 +19,6 @@
           class="szakma-gomb"
           @mouseover="egerFelett(index)"
           @mouseleave="kimenet"
-          @click="clickAt"
           :class="{ 'kiemelt': kiemeltIndex === index }"
           :style="getButtonStyle(index)"
         >
@@ -44,14 +43,14 @@ export default {
       kiemeltIndex: null,
       showProfileMenu: false,
       buttonColors: [
-        "rgba(23, 81, 71, 1)",
+        "rgba(23, 111, 71, 1)",
         "rgba(71, 122, 36, 1)",
         "rgba(128, 180, 20, 1)",
         "rgba(158, 210, 6, 1)",
         "rgba(188, 247, 65, 1)"
       ],
       highlightedColors: [
-      "rgba(23, 81, 71, 1)",
+      "rgba(23, 111, 71, 1)",
         "rgba(71, 122, 36, 1)",
         "rgba(128, 180, 20, 1)",
         "rgba(177, 230, 6, 1)",
@@ -60,9 +59,6 @@ export default {
     };
   },
   methods: {
-    clickAt() {
-      this.$router.push('view')
-    },
     egerFelett(index) {
       this.kiemeltIndex = index;
     },
@@ -158,13 +154,36 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 .cim {
-  font-size: 90px;
+  font-size: 17vh;
   font-weight: bold;
   position: absolute;
   left: 50px;
-  top: 80dvh;
+  top: 79dvh;
   transform: translateY(-50%);
+  transition: 0.2s;
 }
+
+@media (max-width: 1100px) {
+    .cim{
+      font-size: 12vh;
+      top: 81dvh;
+  }
+}
+
+@media (max-width: 880px) {
+  .cim{
+      font-size: 8vh;
+      top: 82.5dvh;
+  }
+}
+
+@media (max-width: 660px) {
+    .cim{
+      font-size: 5vh;
+      top: 83.5dvh;
+  }
+}
+
 .szakmak-listaja {
   display: flex;
   flex-direction: column;
@@ -178,7 +197,6 @@ body {
   color: rgb(0, 0, 0);
   padding: 20px 30px;
   border-radius: 50px 0px 0px 50px;
-  height: 120px;
   font-size: 24px;
   border: none;
   cursor: pointer;

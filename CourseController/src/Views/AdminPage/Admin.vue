@@ -31,8 +31,7 @@ const toggleAdmin = () => {
     <template #right>
       <div class="flex flex-col gap-4 items-end">
         <UserIcon/>
-        <Button label="Switch admin" icon="pi pi-cog" @click="toggleAdmin" />
-      </div>
+        </div>
     </template>
   </BaseLayout>
 
