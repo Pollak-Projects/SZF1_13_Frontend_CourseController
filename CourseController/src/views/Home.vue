@@ -123,7 +123,7 @@ body {
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 5px ;
   display: flex;
   flex-direction: column;
 }
@@ -158,7 +158,7 @@ body {
 .szakma-gomb {
   color: rgb(0, 0, 0);
   padding: 20px 30px;
-  border-radius: 30px;
+  border-radius: 30px 0px 0px 30px;
   font-size: 24px;
   border: none;
   cursor: pointer;
