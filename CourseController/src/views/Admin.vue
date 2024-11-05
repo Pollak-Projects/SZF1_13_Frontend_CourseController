@@ -5,12 +5,18 @@ import AdminModules from "./admin/AdminModules.vue";
 import AdminAssignments from "./admin/AdminAssignments.vue";
 import AdminUsers from "./admin/AdminUsers.vue";
 import BaseLayout from "../slots/BaseLayout.vue";
+import {useRouter} from "vue-router";
 
 
 const isAdmin = ref(false)
 
 const toggleAdmin = () => {
   isAdmin.value = !isAdmin.value
+}
+
+const router = useRouter()
+function routeBack(){
+  router.back()
 }
 
 </script>
@@ -20,9 +26,7 @@ const toggleAdmin = () => {
   <BaseLayout>
     <template #left>
         <div class="m-[2dvh_2dvw]">
-          <RouterLink to="/">
-            <Button icon="pi pi-arrow-left" aria-label="Back" />
-          </RouterLink>
+            <Button icon="pi pi-arrow-left" aria-label="Back" @click="routeBack" />
         </div>
     </template>
     <template #main>
