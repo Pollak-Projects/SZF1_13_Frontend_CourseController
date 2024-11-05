@@ -1,33 +1,13 @@
 
 <link rel="stylesheet" href="style.css"></link>
 
-<script>
+<script setup>
 import AdminNavbar from "../../components/AdminNavbar.vue";
 import AdminModule from "../../components/AdminModule.vue";
-import {provide, ref} from "vue";
 
-export default {
-  components: {AdminModule, AdminNavbar},
-  name: 'Modules',
-  methods:{
-    edit() {
-      this.$router.push('/edit');
-    }
-  },
-  setup(){
-    const isAdmin = ref(false)
-
-    provide('isAdmin', isAdmin)
-
-    const toggleAdmin = () => {
-      isAdmin.value = !isAdmin.value
-    }
-    return {
-      toggleAdmin,
-      isAdmin
-    }
-  }
-}
+const props = defineProps({
+  isAdmin: Boolean,
+})
 
 
 </script>
