@@ -24,12 +24,12 @@ datasource db {
 }
 
 model User {
-  Id             String       @id @default(uuid())
+  Id         String   @id @default(uuid())
   Username       String
   HashedPwd      String // won't be hashed for now
   Displayed_name String
-  Created_at     DateTime     @default(now())
-  Updated_at     DateTime     @updatedAt
+  Created_at DateTime @default(now())
+  Updated_at DateTime @updatedAt
   UserData       UserData[]
   TeacherUser    TeacherUser[]
 }
