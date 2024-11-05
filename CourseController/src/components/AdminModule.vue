@@ -9,7 +9,7 @@
 <template>
 <div>
   <link rel="stylesheet" href="style.css">
-  <input type="select" :placeholder="content" class="bg-transparent text-center">
+  <input type="select" :placeholder="content" style="width: 18vw;" class="bg-transparent text-center">
 </div>
 </template>
 
