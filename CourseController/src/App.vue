@@ -12,6 +12,7 @@
         <View :class="{ 'flex-grow': isFeladatsorVisible, 'w-full': !isFeladatsorVisible }" />
       </div>
       
+      
     </div>
     
   </div>
