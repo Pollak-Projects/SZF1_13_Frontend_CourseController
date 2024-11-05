@@ -37,11 +37,31 @@
   margin: 3%;
 }
 h1{
-    font-size: 20vh;
+    font-size: 17vh;
     font-family: Verdana;
     margin: 0;
     line-height: 1;
+    transition: 0.3s;
 }
+
+@media (max-width: 1000px) {
+    h1{
+      font-size: 12vh;
+  }
+}
+
+@media (max-width: 710px) {
+    h1{
+      font-size: 8vh;
+  }
+}
+
+@media (max-width: 430px) {
+    h1{
+      font-size: 5vh;
+  }
+}
+
 .fixed-top-right {
   position: fixed;
   top: 0;
