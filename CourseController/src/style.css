@@ -1,0 +1,57 @@
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+body{
+  user-select: none;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-transparent {
+  background-color: rgba(255, 255, 255, 0); 
+  width: 15vw;
+}
+
+@media (max-width: 639px) {
+  .bg-transparent {
+    width: 30vw;
+  }
+}
+
+.shadow{
+  box-shadow: 0 0px 50px 10px rgba(0, 0, 0, 1);
+}
+
+.textshadow{
+  text-shadow: 0px 0px 0px  white;
+  transition: .3s;
+}
+
+.textshadow:hover{
+  text-shadow: 0px 0px 20px  white;
+}
+
+option{
+  background-color: rgba(0, 0, 0, 0.521);
+}
