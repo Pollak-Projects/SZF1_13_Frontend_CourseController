@@ -46,8 +46,8 @@ export default {
         "rgba(23, 81, 71, 1)",
         "rgba(71, 122, 36, 1)",
         "rgba(128, 180, 20, 1)",
-        "rgba(177, 230, 6, 1)",
-        "rgba(196, 237, 65, 1)"
+        "rgba(158, 210, 6, 1)",
+        "rgba(188, 247, 65, 1)"
       ],
       highlightedColors: [
       "rgba(23, 81, 71, 1)",
@@ -95,7 +95,22 @@ body {
 }
 .home-page {
   height: 100vh;
-  background: linear-gradient(150deg, black, #003e4c, #00ff00);
+  --_mesh-gradient-blur: 100px;
+  --_mesh-gradient-blend-mode: normal;
+
+  background: radial-gradient(
+  at 0% 0%, #000000 0px, transparent 50%),
+   radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000c0 0px, transparent 50%), 
+   radial-gradient(at 39.054951513370554% 97.9845146871009%, #034749 0px, transparent 50%), 
+   radial-gradient(at 19.054951513370554% 97.9845146871009%, #034749 0px, transparent 50%),
+   radial-gradient(at 47.71672054069938% 38.11222860791827%, #4c9608 0px, transparent 50%), 
+   radial-gradient(at 67.71672054069938% 98.11222860791827%, #4c9608 0px, transparent 50%), 
+   radial-gradient(at 63.052600646488386% 92.55667305236271%, #4c9608 0px, transparent 50%), 
+   radial-gradient(at 153.052600646488386% 42.55667305236271%, #ebe95cb7 0px, transparent 50%), 
+   radial-gradient(at 113.052600646488386% 82.55667305236271%, #ebe95cb7 0px, transparent 50%),
+   radial-gradient(at 113.052600646488386% 2.55667305236271%, #f0efb1b7 0px, transparent 50%),
+   radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #09525f;
+  mix-blend-mode: var(--_mesh-gradient-blend-mode);
   color: white;
   padding: 0 50px;
   position: relative;
@@ -143,7 +158,7 @@ body {
   font-weight: bold;
   position: absolute;
   left: 50px;
-  top: 70%;
+  top: 80dvh;
   transform: translateY(-50%);
 }
 .szakmak-listaja {
@@ -158,18 +173,21 @@ body {
 .szakma-gomb {
   color: rgb(0, 0, 0);
   padding: 20px 30px;
-  border-radius: 30px 0px 0px 30px;
+  border-radius: 50px 0px 0px 50px;
+  height: 120px;
   font-size: 24px;
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  width: 300px;
+  width: 400px;
   text-align: left;
   filter: blur(3px);
   transform: translateX(50px);
+  box-shadow: 0px 0px 10px 0px #000000;
 }
 .szakma-gomb.kiemelt {
   transform: translateX(-150px);
   filter: blur(0);
+  box-shadow: 0px 0px 25px 1px #000000;
 }
 </style>
