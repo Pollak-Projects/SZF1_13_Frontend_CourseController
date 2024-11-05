@@ -3,9 +3,10 @@ Gere Csanád terv: https://www.figma.com/design/7tZ9heZPsNwgWYalnKcNpI/okt-figma
 Bene Dominik terv: https://www.figma.com/design/OMTYyzeOvpP29VktpkhsyK/Pollak-Project?node-id=0-1&node-type=canvas&t=Ze24CO2WwCtIw4jY-0 \
 The project's Figma design is available here: https://www.figma.com/design/KcVklY2NsKUyrEO6JppxGf/Untitled?node-id=1-151&node-type=frame&t=DKxvQwrFHjXRLUnE-0
 
-[bg.txt](https://github.com/user-attachments/files/17631663/bg.txt)
 
-gyengébbek kedvéért(patrik) itt a code (kutya csanad) --> zöld/liláskék háttér
+[bg.txt](https://github.com/user-attachments/files/17631864/bg.txt)
+
+gyengébbek kedvéért(patrik) itt a code --> zöld/liláskék/szines háttér
 
 .containerr{
   --_mesh-gradient-blur: 100px;
@@ -48,3 +49,16 @@ gyengébbek kedvéért(patrik) itt a code (kutya csanad) --> zöld/liláskék h�
   mix-blend-mode: var(--_mesh-gradient-blend-mode);
 }
 
+.containerr{
+  --_mesh-gradient-blur: 100px;
+  --_mesh-gradient-blend-mode: normal;
+
+  background: radial-gradient(at 0% 0%, #000000 0px, transparent 50%), 
+  radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000 0px, transparent 50%), 
+  radial-gradient(at 39.054951513370554% 97.9845146871009%, #435cb6 0px, transparent 50%), 
+  radial-gradient(at 67.71672054069938% 98.11222860791827%, #768ad0 0px, transparent 50%), 
+  radial-gradient(at 63.052600646488386% 42.55667305236271%, #a15cc1 0px, transparent 50%), 
+  radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #957641;
+  mix-blend-mode: var(--_mesh-gradient-blend-mode);
+  
+}
