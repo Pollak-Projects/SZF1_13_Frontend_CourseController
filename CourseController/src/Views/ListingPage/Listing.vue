@@ -19,6 +19,7 @@
           class="szakma-gomb"
           @mouseover="egerFelett(index)"
           @mouseleave="kimenet"
+          @click="clickAt"
           :class="{ 'kiemelt': kiemeltIndex === index }"
           :style="getButtonStyle(index)"
         >
@@ -59,6 +60,9 @@ export default {
     };
   },
   methods: {
+    clickAt() {
+      this.$router.push('view')
+    },
     egerFelett(index) {
       this.kiemeltIndex = index;
     },
