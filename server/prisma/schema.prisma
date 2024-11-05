@@ -60,7 +60,6 @@ model Subject {
   Description  String
   CreatedAt    DateTime   @default(now())
   UpdatedAt    DateTime   @updatedAt
-  CategoryId   String
   ProfessionId String
   Profession   Profession @relation(fields: [ProfessionId], references: [Id])
 }
