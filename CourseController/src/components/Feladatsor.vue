@@ -41,6 +41,46 @@
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue';
+
+const modules = [
+  { id: 1, title: 'Modul 1 tartalom' },
+  { id: 2, title: 'Modul 2 tartalom' },
+];
+
+const tasks = [
+  { id: 1, title: 'Big Tananyag 1', content: ['Content for dropdown 1', 'More content for dropdown 1', 'Even more content for dropdown 1'] },
+  { id: 2, title: 'Big Tananyag 2', content: ['Content for dropdown 2', 'More content for dropdown 2', 'Even more content for dropdown 2'] },
+];
+
+const isOpenModule = ref(false);
+const isOpenTasks = ref(true);
+const openTaskId = ref(null); 
+const isContentVisible = ref(true);
+
+const toggleContentVisibility = () => {
+  isContentVisible.value = !isContentVisible.value;
+};
+
+const toggleModule = () => {
+  isOpenModule.value = !isOpenModule.value;
+  if (isOpenModule.value) {
+    isOpenTasks.value = false; 
+  }
+};
+
+const toggleTasks = () => {
+  isOpenTasks.value = !isOpenTasks.value;
+  if (isOpenTasks.value) {
+    isOpenModule.value = false;
+  }
+};
+
+const toggleDropdown = (taskId) => {
+  openTaskId.value = openTaskId.value === taskId ? null : taskId; 
+};
+</script>
 
 <script setup>
 import { ref } from 'vue';
@@ -94,6 +134,7 @@ const toggleDropdown = (taskId) => {
 .container {
   position: relative;
   display: flex;
+  justify-content: flex-start; 
   align-items: center;
   width: 100%;
 }
