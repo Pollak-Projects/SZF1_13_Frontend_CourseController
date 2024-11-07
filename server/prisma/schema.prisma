@@ -12,7 +12,6 @@
 // npx prisma migrate dev
 // npx prisma generate
 
-// TODO Make naming more concise, this will be painful
 // Putting everything on delete cascasde might be a bad idea lol
 generator client {
   provider = "prisma-client-js"
@@ -25,15 +24,14 @@ datasource db {
 }
 
 model User {
-  Id              String           @id @default(uuid())
-  Username        String
-  HashedPwd       String // won't be hashed for now
-  Displayed_name  String
-  Created_at      DateTime         @default(now())
-  Updated_at      DateTime         @updatedAt
-  SubjectTeachers SubjectTeacher[]
-  UserData        UserData[]
-  TeacherInfo     TeacherInfo[]
+  Id         String   @id @default(uuid())
+  Username       String
+  HashedPwd      String // won't be hashed for now
+  Displayed_name String
+  Created_at DateTime @default(now())
+  Updated_at DateTime @updatedAt
+  UserData       UserData[]
+  TeacherUser    TeacherUser[]
 }
 
 model UserData {
@@ -45,26 +43,24 @@ model UserData {
 }
 
 model Subject {
-  Id       String @id @default(uuid())
-  Name     String
-  Category String
+  Id          String   @id @default(uuid())
+  Name        String
+  Content     String?
+  Grade       String?
+  Description String?
+  CreatedAt   DateTime @default(now())
+  UpdatedAt   DateTime @updatedAt
 
-  TopicId String
-
-  TopicInfo       Topic?           @relation(fields: [TopicId], references: [Id], onDelete: Cascade)
-  SubjectInfo     SubjectInfo[]
-  SubjectContent  SubjectContent[]
-  SubjectTeachers SubjectTeacher[]
-
-  Grade        String
-  Description  String
-  CreatedAt    DateTime   @default(now())
-  UpdatedAt    DateTime   @updatedAt
+  CategoryId String
   ProfessionId String
-  Profession   Profession @relation(fields: [ProfessionId], references: [Id])
+
+  Category   Category?   @relation(fields: [CategoryId], references: [Id], onDelete: Cascade)
+  Profession Profession? @relation(fields: [ProfessionId], references: [Id], onDelete: Cascade)
+
+  TeacherSubject TeacherSubject[]
 }
 
-model SubjectInfo {
+model TeacherSubject {
   SubjectId String
   TeacherId String
 
@@ -74,27 +70,15 @@ model SubjectInfo {
   @@id([TeacherId, SubjectId])
 }
 
-model SubjectContent {
-  SubjectId String
-
-  Subject Subject @relation(fields: [SubjectId], references: [Id], onDelete: Cascade)
-
-  Exercise String
-  Content  String
-
-  @@id([SubjectId])
-}
-
 model Teacher {
   Id   String @id @default(uuid())
   Name String
 
-  SubjectInfo    SubjectInfo[]
-  TeacherInfo    TeacherInfo[]
-  SubjectTeacher SubjectTeacher[]
+  TeacherSubject TeacherSubject[]
+  TeacherUser    TeacherUser[]
 }
 
-model TeacherInfo {
+model TeacherUser {
   TeacherId String
   UserId    String
 
@@ -104,29 +88,16 @@ model TeacherInfo {
   @@id([UserId, TeacherId])
 }
 
-model Topic {
-  Id        String @id @default(uuid())
-  TopicName String
+model Category {
+  Id           String @id @default(uuid())
+  CategoryName String @unique
 
   Subjects Subject[]
 }
 
-model SubjectTeacher {
-  TeacherId String
-  SubjectId String
-
-  Teacher Teacher @relation(fields: [TeacherId], references: [Id], onDelete: Cascade)
-  Subject Subject @relation(fields: [SubjectId], references: [Id], onDelete: Cascade)
-  User    User?   @relation(fields: [userId], references: [Id])
-  userId  String?
-
-  @@id([TeacherId, SubjectId])
-}
-
 model Profession {
-  Id String @id @default(uuid())
-
-  Name String
+  Id   String @id @default(uuid())
+  Name String @unique
 
   Subject Subject[]
 }
