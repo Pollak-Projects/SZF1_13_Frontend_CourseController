@@ -50,8 +50,8 @@
 
         <div class="flex justify-end space-x-4 mt-2">
           <h3 class="pr-96">Közzétéve általa: Faur István</h3>
-          <h3 class="pr-96">Közzététel időpontja: 2024. 06. 25.</h3>
-          <h3 class="pl-16">Utoljára frissítve: {{ lastUpdated }}</h3>
+          <h3 class="pr-96 pl-14">Közzététel időpontja: 2024. 06. 25.</h3>
+          <h3 class="pl-1">Utoljára frissítve: {{ lastUpdated }}</h3>
         </div>
       </div>
     </div>
