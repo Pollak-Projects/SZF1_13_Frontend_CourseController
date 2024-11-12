@@ -36,11 +36,31 @@
   margin: 3%;
 }
 h1{
-    font-size: 20vh;
+    font-size: 17vh;
     font-family: Verdana;
     margin: 0;
     line-height: 1;
+    transition: 0.3s;
 }
+
+@media (max-width: 1000px) {
+    h1{
+      font-size: 12vh;
+  }
+}
+
+@media (max-width: 710px) {
+    h1{
+      font-size: 8vh;
+  }
+}
+
+@media (max-width: 430px) {
+    h1{
+      font-size: 5vh;
+  }
+}
+
 .fixed-top-right {
   position: fixed;
   top: 0;
@@ -65,7 +85,12 @@ li {
   --_mesh-gradient-blur: 100px;
   --_mesh-gradient-blend-mode: normal;
 
-  background: radial-gradient(at 0% 0%, #000000 0px, transparent 50%), radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000 0px, transparent 50%), radial-gradient(at 39.054951513370554% 97.9845146871009%, #435cb6 0px, transparent 50%), radial-gradient(at 67.71672054069938% 98.11222860791827%, #768ad0 0px, transparent 50%), radial-gradient(at 63.052600646488386% 42.55667305236271%, #a15cc1 0px, transparent 50%), radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #957641;
+  background: radial-gradient(at 0% 0%, #000000 0px, transparent 50%), 
+  radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000 0px, transparent 50%), 
+  radial-gradient(at 39.054951513370554% 97.9845146871009%, #435cb6 0px, transparent 50%), 
+  radial-gradient(at 67.71672054069938% 98.11222860791827%, #768ad0 0px, transparent 50%), 
+  radial-gradient(at 63.052600646488386% 42.55667305236271%, #a15cc1 0px, transparent 50%), 
+  radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #957641;
   mix-blend-mode: var(--_mesh-gradient-blend-mode);
   
 }

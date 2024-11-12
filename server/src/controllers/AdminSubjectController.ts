@@ -8,7 +8,6 @@ const log = logger("admin:subject")
 
 const orm = new PrismaClient()
 
-// TODO add topic variable to this controller
 export default class AdminSubjectController {
 
     async createSubject(req: Request, res: Response)  {
@@ -19,25 +18,35 @@ export default class AdminSubjectController {
         log.silly("Creating new subject", {json: subject})
 
         try {
-            const createdSubject = await orm.targy.create({
+            const createdSubject = await orm.subject.create({
                 data: {
-                    name: subject.name,
-                    category: subject.category,
-                    evf: subject.evf,
-                    TargyInfo: {
-                        create: [
-                            {
-                                tanarId: subject.tanarId,
+                    Name: subject.Name,
+                    Grade: subject.Grade,
+                    Description: subject.Description,
+                    Category: {
+                        connectOrCreate: {
+                            where: {
+                                CategoryName: subject.Category,
                             },
-                        ],
+                            create: {
+                                CategoryName: subject.Category,
+                            },
+                        },
                     },
-                    TargyContent: {
-                        create: [
-                            {
-                                content: subject.content,
-                                gyakorlat: subject.gyakorlat,
+                    Profession: {
+                        connectOrCreate: {
+                            where: {
+                                Name: subject.Profession,
                             },
-                        ],
+                            create: {
+                                Name: subject.Profession,
+                            },
+                        },
+                    },
+                    TeacherSubject: {
+                        create: {
+                            TeacherId: subject.TeacherId,
+                        }
                     },
                 },
             })
@@ -57,10 +66,11 @@ export default class AdminSubjectController {
         log.http("Getting all subjects")
 
         try {
-            const subjects = await orm.targy.findMany({
+            const subjects = await orm.subject.findMany({
                 include: {
-                    TargyInfo: true,
-                    TargyContent: true,
+                    Category: true,
+                    Profession: true,
+                    TeacherSubject: true
                 }
             })
 
@@ -74,6 +84,36 @@ export default class AdminSubjectController {
         }
     }
 
+    async getSubjectById(req: Request, res: Response) {
+        log.http("Getting subject by id")
+
+        const id = req.params.id
+
+        log.silly("Getting subject by id", {id})
+
+        try {
+            const subject = await orm.subject.findUnique({
+                where: {
+                    Id: id
+                },
+                include: {
+                    Category: true,
+                    Profession: true,
+                    TeacherSubject: true
+                }
+            })
+
+            log.silly("Subject", subject)
+
+            res.send(subject)
+
+        } catch (e) {
+            log.error(e)
+            res.status(500).send("Internal server error")
+        }
+
+    }
+
     async updateSubject(req: Request, res: Response)  {
         log.http("Updating subject")
 
@@ -82,47 +122,61 @@ export default class AdminSubjectController {
         log.silly("Updating subject", {json: subject})
 
         try {
-            const updated = await orm.targy.update({
+            const updated = await orm.subject.update({
                 where: {
-                    id: subject.id,
+                    Id: subject.Id,
                 },
                 data: {
-                    name: subject.name,
-                    category: subject.category,
-                    evf: subject.evf,
-                    TargyInfo: {
+                    Name: subject.Name,
+                    Grade: subject.Grade,
+                    Description: subject.Description,
+                    Category: {
                         upsert: {
                             where: {
-                                tanarId_targyId: {
-                                    targyId: subject.id,
-                                    tanarId: subject.tanarId,
-                                },
+                                CategoryName: subject.Category,
                             },
                             update: {
-                                tanarId: subject.newTanarId
+                                CategoryName: subject.Category,
                             },
                             create: {
-                                tanarId: subject.tanarId
+                                CategoryName: subject.Category,
                             },
                         },
                     },
-                    TargyContent: {
+                    Profession: {
                         upsert: {
-                            where: { targyId: subject.id },
+                            where: {
+                                Name: subject.Profession,
+                            },
                             update: {
-                                content: subject.content,
-                                gyakorlat: subject.gyakorlat,
+                                Name: subject.Profession,
                             },
                             create: {
-                                content: subject.content,
-                                gyakorlat: subject.gyakorlat,
-                            }
+                                Name: subject.Profession,
+                            },
+                        },
+                    },
+                    TeacherSubject: {
+                        upsert: {
+                            where: {
+                                TeacherId_SubjectId: {
+                                    SubjectId: subject.Id,
+                                    TeacherId: subject.TeacherId,
+                                }
+                            },
+                            update: {
+                                TeacherId: subject.NewTeacherId,
+                            },
+                            create: {
+                                TeacherId: subject.TeacherId,
+                            },
                         },
                     },
                 },
                 include: {
-                    TargyInfo: true,
-                    TargyContent: true,
+                    Category: true,
+                    Profession: true,
+                    TeacherSubject: true
                 },
             })
 
@@ -143,13 +197,14 @@ export default class AdminSubjectController {
         log.silly("Deleting subject", {json: subject});
 
         try {
-            const deletedSubject = await orm.targy.delete({
+            const deletedSubject = await orm.subject.delete({
                 where: {
-                    id: subject.id
+                    Id: subject.Id
                 },
                 include: {
-                    TargyInfo: true,
-                    TargyContent: true,
+                    Category: true,
+                    Profession: true,
+                    TeacherSubject: true
                 },
             })
 
@@ -162,4 +217,5 @@ export default class AdminSubjectController {
             res.status(500).send("Internal server error")
         }
     }
+
 }

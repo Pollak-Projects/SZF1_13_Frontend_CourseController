@@ -2,22 +2,24 @@ import {z} from "zod";
 
 export default class AdminSubjectDTOs {
     static createSubjectDTO = z.object({
-        name: z.string(),
-        category: z.string(),
-        evf: z.string(),
-        gyakorlat: z.string(),
-        content: z.string(),
-        tanarId: z.string(),
+        Name: z.string(),
+        Content: z.string(),
+        Grade: z.string(),
+        Description: z.string(),
+        Category: z.string(),
+        Profession: z.string(),
+        TeacherId: z.string(),
     })
 
     static updateSubjectDTO = z.object({
-        id: z.string(),
-        name: z.string(),
-        category: z.string(),
-        evf: z.string(),
-        gyakorlat: z.string(),
-        content: z.string(),
-        tanarId: z.string(),
-        newTanarId: z.string(),
+        Id: z.string(),
+        Name: z.string(),
+        Content: z.string(),
+        Grade: z.string(),
+        Description: z.string(),
+        Category: z.string(),
+        Profession: z.string(),
+        TeacherId: z.string(),
+        NewTeacherId: z.string().optional(),
     })
 }

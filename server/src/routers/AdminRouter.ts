@@ -1,11 +1,10 @@
-import express, {Request, Response} from "express";
+import express from "express";
 import AdminUserController from "@controllers/AdminUserController.ts";
 import AdminAccessController from "@controllers/AdminAccessController.ts";
 import AdminSubjectController from "@controllers/AdminSubjectController.ts";
 import AdminTopicController from "@controllers/AdminTopicController.ts";
 import logger from "@logger"
 import {validateParseBody} from "@middlewares/ValidateParseMiddleware.ts";
-import {Prisma} from "@prisma/client";
 import AdminUserDTOs from "@/dtos/AdminUserDTOs.ts";
 import AdminSubjectDTOs from "@/dtos/AdminSubjectDTOs.ts";
 import AdminTopicDTOs from "@/dtos/AdminTopicDTOs.ts";
@@ -34,6 +33,7 @@ adminAccessRouter.delete('/', adminAccessController.deleteAccess)
 const adminSubjectRouter = express.Router()
 adminSubjectRouter.post('/', validateParseBody(AdminSubjectDTOs.createSubjectDTO), adminSubjectController.createSubject)
 adminSubjectRouter.get('/', adminSubjectController.getSubjects)
+adminSubjectRouter.get('/:id', adminSubjectController.getSubjectById)
 adminSubjectRouter.put('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.updateSubject)
 adminSubjectRouter.delete('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.deleteSubject)
 
