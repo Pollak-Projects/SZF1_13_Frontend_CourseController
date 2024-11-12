@@ -11,15 +11,14 @@ const routes = [
     { path: '/login', component: () => import("./Views/LoginPage/Login.vue") },
     { path: '/edit', component: () => import("./Views/AdminPage/AddUpdate.vue") },
     { path: '/view', component: () => import("./Views/ViewPage/View.vue") },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import("./Views/NotFound.vue") },
     {
         path: '/admin',
         component: () => import("./Views/AdminPage/Admin.vue"),
-        redirect: '/admin/modules',
+        redirect: '/admin/modules-create',
         children: [{
-            path: 'modules',
-            name: 'Modules',
-            component: () => import("./Views/AdminPage/AdminModules.vue"),
+            path: 'modules-create',
+            name: 'ModulesCreate',
+            component: () => import("./Views/AdminPage/Modules/AdminModuleCreate.vue"),
         },{
             path: 'assignments',
             name: 'Assignments',
@@ -30,6 +29,7 @@ const routes = [
             component: () => import("./Views/AdminPage/AdminUsers.vue"),
         }]
     },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import("./Views/NotFound.vue") },
 ]
 
 const router = createRouter({

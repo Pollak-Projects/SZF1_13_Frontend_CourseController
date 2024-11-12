@@ -18,7 +18,7 @@ const showUsersDropdown = ref(false);
           @mouseenter="showModulesDropdown = true"
           @mouseleave="showModulesDropdown = false"
       >
-        <RouterLink to="/admin/modules" class="px-4 py-2 hover:bg-purple-800 rounded">Modulok</RouterLink>
+        <RouterLink to="/admin/modules/create" class="px-4 py-2 hover:bg-purple-800 rounded">Modulok</RouterLink>
         <div
             v-if="showModulesDropdown"
             class="absolute top-full left-0 mt-1 w-32 bg-white text-gray-800 shadow-lg rounded-lg"
