@@ -1,96 +1,194 @@
-<script setup>
-import { ref } from 'vue';
-
-const contents = ref([
-  {
-    id: 1,
-    title: 'HTML alapok 1.',
-    content: `...asdfghjkjksdfhvkjsdfnvjkdsbfhjkdsbjkfdsbhfhjkbdshjkfbdhjsfbhjdsbfhdsvhjfbvdshjfbgdsiukjfbhdijksubfhiudfjksbghfjkdfsbgghijuzdgsioufdhdfiuzghiuzdfh`,
-    code: `...asdasbdjkfvhdfhijkuvbndfhjbfghjdfgdfikuhjfgioudfhfijkudfhfgiuhdfijugvhdsiufghdfikughdfhjbghjdfghijkdghikudfhg`,
-    isEditingContent: false,
-    isEditingCode: false,
-  },
-  {
-    id: 2,
-    title: 'HTML alapok 2.',
-    content: `...`,
-    code: `...`,
-    isEditingContent: false,
-    isEditingCode: false,
-  },
-]);
-
-const lastUpdated = ref(new Date().toLocaleDateString('hu-HU')); // Aktuális dátum formázva
-
-const toggleEditContent = (index) => {
-  contents.value[index].isEditingContent = !contents.value[index].isEditingContent;
-};
-
-const toggleEditCode = (index) => {
-  contents.value[index].isEditingCode = !contents.value[index].isEditingCode;
-};
-
-const saveContent = (index, event) => {
-  contents.value[index].content = event.target.innerHTML;
-  contents.value[index].isEditingContent = false;
-  lastUpdated.value = new Date().toLocaleDateString('hu-HU');
-   // Dátum frissítése
-};
-
-const saveCode = (index, event) => {
-  contents.value[index].code = event.target.innerHTML;
-  contents.value[index].isEditingCode = false;
-  lastUpdated.value = new Date().toLocaleDateString('hu-HU'); // Dátum frissítése
-};
-</script>
-
 <template>
-  <div class="justify-center items-center h-screen">
-    <div class="mt-28 border-1 rounded-2xl border-black mx-auto bg-black bg-opacity-10 mr-28 ml-10" style="height: 75%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); overflow: auto; padding: 16px;">
+  <div class="justify-center items-center h-screen view-container">
+    <div class="container mx-auto mt-28 border-1 rounded-2xl border-black bg-black bg-opacity-10"
+         style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; padding: 16px; height: 75vh;">
+      
       <div>
-        <h1 class="text-center text-gray-500 text-3xl p-4">HTML Alapok</h1>
-      </div>
-      <div v-for="(item, index) in contents" :key="item.id" class="content-section mb-4">
-        <div class="flex items-center mb-2">
-          <h2 class="mr-2">{{ item.title }}</h2>
-          <span @click="toggleEditContent(index)" class="edit-icon cursor-pointer">✏️</span>
-        </div>
-        <div v-if="item.isEditingContent" class="editor" contenteditable="true" @blur="saveContent(index, $event)" v-html="item.content"></div>
-
-        <div v-else v-html="item.content"></div>
-
-        <div class="flex items-center justify-between mt-4">
-          <span class="mr-2">Kód:</span>
-          <span @click="toggleEditCode(index)" class="edit-icon cursor-pointer edit-codeI">✏️</span>
-        </div>
-        <div v-if="item.isEditingCode" class="code-editor" contenteditable="true" @blur="saveCode(index, $event)" v-html="item.code"></div>
-        <pre v-else class="code-snippet" v-html="item.code"></pre>
+        <h1 class="text-center text-pink-500 text-3xl p-4">HTML Alapok</h1>
       </div>
 
-      <div class="mt-10">
-        <h3 class="top">Közzétéve általa: Faur Istán</h3>
-        <h3>Közzététel időpontja: 2024. 06. 25.</h3>
-        <h3>Utoljára frissítve: {{ lastUpdated }}</h3> <!-- Dinamikus frissítési dátum -->
+      <!-- Nyíl gomb a jobb felső sarokban -->
+
+
+      <span @click="toggleVisibility" class="edit-icon cursor-pointer" style="margin-left: auto;">✏️</span>
+
+      <!-- Görgethető tartalom -->
+      <div class="flex-grow overflow-auto custom-scrollbar">
+        <div v-for="(item, index) in contents" :key="item.id" class="content-section mb-4">
+          <div class="flex items-center mb-2">
+            <h2
+              v-if="isEditing"
+              contenteditable="true"
+              @blur="saveTitle(index, $event)"
+              class="editable-title"
+            >
+              {{ item.title }}
+            </h2>
+            <h2 v-else class="mr-2">{{ item.title }}</h2>
+          </div>
+
+          <div v-if="isEditing" class="editor" contenteditable="true" @blur="saveContent(index, $event)" v-html="item.content"></div>
+          <div v-else class="content" v-html="item.content"></div>
+
+          <div class="flex items-center justify-between mt-4">
+            <span class="mr-2">Kód:</span>
+          </div>
+          <div v-if="isEditing" class="code-editor" contenteditable="true" @blur="saveCode(index, $event)" v-html="item.code"></div>
+          <pre v-else class="code-snippet" v-html="item.code"></pre>
+        </div>
+      </div>
+
+      <div class="text-right mt-4">
+        <button @click="addNewSection" class="add-section-btn pb-3">Új rész hozzáadása</button>
+        <button 
+          @click="removeLastSection" 
+          class="remove-section-btn pb-3 ml-4" 
+          :disabled="contents.length <= 1"
+          :class="{ 'opacity-50 cursor-not-allowed': contents.length <= 1 }">
+          Utolsó elem törlése
+        </button>
+
+        <div class="flex justify-end space-x-4 mt-2">
+          <h3 class="pr-96">Közzétéve általa: Faur István</h3>
+          <h3 class="pr-96 pl-14">Közzététel időpontja: 2024. 06. 25.</h3>
+          <h3 class="pl-1">Utoljára frissítve: {{ lastUpdated }}</h3>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const contents = ref([
+      {
+        id: 1,
+        title: 'HTML alapok 1.',
+        content: `...asdfghjkjksdfhvkjsdfnvjkdsbfhjkasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsbjkfdsbhfhjkbdshjkfbdhjsfbhjdsbfhdsvhjfbvdshjfbgdsiukjfbhdijksubfhiudfjksbghfjkdfsbgghijuzdgsioufdhdfiuzghiuzdfh`,
+        code: `...asdasbdjkfvhdfhijkuvbndfhjbfghjdfgdfikuhjfgioudfhfijkudfhfgiuhdfijugvhdsiufghdfikughdfhjbghjdfghijkdghikudfhg`,
+      },
+    ]);
+    const isEditing = ref(false); // Szerkesztés állapota
+    const lastUpdated = ref("2024. 10. 30."); // Utolsó frissítés dátuma
+
+    const toggleVisibility = () => {
+      isEditing.value = !isEditing.value;
+    };
+
+    const saveContent = (index, event) => {
+      contents.value[index].content = event.target.innerHTML;
+      isEditing.value = false;
+      lastUpdated.value = new Date().toLocaleDateString('hu-HU');
+    };
+
+    const saveCode = (index, event) => {
+      contents.value[index].code = event.target.innerHTML;
+      isEditing.value = false; // Leállítja a szerkesztést
+      lastUpdated.value = new Date().toLocaleDateString('hu-HU');
+    };
+
+    const saveTitle = (index, event) => {
+      contents.value[index].title = event.target.innerHTML;
+      isEditing.value = false; // Leállítja a szerkesztést
+      lastUpdated.value = new Date().toLocaleDateString('hu-HU');
+    };
+
+    const addNewSection = () => {
+      const newId = Math.max(...contents.value.map(item => item.id)) + 1; // Új id generálása
+      contents.value.push({
+        id: newId,
+        title: `Új rész ${newId}`,
+        content: `Ez az új rész tartalma.`,
+        code: `&lt;div&gt;Új rész ${newId}&lt;/div&gt;`
+      });
+      lastUpdated.value = new Date().toLocaleDateString('hu-HU'); // Frissítés dátuma
+    };
+
+    const removeLastSection = () => {
+      if (contents.value.length > 1) { // Csak akkor törlünk, ha több mint egy elem van
+        contents.value.pop(); // Az utolsó szekció eltávolítása
+        lastUpdated.value = new Date().toLocaleDateString('hu-HU'); // Frissítés dátuma
+      }
+    };
+
+    const goBack = () => {
+      window.history.back(); // Vissza navigálás az előző oldalra
+    };
+
+    return {
+      contents,
+      isEditing,
+      lastUpdated,
+      toggleVisibility,
+      saveContent,
+      saveCode,
+      saveTitle,
+      addNewSection,
+      removeLastSection,
+      goBack
+    };
+  }
+};
+</script>
+
 <style scoped>
-.flex {
-  display: flex; /* Flexbox beállítása */
+/* Nyíl gomb stílusa */
+.back-button {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
 }
 
-.items-center {
-  align-items: center; /* Vertikális középre igazítás */
+.back-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem; /* Alsó margó a cím és az editor között */
+/* Gomb letiltott állapotának stílusa */
+.remove-section-btn:disabled {
+  color: #e6e6e6; /* Szürke szöveg */
+  cursor: not-allowed; /* Nem választható kurzor */
 }
 
-.mr-2 {
-  margin-right: 83.8%; /* Jobb margó a cím és az ikon között */
+.remove-section-btn.opacity-50 {
+  opacity: 0.5;
+}
+
+/* További stílusok maradnak változatlanok */
+
+/* Gomb stílus */
+.add-section-btn {
+  font-size: large;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.view-container {
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(0);
+}
+
+.view-container.hidden {
+  transform: translateX(100%);
+}
+
+.flex-grow {
+  transition: flex-grow 0.5s ease;
+}
+
+.content-section {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .editor, .code-editor {
@@ -98,14 +196,16 @@ const saveCode = (index, event) => {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.2);
-  min-height: 100px; /* Minimum magasság a szerkesztéshez */
+  min-height: 100px;
+  width: 100%;
+  box-sizing: border-box;
 }
-.edit-codeI{
-  margin-left: 11.5%
-}
-.edit-icon {
-  cursor: pointer;
-  font-size: 18px; /* Icon size */
+
+.content {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .code-snippet {
@@ -114,7 +214,8 @@ const saveCode = (index, event) => {
   border-radius: 8px;
   overflow: auto;
   backdrop-filter: blur(5px);
-  white-space: pre; /* Preserve whitespace */
+  white-space: pre-wrap;
+  max-width: 100%;
 }
 
 h3 {
@@ -127,7 +228,12 @@ h3 {
   padding-top: 0.3dvw;
 }
 
-/* Scrollbar styling */
+.custom-scrollbar {
+  padding-right: 16px;
+  max-height: 60vh; /* Ha fix méretű területet szeretnél, például a magasságot csökkentheted */
+  overflow-y: auto; /* Görgetés engedélyezése */
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -144,5 +250,23 @@ h3 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #da7be2;
+}
+
+/* Gomb stílus */
+.add-section-btn {
+  font-size: large;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.editable-title {
+  font-size: 20px;
+  color: #444;
+  outline: none;
+  border-bottom: 1px solid #d346f0;
 }
 </style>
