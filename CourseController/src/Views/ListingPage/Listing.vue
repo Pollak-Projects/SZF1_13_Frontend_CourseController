@@ -44,14 +44,14 @@ export default {
       kiemeltIndex: null,
       showProfileMenu: false,
       buttonColors: [
-        "rgba(23, 81, 71, 1)",
+        "rgba(23, 111, 71, 1)",
         "rgba(71, 122, 36, 1)",
         "rgba(128, 180, 20, 1)",
         "rgba(158, 210, 6, 1)",
         "rgba(188, 247, 65, 1)"
       ],
       highlightedColors: [
-      "rgba(23, 81, 71, 1)",
+      "rgba(23, 111, 71, 1)",
         "rgba(71, 122, 36, 1)",
         "rgba(128, 180, 20, 1)",
         "rgba(177, 230, 6, 1)",
@@ -101,7 +101,6 @@ body {
   height: 100vh;
   --_mesh-gradient-blur: 100px;
   --_mesh-gradient-blend-mode: normal;
-
   background: radial-gradient(
   at 0% 0%, #000000 0px, transparent 50%),
    radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000c0 0px, transparent 50%), 
@@ -142,7 +141,7 @@ body {
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
-  border-radius: 5px ;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -158,13 +157,36 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 .cim {
-  font-size: 90px;
+  font-size: 17vh;
   font-weight: bold;
   position: absolute;
   left: 50px;
-  top: 80dvh;
+  top: 79dvh;
   transform: translateY(-50%);
+  transition: 0.2s;
 }
+
+@media (max-width: 1100px) {
+    .cim{
+      font-size: 12vh;
+      top: 81dvh;
+  }
+}
+
+@media (max-width: 880px) {
+  .cim{
+      font-size: 8vh;
+      top: 82.5dvh;
+  }
+}
+
+@media (max-width: 660px) {
+    .cim{
+      font-size: 5vh;
+      top: 83.5dvh;
+  }
+}
+
 .szakmak-listaja {
   display: flex;
   flex-direction: column;
@@ -178,14 +200,13 @@ body {
   color: rgb(0, 0, 0);
   padding: 20px 30px;
   border-radius: 50px 0px 0px 50px;
-  height: 120px;
   font-size: 24px;
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
   width: 400px;
   text-align: left;
-  filter: blur(3px);
+  filter: blur(1px);
   transform: translateX(50px);
   box-shadow: 0px 0px 10px 0px #000000;
 }
@@ -193,5 +214,51 @@ body {
   transform: translateX(-150px);
   filter: blur(0);
   box-shadow: 0px 0px 25px 1px #000000;
+}
+
+@media (max-width: 1024px) {
+  .cim {
+    font-size: 70px;
+  }
+  .szakma-gomb {
+    height: 90px;
+    font-size: 20px;
+    padding: 15px 25px;
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cim {
+    font-size: 50px;
+    left: 20px;
+    top: 60vh;
+  }
+  .szakmak-listaja {
+    gap: 15px;
+    right: -100px;
+  }
+  .szakma-gomb {
+    height: 80px;
+    font-size: 18px;
+    padding: 12px 20px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cim {
+    font-size: 40px;
+  }
+  .szakmak-listaja {
+    right: -50px;
+  }
+  .szakma-gomb {
+    height: 60px;
+    font-size: 16px;
+    padding: 10px 15px;
+    width: 250px;
+    filter: blur(0);
+  }
 }
 </style>

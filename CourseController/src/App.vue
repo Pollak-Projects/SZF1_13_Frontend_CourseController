@@ -1,11 +1,11 @@
 <script setup>
-import UserIcon from "./Components/NavigationComponents/UserIcon.vue";
+import nyiltnap from './Components/nyiltnap.vue';
 
 </script>
 
 <template>
 
-  <RouterView />
+  <nyiltnap></nyiltnap>
 
 </template>
 
