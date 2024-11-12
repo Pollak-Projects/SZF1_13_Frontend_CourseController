@@ -2,71 +2,37 @@
 import { ref } from 'vue';
 import Feladatsor from "../../Components/ViewComponents/Feladatsor.vue";
 import View from "../../Components/ViewComponents/View.vue";
+import ThemeS from "../../Components/ViewComponents/ThemeSwitcher.vue"
 
-// A feladatsor láthatóságát irányítja
+
 const isFeladatsorVisible = ref(true);
 const toggleFeladatsor = () => {
   isFeladatsorVisible.value = !isFeladatsorVisible.value;
 };
 
-// Alapértelmezett háttérszín
-const backgroundColor = ref('radial-gradient(circle at top left, #000000 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(circle at center bottom, #cb0fd1 0%, rgba(161, 92, 193, 0) 100%), radial-gradient(circle at top right, #27b2e0 0%, rgba(0, 191, 255, 0) 100%)');
 
-// A színválasztó panel megjelenítése
-const isColorPickerVisible = ref(false);
-const toggleColorPicker = () => {
-  isColorPickerVisible.value = !isColorPickerVisible.value;
-};
 
-// A háttér színének módosítása
-const changeBackgroundColor = (color) => {
-  backgroundColor.value = color;
-};
 
-// Vissza gomb funkció
+
 const goBack = () => {
   window.history.back();
 };
+
+
 </script>
 
 <template>
+  
   <div class="containerr">
-    <!-- Vissza nyíl gomb -->
+
     <button @click="goBack" class="back-button cursor-pointer absolute text-3xl top-4 left-4">
       ←
     </button>
 
     <div class="box" :style="{ background: backgroundColor }">
-      <!-- Színválasztó gomb -->
-      <button @click="toggleColorPicker" class="toggle-button">
-        Színválasztó
-      </button>
 
-      <!-- Dropdown színválasztó panel -->
-      <div v-if="isColorPickerVisible" class="color-picker">
-  <!-- Lila szín beállítása a kívánt háttér színsémával -->
-  <div 
-    @click="changeBackgroundColor('radial-gradient(at 0% 0%, #000000 0px, transparent 50%), radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000 0px, transparent 50%), radial-gradient(at 39.054951513370554% 97.9845146871009%, #435cb6 0px, transparent 50%), radial-gradient(at 67.71672054069938% 98.11222860791827%, #768ad0 0px, transparent 50%), radial-gradient(at 63.052600646488386% 42.55667305236271%, #a15cc1 0px, transparent 50%), radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%)')" 
-    class="color-option" 
-    style="background: radial-gradient(at 0% 0%, #7f3f98 0%, transparent 50%), radial-gradient(at 50% 50%, #9b4c9c 0%, transparent 50%), radial-gradient(at 100% 100%, #8e3b8d 0%, transparent 50%); opacity: 80%;">
-    Lila
-  </div>
+      <ThemeS class="Themebut"></ThemeS>
 
-  <!-- Zöld szín -->
-  <div 
-    @click="changeBackgroundColor('radial-gradient(circle at top left, #32CD32 0%, rgba(50, 205, 50, 0) 100%), radial-gradient(circle at center bottom, #000000 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(circle at top right, #27b2e0 0%, rgba(0, 191, 255, 0) 100%)')" 
-    class="color-option" 
-    style="background-color: #32CD32;">
-    Zöld
-  </div>
-
-  <!-- Kék szín -->
-  <div 
-    @click="changeBackgroundColor('radial-gradient(circle at top left, #399cca 0%, rgba(50, 205, 255, 0) 100%), radial-gradient(circle at center bottom, #000000 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(circle at top right, #2295ca 0%, rgba(0, 191, 255, 0) 100%)')" 
-    class="color-option" 
-    style="background-color: #399cca;">
-    Kék
-  </div>
 </div>
 
 
@@ -80,16 +46,19 @@ const goBack = () => {
         </div>
       </div>
     </div>
-  </div>
+
 </template>
 
 <style scoped>
-.containerr{
+.Themebut{
+  display: flex;
+  margin-left:80%
+}
+.containerr {
   --_mesh-gradient-blur: 100px;
   --_mesh-gradient-blend-mode: normal;
-  background: radial-gradient(at 0% 0%, #000000 0px, transparent 50%), radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000 0px, transparent 50%), radial-gradient(at 39.054951513370554% 97.9845146871009%, #435cb6 0px, transparent 50%), radial-gradient(at 67.71672054069938% 98.11222860791827%, #768ad0 0px, transparent 50%), radial-gradient(at 63.052600646488386% 42.55667305236271%, #a15cc1 0px, transparent 50%), radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) ;
+  background: radial-gradient( at 0% 0%, #000000 0px, transparent 50%), radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000c0 0px, transparent 50%), radial-gradient(at 9.054951513370554% 60.9845146871009%, #ff00ff0e 0px, transparent 80%), radial-gradient(at 9.054951513370554% 80.9845146871009%, #ff00ff0e 0px, transparent 80%), radial-gradient(at 9.054951513370554% 100.9845146871009%, #ff00ff2d 0px, transparent 80%), radial-gradient(at 20.054951513370554% 100.9845146871009%, #ff00ff6b 0px, transparent 35%), radial-gradient(at 49.054951513370554% 120.9845146871009%, #c40be9d3 0px, transparent 50%), radial-gradient(at 47.71672054069938% 38.11222860791827%, #399cca 0px, transparent 50%), radial-gradient(at 63.052600646488386% 92.55667305236271%, #399cca 0px, transparent 50%), radial-gradient(at 67.71672054069938% 98.11222860791827%, #399cca 0px, transparent 50%), radial-gradient(at 153.052600646488386% 42.55667305236271%, #2295ca 0px, transparent 50%), radial-gradient(at 113.052600646488386% 82.55667305236271%, #2295ca 0px, transparent 50%), radial-gradient(at 113.052600646488386% 2.55667305236271%, #2295ca 0px, transparent 50%), radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #5697cc;
   mix-blend-mode: var(--_mesh-gradient-blend-mode);
-  background-size: cover; 
   height: 100vh; 
   overflow: hidden;
 }
