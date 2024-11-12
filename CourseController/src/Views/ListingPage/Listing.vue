@@ -101,7 +101,6 @@ body {
   height: 100vh;
   --_mesh-gradient-blur: 100px;
   --_mesh-gradient-blend-mode: normal;
-
   background: radial-gradient(
   at 0% 0%, #000000 0px, transparent 50%),
    radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000c0 0px, transparent 50%), 
@@ -142,7 +141,7 @@ body {
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
-  border-radius: 5px ;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -158,7 +157,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 .cim {
-  font-size: 90px;
+  font-size: 120px;
   font-weight: bold;
   position: absolute;
   left: 50px;
@@ -185,7 +184,7 @@ body {
   transition: all 0.4s ease;
   width: 400px;
   text-align: left;
-  filter: blur(3px);
+  filter: blur(1px);
   transform: translateX(50px);
   box-shadow: 0px 0px 10px 0px #000000;
 }
@@ -193,5 +192,51 @@ body {
   transform: translateX(-150px);
   filter: blur(0);
   box-shadow: 0px 0px 25px 1px #000000;
+}
+
+@media (max-width: 1024px) {
+  .cim {
+    font-size: 70px;
+  }
+  .szakma-gomb {
+    height: 90px;
+    font-size: 20px;
+    padding: 15px 25px;
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cim {
+    font-size: 50px;
+    left: 20px;
+    top: 60vh;
+  }
+  .szakmak-listaja {
+    gap: 15px;
+    right: -100px;
+  }
+  .szakma-gomb {
+    height: 80px;
+    font-size: 18px;
+    padding: 12px 20px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cim {
+    font-size: 40px;
+  }
+  .szakmak-listaja {
+    right: -50px;
+  }
+  .szakma-gomb {
+    height: 60px;
+    font-size: 16px;
+    padding: 10px 15px;
+    width: 250px;
+    filter: blur(0);
+  }
 }
 </style>
