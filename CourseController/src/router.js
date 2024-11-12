@@ -28,7 +28,11 @@ const routes = [
             path: 'users',
             name: 'Users',
             component: () => import("./Views/AdminPage/AdminUsers.vue"),
-        }]
+        },
+    {
+        path: "editor",
+        component: () => import("./Views/AdminPage/Editor.vue")
+    }]
     },
 ]
 
