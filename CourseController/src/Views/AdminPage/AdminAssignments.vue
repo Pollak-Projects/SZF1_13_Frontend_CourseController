@@ -4,7 +4,7 @@
 
 import AdminNavbar from "../../Components/AdminComponents/AdminNavbar.vue";
 
-const props = defineProps({
+defineProps({
   isAdmin: Boolean,
 })
 </script>

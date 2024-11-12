@@ -6,19 +6,11 @@ import { ref} from "vue";
 import AdminNavbar from "../../Components/AdminComponents/AdminNavbar.vue";
 import AdminModule from "../../Components/AdminComponents/AdminModule.vue";
 
-const props = defineProps({
-  isAdmin: Boolean,
-})
-const localIsAdmin = ref(props.isAdmin)
-const toggleAdmin = () => {
-  localIsAdmin.value = !localIsAdmin.value
-}
-
 </script>
 
 <template>
   <div class="flex flex-col gap-[10vh] sm:gap-[15vh] md:gap-[20vh]">
-    <AdminNavbar v-model:isAdmin="localIsAdmin" />
+    <AdminNavbar />
     <div class="flex flex-col items-center justify-center shadow bg-[#00000042] py-[3vh] sm:py-[4vh] md:py-[5vh] rounded-3xl">
       <div class="flex flex-col gap-[3vh] sm:gap-[4vh] md:gap-[5vh] mb-[5vh]">
         <p class="place-self-center text-lg sm:text-xl md:text-4xl">Modulok</p>
@@ -48,7 +40,6 @@ const toggleAdmin = () => {
           <Button class="rounded-lg" label="Feltoltes" />
           <Button class="rounded-lg" label="Szerkesztes" @click="edit"/>
           <Button label="Mentés" />
-          <Button label="Switch admin" icon="pi pi-cog" @click="toggleAdmin" />
         </div>
       </div>
     </div>
