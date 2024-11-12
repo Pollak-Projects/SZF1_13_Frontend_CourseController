@@ -4,10 +4,10 @@
          style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; padding: 16px; height: 75vh;">
       
       <div>
-        <h1 class="text-center text-pink-500 text-3xl p-4">HTML Alapok</h1>
+        <h1 class="text-center text-pink-500 text-3xl p-4">{{ item.title }}</h1>
       </div>
 
-      <!-- Nyíl gomb a jobb felső sarokban -->
+      <!-- Tailwind preline reconfiguration for new use of working good -->
 
 
       <span @click="toggleVisibility" class="edit-icon cursor-pointer" style="margin-left: auto;">✏️</span>
@@ -48,11 +48,12 @@
           Utolsó elem törlése
         </button>
 
-        <div class="flex justify-end space-x-4 mt-2">
-          <h3 class="pr-96">Közzétéve általa: Faur István</h3>
-          <h3 class="pr-96 pl-14">Közzététel időpontja: 2024. 06. 25.</h3>
-          <h3 class="pl-1">Utoljára frissítve: {{ lastUpdated }}</h3>
-        </div>
+        <div class="containerr">
+        <h3>Közzétéve általa: Faur Istán</h3>
+        <h3>Közzététel időpontja: 2024. 06. 25.</h3>
+        <h3>Utoljára frissítve: {{ lastUpdated }}</h3> <!-- Dinamikus frissítési dátum -->
+     </div>
+
       </div>
     </div>
   </div>
@@ -66,9 +67,9 @@ export default {
     const contents = ref([
       {
         id: 1,
-        title: 'HTML alapok 1.',
-        content: `...asdfghjkjksdfhvkjsdfnvjkdsbfhjkasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadsbjkfdsbhfhjkbdshjkfbdhjsfbhjdsbfhdsvhjfbvdshjfbgdsiukjfbhdijksubfhiudfjksbghfjkdfsbgghijuzdgsioufdhdfiuzghiuzdfh`,
-        code: `...asdasbdjkfvhdfhijkuvbndfhjbfghjdfgdfikuhjfgioudfhfijkudfhfgiuhdfijugvhdsiufghdfikughdfhjbghjdfghijkdghikudfhg`,
+        title: 'HTML alapok',
+        content: ``,
+        code: `...asdasbdjkfvhdfhijkudfikughdfhjbghjdfghijkdghikudfhg`,
       },
     ]);
     const isEditing = ref(false); // Szerkesztés állapota
@@ -135,7 +136,27 @@ export default {
 </script>
 
 <style scoped>
-/* Nyíl gomb stílusa */
+
+.containerr{
+  display: flex;
+  justify-content: space-between; /* Elosztja a három elemet szélesség szerint */
+  align-items: center;
+}
+
+h3 {
+  margin: 0; /* Eltávolítja az alapértelmezett margót */
+}
+h3:first-child {
+  text-align: left; /* Balra igazítja az első elemet */
+}
+h3:nth-child(2) {
+  text-align: center; /* Középre igazítja a második elemet */
+}
+h3:last-child {
+  text-align: right; /* Jobbra igazítja az utolsó elemet */
+}
+
+
 .back-button {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
@@ -218,11 +239,7 @@ export default {
   max-width: 100%;
 }
 
-h3 {
-  font-style: italic;
-  color: rgb(206, 206, 206);
-  text-align: right;
-}
+
 
 .top {
   padding-top: 0.3dvw;
