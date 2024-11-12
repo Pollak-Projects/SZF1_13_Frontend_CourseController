@@ -1,54 +1,87 @@
 <template>
   <div class="containerr">
     <RouterLink to="/">
-            <Button icon="pi pi-arrow-left" class="custom-button" aria-label="Back" />
-          </RouterLink>
+      <Button icon="pi pi-arrow-left" class="custom-button" aria-label="Back" />
+    </RouterLink>
     <div class="login-box">
-        <h2>Bejelentkezés</h2>
-        <form>
-          <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Felhasználónév</label>
-          </div>
-          <div class="line1"></div>
-          <div class="user-box">
-            <input type="password" name="" required="">
-            <label>Jelszó</label>
-          </div>
-          <div class="line"></div>
-          <a href="" class="submit">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Belépés
-          </a>
-          <router-link to="/listing">
-          <div class="folytdiv"><a class="folyt" >Folytatás bejelentkezés nélkül</a></div>
-          </router-link>
-        </form>
-      </div>
+      <h2>Bejelentkezés</h2>
+      <form @submit.prevent="handleLogin">
+        <div class="user-box">
+          <input type="text" v-model="email" required="">
+          <label>Felhasználónév</label>
+        </div>
+        <div class="line1"></div>
+        <div class="user-box">
+          <input type="password" v-model="password" required="">
+          <label>Jelszó</label>
+        </div>
+        <div class="line"></div>
+        <a
+          href="#"
+          :class="['submit', { disabled: !isFormValid }]"
+          :disabled="!isFormValid"
+          @click="isFormValid && handleLogin"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Belépés
+        </a>
+        <router-link to="/listing">
+          <div class="folytdiv"><a class="folyt">Folytatás bejelentkezés nélkül</a></div>
+        </router-link>
+      </form>
+    </div>
   </div>
   </template>
   
+  
   <script>
-  export default {
-    data() {
-      return {
-        email: '',
-        password: ''
-      };
-    },
-    methods: {
-      handleLogin() {
-        console.log('Email:', this.email);
-        console.log('Jelszó:', this.password);
-      }
+export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  computed: {
+    isFormValid() {
+      return this.email.length > 0 && this.password.length > 0;
     }
-  };
+  },
+  methods: {
+    handleLogin() {
+      console.log('Email:', this.email);
+      console.log('Jelszó:', this.password);
+    }
+  }
+};
   </script>
   
   <style scoped>
+.submit {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit.disabled {
+  background-color: #999;
+  cursor: not-allowed;
+  color: #666;
+  border: 1px solid #666;
+  pointer-events: none; 
+  transition: none; 
+}
+
+.submit.disabled span {
+  display: none;
+}
+
+
   html {
     height: 100%;
   }

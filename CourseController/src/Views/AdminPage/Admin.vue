@@ -6,8 +6,9 @@ import AdminAssignments from "./AdminAssignments.vue";
 import AdminUsers from "./AdminUsers.vue";
 import BaseLayout from "../../Slots/AdminSlots/BaseLayout.vue";
 
-
 const isAdmin = ref(false)
+
+provide("isAdmin", isAdmin)
 
 const toggleAdmin = () => {
   isAdmin.value = !isAdmin.value
@@ -26,7 +27,7 @@ const toggleAdmin = () => {
         </div>
     </template>
     <template #main>
-      <router-view :is-admin="isAdmin" />
+      <router-view />
     </template>
     <template #right>
       <div class="flex flex-col gap-4 items-end">
