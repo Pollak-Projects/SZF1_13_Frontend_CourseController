@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Feladatsor from "../../Components/ViewComponents/Feladatsor.vue";
 import View from "../../Components/ViewComponents/View.vue";
-import ThemeS from "../../Components/ViewComponents/ThemeSwitcher.vue"
+import ThemeSwitcher from '../../Components/ViewComponents/ThemeSwitcher.vue';
 
 
 const isFeladatsorVisible = ref(true);
@@ -31,7 +31,7 @@ const goBack = () => {
 
     <div class="box" :style="{ background: backgroundColor }">
 
-      <ThemeS class="Themebut"></ThemeS>
+      <ThemeSwitcher />
 
 </div>
 
