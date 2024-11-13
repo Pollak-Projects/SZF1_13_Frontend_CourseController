@@ -1,9 +1,7 @@
 <script setup>
 
 import {provide, ref} from "vue";
-import AdminModules from "./AdminModules.vue";
-import AdminAssignments from "./AdminAssignments.vue";
-import AdminUsers from "./AdminUsers.vue";
+;
 import BaseLayout from "../../Slots/AdminSlots/BaseLayout.vue";
 
 const isAdmin = ref(false)

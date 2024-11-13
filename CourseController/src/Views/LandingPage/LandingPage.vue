@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+
 
 </script>
 
@@ -13,7 +14,7 @@
         <router-link to="login" class="text-white">Bejelentkezés</router-link>
       </li>
       <li>
-        <router-link to="admin" class="text-white">Admin</router-link>
+        <router-link to="admin/modules-create"  class="text-white">Admin</router-link>
       </li>
     </ul>
     </div>

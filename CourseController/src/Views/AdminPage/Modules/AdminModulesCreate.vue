@@ -1,11 +1,9 @@
 
-<link rel="stylesheet" href="style.css"></link>
+<link rel="stylesheet" href="style.css"/>
 
 <script setup>
-import { ref} from "vue";
-import AdminNavbar from "src/Components/AdminComponents/AdminNavbar.vue";
-import AdminModule from "src/Components/AdminComponents/AdminModule.vue";
 
+import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
 </script>
 
 <template>
@@ -13,7 +11,7 @@ import AdminModule from "src/Components/AdminComponents/AdminModule.vue";
     <AdminNavbar />
     <div class="flex flex-col items-center justify-center shadow bg-[#00000042] py-[3vh] sm:py-[4vh] md:py-[5vh] rounded-3xl">
       <div class="flex flex-col gap-[3vh] sm:gap-[4vh] md:gap-[5vh] mb-[5vh]">
-        <p class="place-self-center text-lg sm:text-xl md:text-4xl">Modulok</p>
+        <p class="place-self-center text-lg sm:text-xl md:text-4xl">Modul Létrehozás</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[3vh] gap-x-[3vw]">
 
           <!-- Admin Module Component -->
@@ -38,7 +36,7 @@ import AdminModule from "src/Components/AdminComponents/AdminModule.vue";
             <option value="year3">Évfolyam 3</option>
           </select>
           <Button class="rounded-lg" label="Feltoltes" />
-          <Button class="rounded-lg" label="Szerkesztes" @click="edit"/>
+          <Button class="rounded-lg" label="Szerkesztes"/>
           <Button label="Mentés" />
         </div>
       </div>
