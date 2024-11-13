@@ -60,26 +60,6 @@ export default {
   </script>
   
   <style scoped>
-.submit {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.submit.disabled {
-  background-color: #999;
-  cursor: not-allowed;
-  color: #666;
-  border: 1px solid #666;
-  pointer-events: none; 
-  transition: none; 
-}
-
-.submit.disabled span {
-  display: none;
-}
 
 
   html {
@@ -192,10 +172,28 @@ export default {
     align-items: center;
 }
 
+  .submit {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.4s;
+  }
+
+  .submit.disabled {
+    cursor: not-allowed;
+    opacity: 0;
+    pointer-events: none; 
+    transition: none; 
+  }
+
+  .submit.disabled span {
+    display: none;
+  }
+
   .login-box form .submit {
     position: relative;
     padding: 12px 28px;
-    color: rgb(255, 255, 255);
     font-size: 16px;
     text-decoration: none;
     transition: .5s;
@@ -208,13 +206,27 @@ export default {
     display: inline-block;
     text-align: center;
     width: 140px;
+    animation: shadows 1.5s ease-in-out infinite;
   }
   
+  @keyframes shadows {
+  0% {
+    box-shadow: 0px 0px 10px 0px #000000bb;
+  }
+  50% {
+    box-shadow: 0px 0px 40px 3px #ffffff;
+  }
+  100% {
+    box-shadow: 0px 0px 10px 0px #000000bb;
+  }
+}
+
   .login-box form .submit:hover {
     width: 300px;
     background: white;
     color: black;
     border: 1px solid rgba(255, 255, 255, 0);
+    animation:  none;
     box-shadow: 0 0 5px white,
                 0 0 25px white,
                 0 0 50px white,
