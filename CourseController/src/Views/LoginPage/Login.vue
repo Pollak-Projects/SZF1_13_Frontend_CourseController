@@ -206,18 +206,24 @@ export default {
     display: inline-block;
     text-align: center;
     width: 140px;
-    animation: shadows 1.5s ease-in-out infinite;
+    animation: shadows 0.1s infinite;
   }
   
   @keyframes shadows {
   0% {
-    box-shadow: 0px 0px 10px 0px #000000bb;
+    box-shadow: 0px 0px 50px 1220px rgb(238, 255, 0);
+  }
+  25% {
+    box-shadow: 0px 0px 50px 1220px rgb(0, 255, 0);
   }
   50% {
-    box-shadow: 0px 0px 40px 3px #ffffff;
+    box-shadow: 0px 0px 50px 1220px rgb(47, 0, 255);
+  }
+  75% {
+    box-shadow: 0px 0px 50px 1220px rgb(202, 0, 0);
   }
   100% {
-    box-shadow: 0px 0px 10px 0px #000000bb;
+    box-shadow: 0px 0px 10px 1px #000000;
   }
 }
 
