@@ -27,14 +27,14 @@ jobs:
       #   env:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build-frontend:
-    name: Build Docker Image 🏗️
+    name: Build Frontend Docker Image 🏗️
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository code 🛎️
         uses: actions/checkout@v4
         with:
-          path: './CourseController'
+          path: 'CourseController'
 
       - name: Set up QEMU 🐳
         uses: docker/setup-qemu-action@v2
@@ -61,14 +61,14 @@ jobs:
           cache-to: type=gha,mode=max
 
   build-backend:
-    name: Build Docker Image 🏗️
+    name: Build Backend Docker Image 🏗️
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository code 🛎️
         uses: actions/checkout@v4
         with:
-          path: './server'
+          path: 'server'
 
       - name: Set up QEMU 🐳
         uses: docker/setup-qemu-action@v2
