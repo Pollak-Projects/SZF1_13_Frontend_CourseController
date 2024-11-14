@@ -33,6 +33,7 @@ jobs:
     steps:
       - name: Check out repository code 🛎️
         uses: actions/checkout@v4
+          with:
             path: './CourseController'
 
       - name: Set up QEMU 🐳
