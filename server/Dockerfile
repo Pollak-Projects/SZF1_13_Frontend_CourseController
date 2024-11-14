@@ -3,7 +3,7 @@ FROM node:22 AS build
 
 RUN apt-get update && apt-get install -y libc6
 
-WORKDIR .
+WORKDIR ./server/
 
 COPY package*.json . 
 
@@ -17,7 +17,7 @@ RUN npm run build
 # Production stage
 FROM node:22 AS production
 
-WORKDIR .
+WORKDIR /
 
 COPY package*.json . 
 
