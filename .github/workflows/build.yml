@@ -32,7 +32,11 @@ jobs:
 
     steps:
       - run: |
-          echo ${{ github.GITHUB_WORKSPACE }}
+          echo "${GITHUB_WORKSPACE}"
+          echo ${GITHUB_WORKSPACE}
+          echo "${{ github.workspace }}"
+          echo ${{ github.workspace }}
+          
 
       - name: Check out repository code 🛎️
         uses: actions/checkout@v4
