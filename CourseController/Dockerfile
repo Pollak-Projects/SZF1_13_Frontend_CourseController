@@ -29,6 +29,6 @@ FROM nginx:latest as prod
 
 COPY --from=prod-builder /usr/src/app/dist /usr/share/nginx/html
 
-COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./CourseController/config/nginx.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
