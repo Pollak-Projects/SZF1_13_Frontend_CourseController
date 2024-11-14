@@ -54,7 +54,7 @@ jobs:
           platforms: linux/amd64
           file: ./CourseController/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/app:latest
+          tags: ghcr.io/pollak-projects/szf1_13_frontend_coursecontroller/app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -86,7 +86,7 @@ jobs:
           platforms: linux/amd64
           file: ./server/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/api:latest
+          tags: ghcr.io/pollak-projects/szf1_13_frontend_coursecontroller/api:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
