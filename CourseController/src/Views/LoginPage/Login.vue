@@ -1,67 +1,58 @@
 <template>
   <div class="containerr">
+
     <RouterLink to="/">
-      <Button icon="pi pi-arrow-left" class="custom-button" aria-label="Back" />
-    </RouterLink>
+            <Button icon="pi pi-arrow-left" class="custom-button" aria-label="Back" />
+          </RouterLink>
+          <ThemeSwitcher/>
     <div class="login-box">
-      <h2>Bejelentkezés</h2>
-      <form @submit.prevent="handleLogin">
-        <div class="user-box">
-          <input type="text" v-model="email" required="">
-          <label>Felhasználónév</label>
-        </div>
-        <div class="line1"></div>
-        <div class="user-box">
-          <input type="password" v-model="password" required="">
-          <label>Jelszó</label>
-        </div>
-        <div class="line"></div>
-        <a
-          href="#"
-          :class="['submit', { disabled: !isFormValid }]"
-          :disabled="!isFormValid"
-          @click="isFormValid && handleLogin"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Belépés
-        </a>
-        <router-link to="/listing">
-          <div class="folytdiv"><a class="folyt">Folytatás bejelentkezés nélkül</a></div>
-        </router-link>
-      </form>
-    </div>
+        <h2>Bejelentkezés</h2>
+        <form>
+          <div class="user-box">
+            <input type="text" name="" required="">
+            <label>Felhasználónév</label>
+          </div>
+          <div class="line1"></div>
+          <div class="user-box">
+            <input type="password" name="" required="">
+            <label>Jelszó</label>
+          </div>
+          <div class="line"></div>
+          <a href="" class="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Belépés
+          </a>
+          <router-link to="/listing">
+          <div class="folytdiv"><a class="folyt" >Folytatás bejelentkezés nélkül</a></div>
+          </router-link>
+        </form>
+      </div>
   </div>
   </template>
   
   
   <script>
-export default {
-  data() {
-    return {
-      email: '',
-      password: ''
-    };
-  },
-  computed: {
-    isFormValid() {
-      return this.email.length > 0 && this.password.length > 0;
+  import ThemeSwitcher from '../../Components/ViewComponents/ThemeSwitcher.vue';
+  export default {
+    data() {
+      return {
+        email: '',
+        password: ''
+      };
+    },
+    methods: {
+      handleLogin() {
+        console.log('Email:', this.email);
+        console.log('Jelszó:', this.password);
+      }
     }
-  },
-  methods: {
-    handleLogin() {
-      console.log('Email:', this.email);
-      console.log('Jelszó:', this.password);
-    }
-  }
-};
+  };
   </script>
   
   <style scoped>
-
-
   html {
     height: 100%;
   }
@@ -78,13 +69,6 @@ export default {
   --_mesh-gradient-blur: 100px;
   --_mesh-gradient-blend-mode: normal;
 
-  background: radial-gradient(at 0% 0%, #000000 0px, transparent 50%), 
-  radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000 0px, transparent 50%), 
-  radial-gradient(at 39.054951513370554% 97.9845146871009%, #435cb6 0px, transparent 50%), 
-  radial-gradient(at 67.71672054069938% 98.11222860791827%, #768ad0 0px, transparent 50%), 
-  radial-gradient(at 63.052600646488386% 42.55667305236271%, #a15cc1 0px, transparent 50%), 
-  radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #957641;
-  mix-blend-mode: var(--_mesh-gradient-blend-mode);
   
 }
 
@@ -172,28 +156,10 @@ export default {
     align-items: center;
 }
 
-  .submit {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.4s;
-  }
-
-  .submit.disabled {
-    cursor: not-allowed;
-    opacity: 0;
-    pointer-events: none; 
-    transition: none; 
-  }
-
-  .submit.disabled span {
-    display: none;
-  }
-
   .login-box form .submit {
     position: relative;
     padding: 12px 28px;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     text-decoration: none;
     transition: .5s;
@@ -206,33 +172,13 @@ export default {
     display: inline-block;
     text-align: center;
     width: 140px;
-    animation: shadows 0.1s infinite;
   }
   
-  @keyframes shadows {
-  0% {
-    box-shadow: 0px 0px 50px 1220px rgb(238, 255, 0);
-  }
-  25% {
-    box-shadow: 0px 0px 50px 1220px rgb(0, 255, 0);
-  }
-  50% {
-    box-shadow: 0px 0px 50px 1220px rgb(47, 0, 255);
-  }
-  75% {
-    box-shadow: 0px 0px 50px 1220px rgb(202, 0, 0);
-  }
-  100% {
-    box-shadow: 0px 0px 10px 1px #000000;
-  }
-}
-
   .login-box form .submit:hover {
     width: 300px;
     background: white;
     color: black;
     border: 1px solid rgba(255, 255, 255, 0);
-    animation:  none;
     box-shadow: 0 0 5px white,
                 0 0 25px white,
                 0 0 50px white,

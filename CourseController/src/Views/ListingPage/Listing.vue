@@ -1,5 +1,6 @@
 <template>
   <div class="home-page">
+    <ThemeSwitcher/>
     <div class="top-bar">
       <div class="profile-menu">
         <button @click="toggleProfileMenu" class="user-icon">👤</button>
@@ -31,37 +32,34 @@
 </template>
 
 <script>
+import { useThemeStore } from '../../stores/themeStore.js';
+import ThemeSwitcher from '../../Components/ViewComponents/ThemeSwitcher.vue';
+import { storeToRefs } from 'pinia';
+
 export default {
   data() {
     return {
       szakmak: [
-          "Ipari informatikai technikus",
-          "Informatikai alkalmazás- és rendszerüzemeltető technikus",
-          "Szoftverfejlesztő- és tesztelő",
-          "Erősáramú elektrotechnikus",
-          "Közismeret",
+        "Ipari informatikai technikus",
+        "Informatikai alkalmazás- és rendszerüzemeltető technikus",
+        "Szoftverfejlesztő- és tesztelő",
+        "Erősáramú elektrotechnikus",
+        "Közismeret",
       ],
       kiemeltIndex: null,
       showProfileMenu: false,
-      buttonColors: [
-        "rgba(23, 111, 71, 1)",
-        "rgba(71, 122, 36, 1)",
-        "rgba(128, 180, 20, 1)",
-        "rgba(158, 210, 6, 1)",
-        "rgba(188, 247, 65, 1)"
-      ],
-      highlightedColors: [
-      "rgba(23, 111, 71, 1)",
-        "rgba(71, 122, 36, 1)",
-        "rgba(128, 180, 20, 1)",
-        "rgba(177, 230, 6, 1)",
-        "rgba(196, 237, 65, 1)"
-      ]
     };
+  },
+  computed: {
+    // Pinia store-ból hozzuk be a currentTheme értéket
+    currentTheme() {
+      const themeStore = useThemeStore();
+      return themeStore.currentTheme;
+    },
   },
   methods: {
     clickAt() {
-      this.$router.push('view')
+      this.$router.push('view');
     },
     egerFelett(index) {
       this.kiemeltIndex = index;
@@ -82,13 +80,12 @@ export default {
       this.$router.push({ name: "Login" });
     },
     getButtonStyle(index) {
+      // A gomb színét a háttér színéhez igazítjuk
       return {
-        background: this.kiemeltIndex === index
-          ? this.highlightedColors[index]
-          : this.buttonColors[index]
+        background: "var(--button-color)" // A CSS változó alkalmazása
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -99,21 +96,9 @@ body {
 }
 .home-page {
   height: 100vh;
-  --_mesh-gradient-blur: 100px;
-  --_mesh-gradient-blend-mode: normal;
-  background: radial-gradient(
-  at 0% 0%, #000000 0px, transparent 50%),
-   radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000c0 0px, transparent 50%), 
-   radial-gradient(at 39.054951513370554% 97.9845146871009%, #034749 0px, transparent 50%), 
-   radial-gradient(at 19.054951513370554% 97.9845146871009%, #034749 0px, transparent 50%),
-   radial-gradient(at 47.71672054069938% 38.11222860791827%, #4c9608 0px, transparent 50%), 
-   radial-gradient(at 67.71672054069938% 98.11222860791827%, #4c9608 0px, transparent 50%), 
-   radial-gradient(at 63.052600646488386% 92.55667305236271%, #4c9608 0px, transparent 50%), 
-   radial-gradient(at 153.052600646488386% 42.55667305236271%, #ebe95cb7 0px, transparent 50%), 
-   radial-gradient(at 113.052600646488386% 82.55667305236271%, #ebe95cb7 0px, transparent 50%),
-   radial-gradient(at 113.052600646488386% 2.55667305236271%, #f0efb1b7 0px, transparent 50%),
-   radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #09525f;
-  mix-blend-mode: var(--_mesh-gradient-blend-mode);
+
+
+
   color: white;
   padding: 0 50px;
   position: relative;

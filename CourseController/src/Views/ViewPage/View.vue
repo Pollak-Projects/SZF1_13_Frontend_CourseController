@@ -29,9 +29,8 @@ const goBack = () => {
       ←
     </button>
 
-    <div class="box" :style="{ background: backgroundColor }">
 
-      <ThemeSwitcher />
+
 
 </div>
 
@@ -40,12 +39,11 @@ const goBack = () => {
         <div v-if="isFeladatsorVisible" class="transition-transform duration-500">
           <Feladatsor @toggle="toggleFeladatsor" />
         </div>
-
+        <ThemeSwitcher />
         <div class="flex-grow transition-all duration-500" :class="{ 'ml-10': !isFeladatsorVisible, 'mr-40': isFeladatsorVisible }">
           <View :class="{ 'flex-grow': isFeladatsorVisible, 'w-full': !isFeladatsorVisible }" />
         </div>
       </div>
-    </div>
 
 </template>
 
@@ -53,14 +51,6 @@ const goBack = () => {
 .Themebut{
   display: flex;
   margin-left:80%
-}
-.containerr {
-  --_mesh-gradient-blur: 100px;
-  --_mesh-gradient-blend-mode: normal;
-  background: radial-gradient( at 0% 0%, #000000 0px, transparent 50%), radial-gradient(at 3.5474581251836614% 25.18757982120051%, #000000c0 0px, transparent 50%), radial-gradient(at 9.054951513370554% 60.9845146871009%, #ff00ff0e 0px, transparent 80%), radial-gradient(at 9.054951513370554% 80.9845146871009%, #ff00ff0e 0px, transparent 80%), radial-gradient(at 9.054951513370554% 100.9845146871009%, #ff00ff2d 0px, transparent 80%), radial-gradient(at 20.054951513370554% 100.9845146871009%, #ff00ff6b 0px, transparent 35%), radial-gradient(at 49.054951513370554% 120.9845146871009%, #c40be9d3 0px, transparent 50%), radial-gradient(at 47.71672054069938% 38.11222860791827%, #399cca 0px, transparent 50%), radial-gradient(at 63.052600646488386% 92.55667305236271%, #399cca 0px, transparent 50%), radial-gradient(at 67.71672054069938% 98.11222860791827%, #399cca 0px, transparent 50%), radial-gradient(at 153.052600646488386% 42.55667305236271%, #2295ca 0px, transparent 50%), radial-gradient(at 113.052600646488386% 82.55667305236271%, #2295ca 0px, transparent 50%), radial-gradient(at 113.052600646488386% 2.55667305236271%, #2295ca 0px, transparent 50%), radial-gradient(at 26.191007934175726% 100%, #000000 0px, transparent 50%) #5697cc;
-  mix-blend-mode: var(--_mesh-gradient-blend-mode);
-  height: 100vh; 
-  overflow: hidden;
 }
 
 .grid {

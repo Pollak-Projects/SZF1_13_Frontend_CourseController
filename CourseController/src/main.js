@@ -3,6 +3,7 @@ import './style.css'
 import 'primeicons/primeicons.css'
 import App from './App.vue'
 import router from "./router.js";
+import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 import {CourseControlPreset} from "./app-theme.js";
 import {ToastService} from "primevue";
@@ -24,4 +25,6 @@ createApp(App)
     })
     .use(ToastService)
     .use(router)
+    .use(createPinia())
     .mount('#app')
+
