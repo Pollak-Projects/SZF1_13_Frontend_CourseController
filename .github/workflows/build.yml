@@ -31,13 +31,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: |
+          echo "${{ github.GITHUB_WORKSPACE }}"
+
       - name: Check out repository code 🛎️
         uses: actions/checkout@v4
         with:
           path: 'CourseController'
-
-      - run: |
-          echo "${{ github.GITHUB_WORKSPACE }}"
 
       - name: Set up QEMU 🐳
         uses: docker/setup-qemu-action@v2
