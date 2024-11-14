@@ -3,7 +3,7 @@ FROM node:22 AS build
 
 RUN apt-get update && apt-get install -y libc6
 
-WORKDIR ./server/
+WORKDIR ./
 
 COPY package*.json . 
 
