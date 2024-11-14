@@ -21,7 +21,7 @@ WORKDIR /
 
 COPY package*.json . 
 
-RUN npm ci --only=production
+#RUN npm ci --only=production
 
 COPY --from=build /node_modules/.prisma ./node_modules/.prisma
 COPY --from=build /prisma ./prisma
