@@ -37,7 +37,7 @@ jobs:
           path: 'CourseController'
 
       - run: |
-          echo "${{ GITHUB_WORKSPACE }}"
+          echo "${{ github.GITHUB_WORKSPACE }}"
 
       - name: Set up QEMU 🐳
         uses: docker/setup-qemu-action@v2
