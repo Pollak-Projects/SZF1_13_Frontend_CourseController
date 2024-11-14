@@ -11,12 +11,12 @@ ARG VITE_BACKEND_URL
 # expose the variable to the finished cotainer
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
 
-COPY ./CourseController/package.json ./
+COPY ./package.json ./
 
 RUN npm install
 
 # use a more specific COPY, as this will include files like `Dockerfile`, we don't really need inside our containers.
-COPY ./CourseController/ ./
+COPY ./ ./
 
 FROM builder as dev
 CMD ["npm", "run", "dev"]
@@ -29,6 +29,6 @@ FROM nginx:latest as prod
 
 COPY --from=prod-builder /usr/src/app/dist /usr/share/nginx/html
 
-COPY ./CourseController/config/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
