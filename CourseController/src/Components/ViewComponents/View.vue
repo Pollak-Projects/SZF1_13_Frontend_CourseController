@@ -4,7 +4,7 @@
          style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; padding: 16px; height: 75vh;">
       
       <div>
-        <h1 class="text-center text-pink-500 text-3xl p-4">{{ item.title }}</h1>
+        <h1 class="text-center text-pink-500 text-3xl p-4">dfdsfsdfd</h1>
       </div>
 
       <!-- Tailwind preline reconfiguration for new use of working good -->

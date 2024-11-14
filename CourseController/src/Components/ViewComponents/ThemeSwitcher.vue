@@ -1,88 +1,126 @@
 <script setup>
 import { storeToRefs } from 'pinia';
-import { useThemeStore } from '@/stores/themeStore.js';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useThemeStore } from '../../stores/themeStore.js';
 import { watch } from "vue";
 
 const themeStore = useThemeStore();
 const { currentTheme } = storeToRefs(themeStore);
+
+// Dropdown kezelése
+const isDropdownOpen = ref(false);
+const activeColor = ref(currentTheme.value); // Aktív szín követése
+
+// Téma frissítés
 const updateTheme = (theme) => {
   themeStore.setTheme(theme);
+  activeColor.value = theme; // Az aktuális szín frissítése
 };
-watch(currentTheme, (newTheme) => { 
+
+// Figyelő, hogy a témát frissítsük a store-ban, ha változik
+watch(currentTheme, (newTheme) => {
   document.documentElement.setAttribute('data-theme', newTheme);
   localStorage.setItem('theme', newTheme);
 });
+
+// Dropdown bezárása kattintáskor bárhol
+const closeDropdown = (event) => {
+  if (!event.target.closest('.theme-selector')) {
+    isDropdownOpen.value = false;
+  }
+};
+
+// OnMounted és BeforeUnmount életciklusok
+onMounted(() => {
+  themeStore.loadTheme();  // Betöltjük a témát a store-ban
+  window.addEventListener('click', closeDropdown); // Bezárás kattintásra
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('click', closeDropdown); // Takarítás
+});
 </script>
+
 <template>
-  <div class="theme-switcher">
-    <label>
-      <input type="radio" name="theme" value="purple" @change="updateTheme('purple')" :checked="currentTheme === 'purple'" />
-      Purple
-    </label>
-    <label>
-      <input type="radio" name="theme" value="green" @change="updateTheme('green')" :checked="currentTheme === 'green'" />
-      Green
-    </label>
-    <label>
-      <input type="radio" name="theme" value="default" @change="updateTheme('default')" :checked="currentTheme === 'default'" />
-      Default
-    </label>
-    <div class="card">
-      <h2>Card Title</h2>
-      <p>This is a card component. The theme switcher will change its styles.</p>
-      <button class="primary-button">Primary Button</button>
-    </div>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" />
+  <!-- Bal felső sarokban lebegő színválasztó -->
+  <div class="theme-selector" @mouseover="isDropdownOpen = true" @mouseleave="isDropdownOpen = false">
+    <div :style="{ backgroundColor: activeColor }" class="circle"></div>
+    <div v-if="isDropdownOpen" class="colors">
+      <button @click="updateTheme('purple')" class="color-option purple"></button>
+      <button @click="updateTheme('green')" class="color-option green"></button>
+      <button @click="updateTheme('white')" class="color-option white"></button>
     </div>
   </div>
 </template>
-<style>
-h1 {
-  color: var(--primary-color);
-  margin-bottom: 20px;
+
+<style scoped>
+/* A színválasztó kör */
+.theme-selector {
+  position: fixed;
+  top: 20px; /* Fentről 20px távolságra */
+  left: 50%; /* Középre igazítva */
+  transform: translateX(-50%); /* Tökéletes középre igazítás */
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.card {
-  background-color: var(--background-color);
-  border: 1px solid var(--primary-color);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.primary-button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+
+/* A nagy kör, ami az aktív színt mutatja */
+.circle {
+  width: 70px;
+  height: 70px;
+  background-color: var(--primary-color); /* Alapértelmezett szín */
+  border-radius: 50%;
+  transition: all 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
-.primary-button:hover {
-  background-color: darken(var(--primary-color), 10%);
+
+/* A színválasztó menü */
+.colors {
+  display: flex;
+  flex-direction: row; /* Vízszintes elrendezés */
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
-.form-group {
-  margin-bottom: 20px;
+
+/* Mivel az egér fölé megy, akkor láthatóvá válik a színválasztó */
+.theme-selector:hover .colors {
+  opacity: 1;
+  pointer-events: auto;
 }
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--text-color);
+
+/* A szín gombok */
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 10px; /* Távolság a gombok között */
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
-.form-group input {
-  padding: 10px;
-  border: 1px solid var(--primary-color);
-  border-radius: 4px;
-  width: 100%;
-  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+
+/* Színek */
+.purple {
+  background-color: purple;
 }
-.form-group input:focus {
-  outline: none;
-  border-color: darken(var(--primary-color), 10%);
-  background-color: lighten(var(--background-color), 5%);
-  color: var(--text-color);
+
+.green {
+  background-color: green;
+}
+
+.default {
+  background-color: lightgray;
+}
+
+/* Hover hatás a színekre */
+.color-option:hover {
+  transform: scale(1.2);
 }
 </style>
