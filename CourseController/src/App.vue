@@ -1,5 +1,4 @@
 <script setup>
-import UserIcon from "./Components/NavigationComponents/UserIcon.vue";
 
 </script>
 
