@@ -3,8 +3,8 @@
 
 <script setup>
 import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
-import { useToast } from "primevue/usetoast";
-import { provide, ref, reactive, onMounted } from "vue";
+import {useToast} from "primevue/usetoast";
+import {onMounted, provide, reactive, ref} from "vue";
 
 let formData = reactive({
   selectedCategory: null,
@@ -20,21 +20,26 @@ let professions = ref([]);
 let grades = ref([]);
 
 const getProfessions = async () => {
-  professions.value = [
-    { id: 1, professionName: "Profession 1" },
-    { id: 2, professionName: "Profession 2" },
-    { id: 3, professionName: "Profession 3" },
-    { id: 4, professionName: "Profession 4" },
-  ];
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/professions`);
+  professions.value = await response.json();
+  // professions.value = [
+  //   { id: 1, professionName: "Profession 1" },
+  //   { id: 2, professionName: "Profession 2" },
+  //   { id: 3, professionName: "Profession 3" },
+  //   { id: 4, professionName: "Profession 4" },
+  // ];
 };
 
 const getCategories = async () => {
-  categories.value = [
-    { id: 1, categoryName: "Category 1" },
-    { id: 2, categoryName: "Category 2" },
-    { id: 3, categoryName: "Category 3" },
-    { id: 4, categoryName: "Category 4" },
-  ];
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/categories`);
+  categories.value = await response.json();
+
+  // categories.value = [
+  //   { id: 1, categoryName: "Category 1" },
+  //   { id: 2, categoryName: "Category 2" },
+  //   { id: 3, categoryName: "Category 3" },
+  //   { id: 4, categoryName: "Category 4" },
+  // ];
 };
 
 const getGrades = async () => {

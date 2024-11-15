@@ -26,12 +26,8 @@ const getModules = async () => {
 };
 
 const deleteModule = async (id) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/subject`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/subject/${id}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id }),
   });
   console.log(await response.json());
 };

@@ -26,12 +26,8 @@ const getAssignments = async () => {
 };
 
 const deleteAssignment = async (id) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/assignment`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/assignment/${id}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id }),
   });
   console.log(await response.json());
 };
