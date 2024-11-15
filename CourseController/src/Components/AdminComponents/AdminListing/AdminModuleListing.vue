@@ -1,45 +1,42 @@
-<script>
+<script setup>
+import {computed, onMounted, ref} from 'vue';
 
-export default {
-  data() {
-    return {
-      modules: [],
-      searchQuery: '',
-    }
-  },
-  computed: {
-    filteredModules() {
-      return this.modules.filter(module => module.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    }
-  },
-  async mounted() {
-    try {
-      await this.getModules();
-    } catch (error) {
-      console.log("Hiba a betöltés során!", error);
-    }
-  },
-  methods: {
-    async getModules() {
-      this.modules = [
-        { id: 1, name: 'Express alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'Java alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'C# alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'HTML alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'CSS alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'PHP alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'Random alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-      ]
-    },
-    async deleteModule(id) {
+const modules = ref([]);
+const searchQuery = ref('');
 
-    },
-    editModule(id) {
+const filteredModules = computed(() => {
+  return modules.value.filter(module =>
+      module.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 
-    }
-  }
+const getModules = async () => {
+  modules.value = [
+    { id: 1, name: 'Express alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'Java alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'C# alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'HTML alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'CSS alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'PHP alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'Random alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+  ];
 };
 
+const deleteModule = async (id) => {
+  // Implement delete logic here
+};
+
+const editModule = (id) => {
+  // Implement edit logic here
+};
+
+onMounted(async () => {
+  try {
+    await getModules();
+  } catch (error) {
+    console.log("Hiba a betöltés során!", error);
+  }
+});
 </script>
 
 <template>

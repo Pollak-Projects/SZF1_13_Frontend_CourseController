@@ -1,44 +1,43 @@
-<script>
+<script setup>
+import {computed, onMounted, ref} from 'vue';
 
-export default {
-  data() {
-    return {
-      assignments: [],
-      searchQuery: '',
-    }
-  },
-  computed: {
-    filteredAssignments() {
-      return this.assignments.filter(assignment => assignment.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    }
-  },
-  async mounted() {
-    try {
-      await this.getAssignments();
-    } catch (error) {
-      console.log("Hiba a betöltés során!", error);
-    }
-  },
-  methods: {
-    async getAssignments() {
-      this.assignments = [
-        { id: 1, name: 'Express alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'Java alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'C# alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'HTML alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'CSS alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'PHP alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-        { id: 1, name: 'Random alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-      ]
-    },
-    async deleteAssignment(id) {
+const assignments = ref([]);
+const searchQuery = ref('');
+const deletedWords = ref([]);
 
-    },
-    editAssignment(id) {
+const filteredAssignments = computed(() => {
+  return assignments.value.filter(assignment =>
+      assignment.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 
-    }
-  }
+const getAssignments = async () => {
+  assignments.value = [
+    { id: 1, name: 'Express alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'Java alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'C# alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'HTML alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'CSS alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'PHP alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+    { id: 1, name: 'Random alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+  ];
 };
+
+const deleteAssignment = async (id) => {
+  // Implement delete logic here
+};
+
+const editAssignment = (id) => {
+  // Implement edit logic here
+};
+
+onMounted(async () => {
+  try {
+    await getAssignments();
+  } catch (error) {
+    console.log("Hiba a betöltés során!", error);
+  }
+});
 
 </script>
 

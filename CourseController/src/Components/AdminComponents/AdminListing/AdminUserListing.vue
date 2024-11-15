@@ -1,48 +1,45 @@
-<script>
+<script setup>
+import {computed, onMounted, ref} from 'vue';
 
-export default {
-  data() {
-    return {
-      users: [],
-      searchQuery: '',
-    }
-  },
-  computed: {
-    filteredUsers() {
-      return this.users.filter(user => user.username.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    }
-  },
-  async mounted() {
-    try {
-      await this.getUsers();
-    } catch (error) {
-      console.log("Hiba a betöltés során!", error);
-    }
-  },
-  methods: {
-    async getUsers() {
-      this.users = [
-        { id: 1, username: 'Geza1', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza2', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza3', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza4', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza5', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza6', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza7', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza8', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza9', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-        { id: 1, username: 'Geza10', diplayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-      ]
-    },
-    async deleteUser(id) {
+const users = ref([]);
+const searchQuery = ref('');
 
-    },
-    editUser(id) {
+const filteredUsers = computed(() => {
+  return users.value.filter(user =>
+      user.username.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 
-    }
-  }
+const getUsers = async () => {
+  users.value = [
+    { id: 1, username: 'Geza1', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza2', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza3', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza4', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza5', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza6', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza7', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza8', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza9', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+    { id: 1, username: 'Geza10', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  ];
 };
 
+const deleteUser = async (id) => {
+  // Implement delete logic here
+};
+
+const editUser = (id) => {
+  // Implement edit logic here
+};
+
+onMounted(async () => {
+  try {
+    await getUsers();
+  } catch (error) {
+    console.log("Hiba a betöltés során!", error);
+  }
+});
 </script>
 
 <template>
