@@ -20,7 +20,7 @@ let professions = ref([]);
 let grades = ref([]);
 
 const getProfessions = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/professions`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/profession`);
   professions.value = await response.json();
   // professions.value = [
   //   { id: 1, professionName: "Profession 1" },
@@ -31,7 +31,7 @@ const getProfessions = async () => {
 };
 
 const getCategories = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/categories`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/category`);
   categories.value = await response.json();
 
   // categories.value = [

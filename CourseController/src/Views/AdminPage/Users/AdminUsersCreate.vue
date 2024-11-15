@@ -5,19 +5,26 @@
 
 import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
 
-import { ref, reactive } from "vue";
+import {reactive} from "vue";
 
 let formData = reactive({
   username: null,
   email: null,
-  password: null,
-  displayedName: null,
+  hashedPwd: null,
+  displayName: null,
   birthDate:null
 });
 
 const createUser = async () => {
-  //Implement userCreate API call here
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/user`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
   console.log(formData)
+  console.log(await response.json());
 }
 
 </script>
@@ -31,10 +38,10 @@ const createUser = async () => {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[3vh] gap-x-[3vw]">
 
           <!-- Admin Module Component -->
-          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="username" />
-          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="displayedName" />
-          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="password" />
-          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="email" />
+          <AdminModule v-model:input="formData.username" style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="username" />
+          <AdminModule v-model:input="formData.displayName" style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="displayedName" />
+          <AdminModule v-model:input="formData.hashedPwd" style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="password" />
+          <AdminModule v-model:input="formData.email" style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="email" />
           <input type="date" v-model="formData.birthDate">
 
           <Button label="Létrehozás" @click="createUser"/>

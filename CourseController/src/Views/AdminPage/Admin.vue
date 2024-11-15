@@ -1,8 +1,9 @@
 <script setup>
 
 import {provide, ref} from "vue";
-;
 import BaseLayout from "../../Slots/AdminSlots/BaseLayout.vue";
+
+
 
 const isAdmin = ref(false)
 
@@ -30,7 +31,8 @@ const toggleAdmin = () => {
     <template #right>
       <div class="flex flex-col gap-4 items-end">
         <UserIcon/>
-        </div>
+      </div>
+      <Button @click="toggleAdmin" icon="pi pi-cog" aria-label="Admin" />
     </template>
   </BaseLayout>
 
