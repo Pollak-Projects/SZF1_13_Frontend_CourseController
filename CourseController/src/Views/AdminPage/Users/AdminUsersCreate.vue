@@ -4,6 +4,22 @@
 <script setup>
 
 import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
+
+import { ref, reactive } from "vue";
+
+let formData = reactive({
+  username: null,
+  email: null,
+  password: null,
+  displayedName: null,
+  birthDate:null
+});
+
+const createUser = async () => {
+  //Implement userCreate API call here
+  console.log(formData)
+}
+
 </script>
 
 <template>
@@ -15,29 +31,13 @@ import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[3vh] gap-x-[3vw]">
 
           <!-- Admin Module Component -->
-          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="Bejegyzések" />
+          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="username" />
+          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="displayedName" />
+          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="password" />
+          <AdminModule style="height: 60px;" class="rounded-lg p-4 sm:text-lg md:text-xl shadow-xl shadow-black/50 bg-black/40 text-white" content="email" />
+          <input type="date" v-model="formData.birthDate">
 
-          <select style="height: 60px;" class="rounded-lg p-3 shadow-xl shadow-black/50 bg-black/40 text-center text-gray-400 sm:text-lg md:text-xl">
-            <option value="" disabled selected>Kategória</option>
-            <option value="category1">Kategória 1</option>
-            <option value="category2">Kategória 2</option>
-            <option value="category3">Kategória 3</option>
-          </select>
-          <select style="height: 60px;" class="rounded-lg p-3 shadow-xl shadow-black/50 bg-black/40 text-center text-gray-400  sm:text-lg md:text-xl">
-            <option value="" disabled selected>Szakma</option>
-            <option value="profession1">Szakma 1</option>
-            <option value="profession2">Szakma 2</option>
-            <option value="profession3">Szakma 3</option>
-          </select>
-          <select style="height: 60px;" class="rounded-lg p-3 shadow-xl shadow-black/50 bg-black/40 text-center text-gray-400  sm:text-lg md:text-xl">
-            <option value="" disabled selected>Évfolyam</option>
-            <option value="year1">Évfolyam 1</option>
-            <option value="year2">Évfolyam 2</option>
-            <option value="year3">Évfolyam 3</option>
-          </select>
-          <Button class="rounded-lg" label="Feltoltes" />
-          <Button class="rounded-lg" label="Szerkesztes"/>
-          <Button label="Mentés" />
+          <Button label="Létrehozás" @click="createUser"/>
         </div>
       </div>
     </div>
