@@ -55,7 +55,7 @@ export default class AdminProfessionController {
 
             log.silly("Added profession:", {json: result})
 
-            res.send(profession)
+            res.send(result)
         } catch (err) {
             log.error(err)
             res.status(500).send("Internal server error")

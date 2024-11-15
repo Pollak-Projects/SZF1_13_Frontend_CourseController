@@ -46,7 +46,7 @@ export default class AdminUserController {
             log.silly("Added user:", {json: result})
 
 
-            res.send(user)
+            res.send(result)
         }
         catch(err) {
             log.error(err)

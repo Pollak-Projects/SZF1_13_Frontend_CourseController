@@ -53,7 +53,7 @@ export default class AdminSubjectController {
 
             log.silly("Created new subject", {json: createdSubject})
 
-            res.send(subject);
+            res.send(createdSubject);
 
         } catch (e) {
             log.error(e)

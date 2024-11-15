@@ -53,7 +53,7 @@ export default class AdminAssignmentController {
 
             log.silly("Created new assignment", {json: createdAssignment})
 
-            res.send(assignment);
+            res.send(createdAssignment);
 
         } catch (e) {
             log.error(e)

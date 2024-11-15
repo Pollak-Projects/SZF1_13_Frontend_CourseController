@@ -50,7 +50,7 @@ export default class AdminCategoryController {
 
             log.silly("Created new category", {json: resultCategory})
 
-            res.send(category)
+            res.send(resultCategory)
 
         } catch (e) {
             log.error(e)
