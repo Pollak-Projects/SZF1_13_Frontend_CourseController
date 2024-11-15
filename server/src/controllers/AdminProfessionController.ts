@@ -178,14 +178,12 @@ export default class AdminProfessionController {
     async deleteProfession(req: Request, res: Response) {
         log.http("Delete profession")
 
-        const profession: z.infer<typeof AdminProfessionDTOs.updateProfessionDTO> = req.body
-
-        log.silly(profession)
+        const id = req.params.id
 
         try {
             const result = await orm.profession.delete({
                 where: {
-                    Id: profession.id,
+                    Id: id,
                 },
                 include: {
                     Subjects: true,
@@ -197,7 +195,7 @@ export default class AdminProfessionController {
 
             log.silly("Deleted profession:", {json: result})
 
-            res.send(profession)
+            res.send(result)
         } catch (err) {
             log.error(err)
             res.status(500).send("Internal server error")

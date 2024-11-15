@@ -165,12 +165,12 @@ export default class AdminCategoryController {
     async deleteCategory(req: Request, res: Response) {
         log.http("Deleted category")
 
-        const category: z.infer<typeof AdminCategoryDTOs.updateCategoryDTO> = req.body
+        const id = req.params.id
 
         try {
             const deletedCategory = await orm.category.delete({
                 where: {
-                    Id: category.id,
+                    Id: id,
                 },
                 include: {
                     Subjects: true,
@@ -180,7 +180,7 @@ export default class AdminCategoryController {
 
             log.silly("Deleted category", {json: deletedCategory})
 
-            res.send(category)
+            res.send(deletedCategory)
 
         } catch (e) {
             log.error(e)

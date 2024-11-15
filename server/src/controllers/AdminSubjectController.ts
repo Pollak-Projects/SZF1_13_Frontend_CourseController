@@ -192,14 +192,14 @@ export default class AdminSubjectController {
     async deleteSubject(req: Request, res: Response)  {
         log.http("Deleting subject")
 
-        const subject: z.infer<typeof AdminSubjectDTOs.updateSubjectDTO> = req.body
+        const id = req.params.id
 
-        log.silly("Deleting subject", {json: subject});
+        log.silly("Deleting subject", id);
 
         try {
             const deletedSubject = await orm.subject.delete({
                 where: {
-                    Id: subject.Id
+                    Id: id
                 },
                 include: {
                     Category: true,

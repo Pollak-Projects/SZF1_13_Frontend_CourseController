@@ -193,14 +193,14 @@ export default class AdminAssignmentController {
     async deleteAssignment(req: Request, res: Response) {
         log.http("Deleting assignment")
 
-        const assignment: z.infer<typeof AdminAssignmentDTOs.updateAssignmentDTO> = req.body
+        const id = req.params.id
 
-        log.silly("Deleting assignment", {json: assignment});
+        log.silly("Deleting assignment", id);
 
         try {
             const deletedAssignment = await orm.assignment.delete({
                 where: {
-                    Id: assignment.Id
+                    Id: id
                 },
                 include: {
                     Category: true,
