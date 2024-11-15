@@ -65,6 +65,29 @@ export default class AdminProfessionController {
     async getProfessions(req: Request, res: Response) {
         log.http("Getting all professions")
 
+        try {
+            const result = await orm.profession.findMany({
+                include: {
+                    Subjects: true,
+                    Assignments: true,
+                }
+            }).catch((err) => {
+                log.error(err)
+            });
+
+            log.silly("All professions:", {json: result})
+
+            res.send(result)
+        } catch (err) {
+            log.error(err)
+            res.status(500).send("Internal server error")
+        }
+
+    }
+
+    async getProfessionById(req: Request, res: Response) {
+        log.http("Getting profession by id")
+
         const profession: z.infer<typeof AdminProfessionDTOs.createProfessionDTO> = req.body
 
         log.silly(profession)

@@ -79,6 +79,32 @@ export default class AdminCategoryController {
         }
     }
 
+    async getCategoryById(req: Request, res: Response) {
+        log.http("Getting category by id")
+
+        const id = req.params.id
+
+        try {
+            const category = await orm.category.findFirst({
+                where: {
+                    Id: id,
+                },
+                include: {
+                    Subjects: true,
+                    Assignments: true,
+                },
+            })
+
+            log.silly("Category", {json: category})
+
+            res.send(category)
+
+        } catch (e) {
+            log.error(e)
+            res.status(500).send("Internal server error")
+        }
+    }
+
     async updateCategory(req: Request, res: Response) {
         log.http("Updating category")
 
