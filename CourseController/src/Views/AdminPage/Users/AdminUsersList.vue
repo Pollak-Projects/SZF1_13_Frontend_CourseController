@@ -17,5 +17,4 @@ import AdminUserListing from "../../../Components/AdminComponents/AdminListing/A
     </div>
   </div>
 
-
 </template>
