@@ -7,9 +7,9 @@ let formData = reactive({
   selectedCategory: null,
   selectedProfession: null,
   selectedGrade: null,
-  modulName: null,
-  modulDescription: null,
-  modulMarkdownFile: null
+  moduleName: null,
+  moduleDescription: null,
+  moduleMarkdownFile: null
 });
 
 let categories = ref([]);
@@ -47,9 +47,9 @@ const logger = () => {
   console.log(formData.selectedCategory);
   console.log(formData.selectedProfession);
   console.log(formData.selectedGrade)
-  console.log(formData.modulName)
-  console.log(formData.modulDescription)
-  console.log(formData.modulMarkdownFile)
+  console.log(formData.moduleName)
+  console.log(formData.moduleDescription)
+  console.log(formData.moduleMarkdownFile)
 }
 
 const modulesFile = ref(null);
