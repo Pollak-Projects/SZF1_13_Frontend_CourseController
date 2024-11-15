@@ -1,7 +1,5 @@
 <script setup>
 
-
-
 import AdminNavbar from "../../Components/AdminComponents/AdminNavbar.vue";
 
 defineProps({

@@ -15,7 +15,7 @@ export const CourseControlPreset = definePreset(Aura, {
             800: 'rgba(10, 0, 0, 0.5)',
             900: 'rgba(10, 0, 0, 0.5)',
             950: 'rgba(10, 0, 0, 0.5)',
-        },
+    },
         colorScheme: {
             light: {
                 primary: {

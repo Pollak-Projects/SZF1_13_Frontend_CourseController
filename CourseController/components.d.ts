@@ -10,6 +10,7 @@ declare module 'vue' {
     AdminModule: typeof import('./src/components/AdminComponents/AdminModule.vue')['default']
     AdminNavbar: typeof import('./src/components/AdminComponents/AdminNavbar.vue')['default']
     Button: typeof import('primevue/button')['default']
+    Toast: typeof import('primevue/toast')['default']
     Feladatsor: typeof import('./src/components/ViewComponents/Feladatsor.vue')['default']
     Menu: typeof import('primevue/menu')['default']
     Navigation: typeof import('./src/components/NavigationComponents/Navigation.vue')['default']

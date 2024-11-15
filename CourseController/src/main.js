@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from "./router.js";
 import PrimeVue from 'primevue/config';
 import {CourseControlPreset} from "./app-theme.js";
+import {ToastService} from "primevue";
 
 
 createApp(App)
@@ -21,5 +22,6 @@ createApp(App)
             },
         },
     })
+    .use(ToastService)
     .use(router)
     .mount('#app')

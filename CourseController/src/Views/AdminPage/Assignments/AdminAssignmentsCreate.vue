@@ -4,6 +4,12 @@
 <script setup>
 
 import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
+import {useToast} from "primevue/usetoast";
+
+const toast = useToast();
+const onUpload = () => {
+  toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+};
 </script>
 
 <template>
@@ -35,7 +41,9 @@ import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
             <option value="year2">Évfolyam 2</option>
             <option value="year3">Évfolyam 3</option>
           </select>
-          <Button class="rounded-lg" label="Feltoltes" />
+<!--          <Button class="rounded-lg" label="Feltoltes" />-->
+          <Toast />
+          <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="text/markdown" :maxFileSize="1000000" @upload="onUpload" :auto="true" chooseLabel="Browse" />
           <Button class="rounded-lg" label="Szerkesztes"/>
           <Button label="Mentés" />
         </div>

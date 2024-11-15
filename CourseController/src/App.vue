@@ -5,6 +5,7 @@
 <template>
 
   <RouterView />
+  <Toast />
 
 </template>
 

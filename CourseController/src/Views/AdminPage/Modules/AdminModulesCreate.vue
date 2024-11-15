@@ -1,9 +1,22 @@
-
-<link rel="stylesheet" href="style.css"/>
-
 <script setup>
-
 import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
+import {useToast} from "primevue/usetoast";
+import {provide, ref} from "vue";
+
+const modulesFile = ref(null);
+
+provide("modulesFile", modulesFile);
+
+const toast = useToast();
+const onUpload = () => {
+  toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+};
+
+const onFileSelect = (e) => {
+  console.log(e);
+  modulesFile.value = e.files[0];
+  toast.add({ severity: 'info', summary: 'File Selected', detail: e.files[0].name, life: 2000 });
+};
 </script>
 
 <template>
@@ -35,7 +48,7 @@ import AdminNavbar from "../../../Components/AdminComponents/AdminNavbar.vue";
             <option value="year2">Évfolyam 2</option>
             <option value="year3">Évfolyam 3</option>
           </select>
-          <Button class="rounded-lg" label="Feltoltes" />
+          <FileUpload mode="basic" name="modules[]" @select="onFileSelect" customUpload :maxFileSize="1000000" @upload="onUpload" :auto="true" chooseLabel="Feltoltes" class="w-full" />
           <Button class="rounded-lg" label="Szerkesztes"/>
           <Button label="Mentés" />
         </div>
