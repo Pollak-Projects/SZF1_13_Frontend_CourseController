@@ -9,13 +9,16 @@ import AdminUserDTOs from "@/dtos/AdminUserDTOs.ts";
 import AdminSubjectDTOs from "@/dtos/AdminSubjectDTOs.ts";
 import AdminCategoryDTOs from "@/dtos/AdminCategoryDTOs.ts";
 import AdminProfessionController from "@controllers/AdminProfessionController.ts";
-import {AdminProfessionDTO} from "@/dtos/AdminProfessionDTO.ts";
+import {AdminProfessionDTOs} from "@/dtos/AdminProfessionDTOs.ts";
+import AdminAssignmentController from "@controllers/AdminAssignmentController.ts";
+import AdminAssignmentDTOs from "@/dtos/AdminAssignmentDTOs.ts";
 
 const adminUserController = new AdminUserController()
 const adminAccessController = new AdminAccessController()
 const adminSubjectController = new AdminSubjectController()
 const adminCategoryController = new AdminCategoryController()
 const adminProfessionController = new AdminProfessionController()
+const adminAssignmentController = new AdminAssignmentController()
 
 const log = logger('admin:router')
 
@@ -47,15 +50,22 @@ adminCategoryRouter.put('/', validateParseBody(AdminCategoryDTOs.updateCategoryD
 adminCategoryRouter.delete('/', validateParseBody(AdminCategoryDTOs.updateCategoryDTO), adminCategoryController.deleteCategory)
 
 const adminProfessionRouter = express.Router()
-adminProfessionRouter.post('/', validateParseBody(AdminProfessionDTO.createProfessionDTO), adminProfessionController.createProfession)
+adminProfessionRouter.post('/', validateParseBody(AdminProfessionDTOs.createProfessionDTO), adminProfessionController.createProfession)
 adminProfessionRouter.get('/', adminProfessionController.getProfessions)
-adminProfessionRouter.put('/', validateParseBody(AdminProfessionDTO.updateProfessionDTO), adminProfessionController.updateProfession)
-adminProfessionRouter.delete('/', validateParseBody(AdminProfessionDTO.updateProfessionDTO), adminProfessionController.deleteProfession)
+adminProfessionRouter.put('/', validateParseBody(AdminProfessionDTOs.updateProfessionDTO), adminProfessionController.updateProfession)
+adminProfessionRouter.delete('/', validateParseBody(AdminProfessionDTOs.updateProfessionDTO), adminProfessionController.deleteProfession)
+
+const adminAssignmentRouter = express.Router()
+adminAssignmentRouter.post('/', validateParseBody(AdminAssignmentDTOs.createAssignmentDTO), adminAssignmentController.createAssignment)
+adminAssignmentRouter.get('/', adminAssignmentController.getAssignments)
+adminAssignmentRouter.put('/', validateParseBody(AdminAssignmentDTOs.updateAssignmentDTO), adminAssignmentController.updateAssignment)
+adminAssignmentRouter.delete('/', validateParseBody(AdminAssignmentDTOs.updateAssignmentDTO), adminAssignmentController.deleteAssignment)
 
 adminRouter.use('/user', adminUserRouter)
 adminRouter.use('/access', adminAccessRouter)
 adminRouter.use('/subject', adminSubjectRouter)
 adminRouter.use('/category', adminCategoryRouter)
 adminRouter.use('/profession', adminProfessionRouter)
+adminRouter.use('/assignment', adminAssignmentRouter)
 
 export default adminRouter

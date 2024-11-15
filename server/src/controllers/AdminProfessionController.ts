@@ -1,7 +1,7 @@
 import logger from "@logger";
 import {Request, Response} from "express";
 import {z} from "zod";
-import {AdminProfessionDTO} from "@/dtos/AdminProfessionDTO.ts";
+import {AdminProfessionDTOs} from "@/dtos/AdminProfessionDTOs.ts";
 import {PrismaClient} from "@prisma/client";
 
 const log = logger("admin:profession")
@@ -14,7 +14,7 @@ export default class AdminProfessionController {
     async createProfession(req: Request, res: Response) {
         log.http("Adding new profession")
 
-        const profession: z.infer<typeof AdminProfessionDTO.createProfessionDTO> = req.body
+        const profession: z.infer<typeof AdminProfessionDTOs.createProfessionDTO> = req.body
 
         log.silly(profession)
 
@@ -33,6 +33,21 @@ export default class AdminProfessionController {
                             },
                         })),
                     },
+                    Assignments: {
+                        connectOrCreate: profession.assignments?.map((ass) => ({
+                            where: {
+                                Id: ass,
+                            },
+                            create: {
+                                Id: ass,
+                                Name: "",
+                            }
+                        }))
+                    }
+                },
+                include: {
+                    Subjects: true,
+                    Assignments: true,
                 }
             }).catch((err) => {
                 log.error(err)
@@ -50,12 +65,17 @@ export default class AdminProfessionController {
     async getProfessions(req: Request, res: Response) {
         log.http("Getting all professions")
 
-        const profession: z.infer<typeof AdminProfessionDTO.createProfessionDTO> = req.body
+        const profession: z.infer<typeof AdminProfessionDTOs.createProfessionDTO> = req.body
 
         log.silly(profession)
 
         try {
-            const result = await orm.profession.findMany({}).catch((err) => {
+            const result = await orm.profession.findMany({
+                include: {
+                    Subjects: true,
+                    Assignments: true,
+                }
+            }).catch((err) => {
                 log.error(err)
             });
 
@@ -72,7 +92,7 @@ export default class AdminProfessionController {
     async updateProfession(req: Request, res: Response) {
         log.http("Updated profession")
 
-        const profession: z.infer<typeof AdminProfessionDTO.updateProfessionDTO> = req.body
+        const profession: z.infer<typeof AdminProfessionDTOs.updateProfessionDTO> = req.body
 
         log.silly(profession)
 
@@ -84,16 +104,39 @@ export default class AdminProfessionController {
                 data: {
                     ProfessionName: profession.professionName,
                     Subjects: {
-                        connectOrCreate: profession.subjects?.map((sub) => ({
+                        upsert: profession.subjects?.map((sub) => ({
                             where: {
                                 Id: sub,
+                            },
+                            update: {
+                                Id: sub,
+                                Name: "",
                             },
                             create: {
                                 Id: sub,
                                 Name: "",
-                            },
-                        })),
+                            }
+                        }))
                     },
+                    Assignments: {
+                        upsert: profession.assignments?.map((sub) => ({
+                            where: {
+                                Id: sub,
+                            },
+                            update: {
+                                Id: sub,
+                                Name: "",
+                            },
+                            create: {
+                                Id: sub,
+                                Name: "",
+                            }
+                        }))
+                    }
+                },
+                include: {
+                    Subjects: true,
+                    Assignments: true,
                 }
             }).catch((err) => {
                 log.error(err)
@@ -112,7 +155,7 @@ export default class AdminProfessionController {
     async deleteProfession(req: Request, res: Response) {
         log.http("Delete profession")
 
-        const profession: z.infer<typeof AdminProfessionDTO.updateProfessionDTO> = req.body
+        const profession: z.infer<typeof AdminProfessionDTOs.updateProfessionDTO> = req.body
 
         log.silly(profession)
 
@@ -123,6 +166,7 @@ export default class AdminProfessionController {
                 },
                 include: {
                     Subjects: true,
+                    Assignments: true,
                 }
             }).catch((err) => {
                 log.error(err)

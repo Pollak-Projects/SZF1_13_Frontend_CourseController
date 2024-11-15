@@ -30,9 +30,21 @@ export default class AdminCategoryController {
                             },
                         })),
                     },
+                    Assignments: {
+                        connectOrCreate: category.assignments?.map((sub) => ({
+                            where: {
+                                Id: sub,
+                            },
+                            create: {
+                                Id: sub,
+                                Name: "",
+                            },
+                        })),
+                    },
                 },
                 include: {
                     Subjects: true,
+                    Assignments: true,
                 }
             })
 
@@ -53,6 +65,7 @@ export default class AdminCategoryController {
             const allCategories = await orm.category.findMany({
                 include: {
                     Subjects: true,
+                    Assignments: true,
                 },
             })
 
@@ -91,10 +104,25 @@ export default class AdminCategoryController {
                                 Name: "",
                             },
                         }))
+                    },
+                    Assignments: {
+                        upsert: category.assignments?.map((sub) => ({
+                            where: {
+                                Id: sub,
+                            },
+                            update: {
+                                Id: sub,
+                            },
+                            create: {
+                                id: sub,
+                                Name: "",
+                            },
+                        }))
                     }
                 },
                 include: {
                     Subjects: true,
+                    Assignments: true,
                 },
             })
 
@@ -120,6 +148,7 @@ export default class AdminCategoryController {
                 },
                 include: {
                     Subjects: true,
+                    Assignments: true,
                 },
             })
 
