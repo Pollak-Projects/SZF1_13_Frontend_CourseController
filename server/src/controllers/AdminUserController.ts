@@ -78,6 +78,34 @@ export default class AdminUserController {
         }
     }
 
+    async getUserById(req: Request, res: Response) {
+        log.http("Getting user by id")
+
+        const id = req.params.id
+
+        try {
+            const user = await orm.user.findFirst({
+                where: {
+                    Id: id,
+                },
+                include: {
+                    UserData: true,
+                    TeacherUser: true,
+                }
+            }).catch((err) => {
+                log.error(err)
+            });
+
+            log.silly("All users", {json: user})
+
+            res.send(user)
+
+        } catch (err) {
+            log.error(err)
+            res.status(500).send("Internal server error")
+        }
+    }
+
     // TODO this is probably wrong, will not update values
     async updateUser(req: Request, res: Response) {
         log.http("Updating user")
