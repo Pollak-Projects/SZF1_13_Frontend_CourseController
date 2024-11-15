@@ -11,22 +11,31 @@ const filteredUsers = computed(() => {
 });
 
 const getUsers = async () => {
-  users.value = [
-    { id: 1, username: 'Geza1', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza2', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza3', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza4', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza5', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza6', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza7', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza8', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza9', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-    { id: 1, username: 'Geza10', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
-  ];
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/user`);
+  users.value  = await response.json();
+  // users.value = [
+  //   { id: 1, username: 'Geza1', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza2', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza3', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza4', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza5', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza6', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza7', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza8', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza9', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza10', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  // ];
 };
 
 const deleteUser = async (id) => {
-  // Implement delete logic here
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/user`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id }),
+  });
+  console.log(await response.json());
 };
 
 const editUser = (id) => {
