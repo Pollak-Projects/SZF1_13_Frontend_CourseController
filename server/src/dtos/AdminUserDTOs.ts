@@ -3,6 +3,7 @@ import {z} from "zod";
 export default class AdminUserDTOs {
     static createUserDTO = z.object({
         username: z.string(),
+        displayName: z.string(),
         hashedPwd: z.string(),
         email: z.string(),
         birthDate: z.coerce.date(),
@@ -14,5 +15,8 @@ export default class AdminUserDTOs {
         hashedPwd: z.string(),
         email: z.string(),
         birthDate: z.coerce.date(),
+        displayName: z.string(),
+        teacherId: z.string(),
+        teacherName: z.string().optional(),
     })
 }

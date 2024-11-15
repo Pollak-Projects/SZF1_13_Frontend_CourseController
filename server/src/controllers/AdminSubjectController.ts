@@ -36,10 +36,10 @@ export default class AdminSubjectController {
                     Profession: {
                         connectOrCreate: {
                             where: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                             create: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                         },
                     },
@@ -146,13 +146,13 @@ export default class AdminSubjectController {
                     Profession: {
                         upsert: {
                             where: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                             update: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                             create: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                         },
                     },
