@@ -2,7 +2,9 @@ import express from 'express';
 import {config} from "dotenv";
 import logger from "@logger";
 import adminRouter from "@routers/AdminRouter.ts";
+import teacherRouter from "@routers/TeacherRouter.ts";
 import bodyParser from "body-parser";
+import cors from 'cors';
 
 const debug = logger('server:express')
 
@@ -10,9 +12,13 @@ const app = express();
 
 config(); // Dotenv init
 
+app.use(cors())
+
 app.use(bodyParser.json())
 
 app.use('/admin', adminRouter)
+
+app.use('/teacher', teacherRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

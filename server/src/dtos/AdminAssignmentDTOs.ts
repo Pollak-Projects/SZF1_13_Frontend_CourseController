@@ -1,7 +1,7 @@
 import {z} from "zod";
 
-export default class AdminSubjectDTOs {
-    static createSubjectDTO = z.object({
+export default class AdminAssignmentDTOs {
+    static createAssignmentDTO = z.object({
         Name: z.string(),
         Content: z.string(),
         Grade: z.string(),
@@ -11,7 +11,7 @@ export default class AdminSubjectDTOs {
         TeacherId: z.string(),
     })
 
-    static updateSubjectDTO = z.object({
+    static updateAssignmentDTO = z.object({
         Id: z.string(),
         Name: z.string(),
         Content: z.string(),

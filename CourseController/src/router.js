@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from 'vue-router'
-
 // TODO someday replace this with an auto generated router
 // pain in the butt to batch add new routes
 const routes = [
@@ -11,25 +10,36 @@ const routes = [
     { path: '/login', component: () => import("./Views/LoginPage/Login.vue") },
     { path: '/edit', component: () => import("./Views/AdminPage/AddUpdate.vue") },
     { path: '/view', component: () => import("./Views/ViewPage/View.vue") },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import("./Views/NotFound.vue") },
     {
         path: '/admin',
         component: () => import("./Views/AdminPage/Admin.vue"),
-        redirect: '/admin/modules',
         children: [{
-            path: 'modules',
-            name: 'Modules',
-            component: () => import("./Views/AdminPage/AdminModules.vue"),
+            path: 'modules-create',
+            name: 'ModulesCreate',
+            component: () => import("./Views/AdminPage/Modules/AdminModulesCreate.vue"),
         },{
-            path: 'assignments',
-            name: 'Assignments',
-            component: () => import("./Views/AdminPage/AdminAssignments.vue"),
+            path: 'modules-list',
+            name: 'ModulesList',
+            component: () => import("./Views/AdminPage/Modules/AdminModulesList.vue"),
         },{
-            path: 'users',
-            name: 'Users',
-            component: () => import("./Views/AdminPage/AdminUsers.vue"),
+            path: 'assignments-create',
+            name: 'AssignmentsCreate',
+            component: () => import("./Views/AdminPage/Assignments/AdminAssignmentsCreate.vue"),
+        },{
+            path: 'assignments-list',
+            name: 'AssignmentsList',
+            component: () => import("./Views/AdminPage/Assignments/AdminAssignmentsList.vue"),
+        },{
+            path: 'users-create',
+            name: 'UsersCreate',
+            component: () => import("./Views/AdminPage/Users/AdminUsersCreate.vue"),
+        },{
+            path: 'users-list',
+            name: 'UsersList',
+            component: () => import("./Views/AdminPage/Users/AdminUsersList.vue"),
         }]
     },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import("./Views/NotFound.vue") },
 ]
 
 const router = createRouter({

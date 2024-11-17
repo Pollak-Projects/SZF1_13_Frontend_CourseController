@@ -8,7 +8,6 @@ const log = logger("admin:user")
 
 const orm = new PrismaClient()
 
-// TODO refactor this to try catch
 export default class AdminUserController {
 
     async createUser(req: Request, res: Response)  {
@@ -21,14 +20,24 @@ export default class AdminUserController {
         try{
             const result = await orm.user.create({
                 data: {
-                    username: user.username,
-                    hashedPwd: user.hashedPwd,
+                    Username: user.username,
+                    HashedPwd: user.hashedPwd,
+                    DisplayName: user.displayName,
                     UserData: {
                         create: {
-                            email: user.email,
-                            birthDate: user.birthDate,
+                            Email: user.email,
+                            BirthDate: user.birthDate,
                         },
                     },
+                    TeacherUser: {
+                        create: {
+                            Teacher: {
+                                create: {
+                                    Name: user.username
+                                }
+                            }
+                        }
+                    }
                 },
             }).catch((err) => {
                 log.error(err)
@@ -37,7 +46,7 @@ export default class AdminUserController {
             log.silly("Added user:", {json: result})
 
 
-            res.send(user)
+            res.send(result)
         }
         catch(err) {
             log.error(err)
@@ -53,7 +62,7 @@ export default class AdminUserController {
             const users = await orm.user.findMany({
                 include: {
                     UserData: true,
-                    TanarInfo: true,
+                    TeacherUser: true,
                 }
             }).catch((err) => {
                 log.error(err)
@@ -62,6 +71,34 @@ export default class AdminUserController {
             log.silly("All users", {json: users})
 
             res.send(users)
+
+        } catch (err) {
+            log.error(err)
+            res.status(500).send("Internal server error")
+        }
+    }
+
+    async getUserById(req: Request, res: Response) {
+        log.http("Getting user by id")
+
+        const id = req.params.id
+
+        try {
+            const user = await orm.user.findFirst({
+                where: {
+                    Id: id,
+                },
+                include: {
+                    UserData: true,
+                    TeacherUser: true,
+                }
+            }).catch((err) => {
+                log.error(err)
+            });
+
+            log.silly("All users", {json: user})
+
+            res.send(user)
 
         } catch (err) {
             log.error(err)
@@ -79,24 +116,51 @@ export default class AdminUserController {
 
             const users = await orm.user.update({
                 where: {
-                    id: user.id,
+                    Id: user.id,
                 },
                 data: {
-                    username: user.username,
-                    hashedPwd: user.hashedPwd,
+                    Username: user.username,
+                    HashedPwd: user.hashedPwd,
+                    DisplayName: user.displayName,
                     UserData: {
                         connectOrCreate: {
                             where: {
-                                userId: user.id,
-                                email: user.email,
-                                birthDate: user.birthDate,
+                                UserId: user.id,
+                                Email: user.email,
+                                BirthDate: user.birthDate,
                             },
                             create: {
-                                email: user.email,
-                                birthDate: user.birthDate,
+                                Email: user.email,
+                                BirthDate: user.birthDate,
                             }
                         },
                     },
+                    TeacherUser: {
+                        upsert: {
+                            where: {
+                                UserId_TeacherId: {
+                                    UserId: user.id,
+                                    TeacherId: user.teacherId,
+                                }
+                            },
+                            update: {
+                                TeacherId: user.teacherId,
+                            },
+                            create: {
+                                Teacher: {
+                                    connectOrCreate: {
+                                        where: {
+                                            Id: user.teacherId,
+                                        },
+                                        create: {
+                                            Id: user.teacherId,
+                                            Name: user.teacherName!
+                                        }
+                                    }
+                                }
+                            },
+                        }
+                    }
                 },
             })
 
@@ -119,10 +183,11 @@ export default class AdminUserController {
 
         const deletedUser = await orm.user.delete({
             where: {
-                id: user.id,
+                Id: user.id,
             },
             include: {
                 UserData: true,
+                TeacherUser: true,
             }
         })
 
