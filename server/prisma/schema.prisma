@@ -135,3 +135,11 @@ model Profession {
   Subjects    Subject[]
   Assignments Assignment[]
 }
+
+model Grade {
+  Id             String @id @default(uuid())
+  GradeName String @unique
+
+  Subjects    Subject[]
+  Assignments Assignment[]
+}
