@@ -14,7 +14,7 @@
 ## ViewPage
 
 - Members: Huszár Imre, Héja Gábor
-- I Don't know the details since the commint messages are the followings: "Idk what is this",  "Új funkció", etc..
+- I Don't know the details since the commint messages are the followings: "Idk what is this",  "Új funkció", "Add files via upload" etc..
 
 ## ListingPage
 
