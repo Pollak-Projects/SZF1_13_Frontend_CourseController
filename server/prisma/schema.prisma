@@ -42,6 +42,7 @@ model UserData {
   BirthDate DateTime
 }
 
+// MODULOK
 model Subject {
   Id          String   @id @default(uuid())
   Name        String
@@ -60,6 +61,7 @@ model Subject {
   TeacherSubject TeacherSubject[]
 }
 
+// FELADATOK
 model Assignment {
   Id          String   @id @default(uuid())
   Name        String
@@ -117,6 +119,7 @@ model TeacherUser {
   @@id([UserId, TeacherId])
 }
 
+// KATEGORIA
 model Category {
   Id           String @id @default(uuid())
   CategoryName String @unique
@@ -124,7 +127,7 @@ model Category {
   Subjects    Subject[]
   Assignments Assignment[]
 }
-
+ // SZAKMA
 model Profession {
   Id             String @id @default(uuid())
   ProfessionName String @unique
