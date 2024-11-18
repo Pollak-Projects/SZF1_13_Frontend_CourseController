@@ -19,7 +19,7 @@
 ## ListingPage
 
 - Members: Hubert Gyula Áron, Korom Levente
-- Their last commits were in the first half of October (oct. 7-8, literally the first documetations which was used to plan the basic components which we were going to use) 💀💀💀💀 
+- Their last commits were in the first half of October (oct. 7-8, literally the first documetations which was used to plan the basic components which ones we were going to use) 💀💀💀💀 
 - Klepi did all their tasks 
 
 ## Add/Update
