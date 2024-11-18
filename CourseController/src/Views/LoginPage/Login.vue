@@ -22,10 +22,6 @@
           :disabled="!isFormValid"
           @click="isFormValid && handleLogin"
         >
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
           Belépés
         </a>
         <router-link to="/listing">
