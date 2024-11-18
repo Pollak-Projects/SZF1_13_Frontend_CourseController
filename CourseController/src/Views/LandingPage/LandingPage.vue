@@ -82,9 +82,6 @@ li {
 .router-link {
   text-decoration: underline;
 }
-.containerr{
-  --_mesh-gradient-blur: 100px;
-  --_mesh-gradient-blend-mode: normal;
 
 
 </style>
