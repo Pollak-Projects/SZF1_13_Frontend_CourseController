@@ -5,7 +5,7 @@
         <button @click="toggleProfileMenu" class="user-icon">👤</button>
         <div v-if="showProfileMenu" class="profile-dropdown">
           <button @click="navigateTo('/')">Főoldal</button>
-          <button @click="navigateTo('/admin')">Admin</button>
+        <button @click="navigateTo('/admin/modules-create')">Admin</button>
           <button @click="logout">Kijelentkezés</button>
         </div>
       </div>
