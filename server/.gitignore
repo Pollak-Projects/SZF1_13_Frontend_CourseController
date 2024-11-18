@@ -3,3 +3,4 @@ node_modules
 
 prisma/migrations
 prisma/db.sqlite
+prisma/db.sqlite-journal

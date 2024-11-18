@@ -1,6 +1,5 @@
-import {Prisma} from "@prisma/client";
 import logger from "@logger"
-import {NextFunction, Request, RequestHandler, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import {ZodObject} from "zod";
 
 const log = logger("middleware:prismaParse")
@@ -11,7 +10,7 @@ export const validateParseBody = (customDTO: ZodObject<any, any, any, any, any>)
             req.body = customDTO.parse(req.body);
         } catch (e) {
             log.error("Failed to parse body", e)
-            res.status(400).send('Failed to parse body')
+            res.status(400).send(e);
             next('Failed to parse body');
         }
         next();

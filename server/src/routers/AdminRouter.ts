@@ -2,17 +2,23 @@ import express from "express";
 import AdminUserController from "@controllers/AdminUserController.ts";
 import AdminAccessController from "@controllers/AdminAccessController.ts";
 import AdminSubjectController from "@controllers/AdminSubjectController.ts";
-import AdminTopicController from "@controllers/AdminTopicController.ts";
+import AdminCategoryController from "@controllers/AdminCategoryController.ts";
 import logger from "@logger"
 import {validateParseBody} from "@middlewares/ValidateParseMiddleware.ts";
 import AdminUserDTOs from "@/dtos/AdminUserDTOs.ts";
 import AdminSubjectDTOs from "@/dtos/AdminSubjectDTOs.ts";
-import AdminTopicDTOs from "@/dtos/AdminTopicDTOs.ts";
+import AdminCategoryDTOs from "@/dtos/AdminCategoryDTOs.ts";
+import AdminProfessionController from "@controllers/AdminProfessionController.ts";
+import {AdminProfessionDTOs} from "@/dtos/AdminProfessionDTOs.ts";
+import AdminAssignmentController from "@controllers/AdminAssignmentController.ts";
+import AdminAssignmentDTOs from "@/dtos/AdminAssignmentDTOs.ts";
 
 const adminUserController = new AdminUserController()
 const adminAccessController = new AdminAccessController()
 const adminSubjectController = new AdminSubjectController()
-const adminTopicController = new AdminTopicController()
+const adminCategoryController = new AdminCategoryController()
+const adminProfessionController = new AdminProfessionController()
+const adminAssignmentController = new AdminAssignmentController()
 
 const log = logger('admin:router')
 
@@ -21,8 +27,9 @@ const adminRouter = express.Router()
 const adminUserRouter = express.Router()
 adminUserRouter.post('/', validateParseBody(AdminUserDTOs.createUserDTO), adminUserController.createUser)
 adminUserRouter.get('/', adminUserController.getUsers)
+adminUserRouter.get('/:id', adminUserController.getUserById)
 adminUserRouter.put('/', validateParseBody(AdminUserDTOs.updateUserDTO), adminUserController.updateUser)
-adminUserRouter.delete('/', validateParseBody(AdminUserDTOs.createUserDTO), adminUserController.deleteUser)
+adminUserRouter.delete('/:id', adminUserController.deleteUser)
 
 const adminAccessRouter = express.Router()
 adminAccessRouter.post('/', adminAccessController.createAccess)
@@ -35,17 +42,34 @@ adminSubjectRouter.post('/', validateParseBody(AdminSubjectDTOs.createSubjectDTO
 adminSubjectRouter.get('/', adminSubjectController.getSubjects)
 adminSubjectRouter.get('/:id', adminSubjectController.getSubjectById)
 adminSubjectRouter.put('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.updateSubject)
-adminSubjectRouter.delete('/', validateParseBody(AdminSubjectDTOs.updateSubjectDTO), adminSubjectController.deleteSubject)
+adminSubjectRouter.delete('/:id', adminSubjectController.deleteSubject)
 
-const adminTopicRouter = express.Router()
-adminTopicRouter.post('/', validateParseBody(AdminTopicDTOs.createTopicDTO), adminTopicController.createTopic)
-adminTopicRouter.get('/', adminTopicController.getTopics)
-adminTopicRouter.put('/', validateParseBody(AdminTopicDTOs.updateTopicDTO), adminTopicController.updateTopics)
-adminTopicRouter.delete('/', validateParseBody(AdminTopicDTOs.updateTopicDTO), adminTopicController.deleteTopic)
+const adminCategoryRouter = express.Router()
+adminCategoryRouter.post('/', validateParseBody(AdminCategoryDTOs.createCategoryDTO), adminCategoryController.createCategory)
+adminCategoryRouter.get('/', adminCategoryController.getCategories)
+adminCategoryRouter.get('/', adminCategoryController.getCategoryById)
+adminCategoryRouter.put('/', validateParseBody(AdminCategoryDTOs.updateCategoryDTO), adminCategoryController.updateCategory)
+adminCategoryRouter.delete('/:id', adminCategoryController.deleteCategory)
+
+const adminProfessionRouter = express.Router()
+adminProfessionRouter.post('/', validateParseBody(AdminProfessionDTOs.createProfessionDTO), adminProfessionController.createProfession)
+adminProfessionRouter.get('/', adminProfessionController.getProfessions)
+adminProfessionRouter.get('/:id', adminProfessionController.getProfessionById)
+adminProfessionRouter.put('/', validateParseBody(AdminProfessionDTOs.updateProfessionDTO), adminProfessionController.updateProfession)
+adminProfessionRouter.delete('/:id', adminProfessionController.deleteProfession)
+
+const adminAssignmentRouter = express.Router()
+adminAssignmentRouter.post('/', validateParseBody(AdminAssignmentDTOs.createAssignmentDTO), adminAssignmentController.createAssignment)
+adminAssignmentRouter.get('/', adminAssignmentController.getAssignments)
+adminAssignmentRouter.get('/:id', adminAssignmentController.getAssignmentById)
+adminAssignmentRouter.put('/', validateParseBody(AdminAssignmentDTOs.updateAssignmentDTO), adminAssignmentController.updateAssignment)
+adminAssignmentRouter.delete('/:id', adminAssignmentController.deleteAssignment)
 
 adminRouter.use('/user', adminUserRouter)
 adminRouter.use('/access', adminAccessRouter)
 adminRouter.use('/subject', adminSubjectRouter)
-adminRouter.use('/topic', adminTopicRouter)
+adminRouter.use('/category', adminCategoryRouter)
+adminRouter.use('/profession', adminProfessionRouter)
+adminRouter.use('/assignment', adminAssignmentRouter)
 
 export default adminRouter

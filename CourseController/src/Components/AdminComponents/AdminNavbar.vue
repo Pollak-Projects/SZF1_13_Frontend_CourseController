@@ -1,7 +1,6 @@
 <script setup>
 
 import {inject, ref} from "vue";
-import AdminModuleListing from "./AdminListing/AdminModuleListing.vue";
 
 const isAdmin = inject("isAdmin")
 
@@ -57,11 +56,11 @@ const showUsersDropdown = ref(false);
           <RouterLink to="/admin/assignments-create"
                       class="block px-4 py-2 hover:text-gray-100 hover:bg-purple-600"
                       @click.native="showAssignmentsDropdown = false"
-          >Create</RouterLink>
+          >Létrehozás</RouterLink>
           <RouterLink to="/admin/assignments-list"
                       class="block px-4 py-2 hover:text-gray-100 hover:bg-purple-600"
                       @click.native="showAssignmentsDropdown = false"
-          >List</RouterLink>
+          >Listázás</RouterLink>
         </div>
       </div>
 
@@ -83,11 +82,11 @@ const showUsersDropdown = ref(false);
           <RouterLink to="/admin/users-create"
                       class="block px-4 py-2 hover:text-gray-100 hover:bg-purple-600"
                       @click.native="showUsersDropdown = false"
-          >Create</RouterLink>
+          >Létrehozás</RouterLink>
           <RouterLink to="/admin/users-list"
                       class="block px-4 py-2 hover:text-gray-100 hover:bg-purple-600"
                       @click.native="showUsersDropdown = false"
-          >List</RouterLink>
+          >Listázás</RouterLink>
         </div>
       </div>
     </div>

@@ -36,10 +36,10 @@ export default class AdminSubjectController {
                     Profession: {
                         connectOrCreate: {
                             where: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                             create: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                         },
                     },
@@ -53,7 +53,7 @@ export default class AdminSubjectController {
 
             log.silly("Created new subject", {json: createdSubject})
 
-            res.send(subject);
+            res.send(createdSubject);
 
         } catch (e) {
             log.error(e)
@@ -146,13 +146,13 @@ export default class AdminSubjectController {
                     Profession: {
                         upsert: {
                             where: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                             update: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                             create: {
-                                Name: subject.Profession,
+                                ProfessionName: subject.Profession,
                             },
                         },
                     },
@@ -192,14 +192,14 @@ export default class AdminSubjectController {
     async deleteSubject(req: Request, res: Response)  {
         log.http("Deleting subject")
 
-        const subject: z.infer<typeof AdminSubjectDTOs.updateSubjectDTO> = req.body
+        const id = req.params.id
 
-        log.silly("Deleting subject", {json: subject});
+        log.silly("Deleting subject", id);
 
         try {
             const deletedSubject = await orm.subject.delete({
                 where: {
-                    Id: subject.Id
+                    Id: id
                 },
                 include: {
                     Category: true,

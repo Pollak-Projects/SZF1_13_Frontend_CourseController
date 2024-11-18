@@ -25,13 +25,13 @@ datasource db {
 
 model User {
   Id         String   @id @default(uuid())
-  Username       String
-  HashedPwd      String // won't be hashed for now
-  Displayed_name String
+  Username    String
+  HashedPwd   String // won't be hashed for now
+  DisplayName String
   Created_at DateTime @default(now())
   Updated_at DateTime @updatedAt
-  UserData       UserData[]
-  TeacherUser    TeacherUser[]
+  UserData    UserData[]
+  TeacherUser TeacherUser[]
 }
 
 model UserData {
@@ -60,6 +60,24 @@ model Subject {
   TeacherSubject TeacherSubject[]
 }
 
+model Assignment {
+  Id          String   @id @default(uuid())
+  Name        String
+  Content     String?
+  Grade       String?
+  Description String?
+  CreatedAt   DateTime @default(now())
+  UpdatedAt   DateTime @updatedAt
+
+  CategoryId   String
+  ProfessionId String
+
+  Category   Category?   @relation(fields: [CategoryId], references: [Id], onDelete: Cascade)
+  Profession Profession? @relation(fields: [ProfessionId], references: [Id], onDelete: Cascade)
+
+  TeacherAssignment TeacherAssignment[]
+}
+
 model TeacherSubject {
   SubjectId String
   TeacherId String
@@ -70,12 +88,23 @@ model TeacherSubject {
   @@id([TeacherId, SubjectId])
 }
 
+model TeacherAssignment {
+  AssignmentId String
+  TeacherId    String
+
+  Assignment Assignment @relation(fields: [AssignmentId], references: [Id], onDelete: Cascade)
+  Teacher    Teacher    @relation(fields: [TeacherId], references: [Id], onDelete: Cascade)
+
+  @@id([TeacherId, AssignmentId])
+}
+
 model Teacher {
   Id   String @id @default(uuid())
   Name String
 
-  TeacherSubject TeacherSubject[]
-  TeacherUser    TeacherUser[]
+  TeacherSubject    TeacherSubject[]
+  TeacherAssignment TeacherAssignment[]
+  TeacherUser       TeacherUser[]
 }
 
 model TeacherUser {
@@ -92,12 +121,14 @@ model Category {
   Id           String @id @default(uuid())
   CategoryName String @unique
 
-  Subjects Subject[]
+  Subjects    Subject[]
+  Assignments Assignment[]
 }
 
 model Profession {
-  Id   String @id @default(uuid())
-  Name String @unique
+  Id             String @id @default(uuid())
+  ProfessionName String @unique
 
-  Subject Subject[]
+  Subjects    Subject[]
+  Assignments Assignment[]
 }

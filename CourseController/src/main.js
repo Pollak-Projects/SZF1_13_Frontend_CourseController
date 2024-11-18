@@ -1,23 +1,27 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import './style.css'
 import 'primeicons/primeicons.css'
 import App from './App.vue'
 import router from "./router.js";
 import PrimeVue from 'primevue/config';
-import Aura from '@primevue/themes/aura';
+import {CourseControlPreset} from "./app-theme.js";
+import {ToastService} from "primevue";
+
 
 createApp(App)
     .use(PrimeVue, {
-        unstyled: true,
+        // unstyled: true,
         theme: {
-            preset: Aura,
+            preset: CourseControlPreset,
             options: {
+                darkModeSelector: false,
                 cssLayer: {
                     name: 'primevue',
-                    order: 'tailwind-base, primevue, tailwind-utilities'
-                }
-            }
-        }
+                    order: 'tailwind-base, primevue, tailwind-utilities',
+                },
+            },
+        },
     })
+    .use(ToastService)
     .use(router)
     .mount('#app')

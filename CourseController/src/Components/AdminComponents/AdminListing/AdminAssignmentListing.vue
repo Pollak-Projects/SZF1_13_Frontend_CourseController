@@ -1,20 +1,20 @@
 <script setup>
 import {computed, onMounted, ref} from 'vue';
 
-const modules = ref([]);
+const assignments = ref([]);
 const searchQuery = ref('');
+const deletedWords = ref([]);
 
-const filteredModules = computed(() => {
-  return modules.value.filter(module =>
-      module.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+const filteredAssignments = computed(() => {
+  return assignments.value.filter(assignment =>
+      assignment.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
-const getModules = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/subject`);
-  modules.value  = await response.json();
-
-  // modules.value = [
+const getAssignments = async () => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/assignment`);
+  assignments.value  = await response.json();
+  // assignments.value = [
   //   { id: 1, name: 'Express alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
   //   { id: 1, name: 'Java alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
   //   { id: 1, name: 'C# alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
@@ -25,36 +25,37 @@ const getModules = async () => {
   // ];
 };
 
-const deleteModule = async (id) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/subject/${id}`, {
+const deleteAssignment = async (id) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/assignment/${id}`, {
     method: 'DELETE',
   });
   console.log(await response.json());
 };
 
-const editModule = (id) => {
+const editAssignment = (id) => {
   // Implement edit logic here
 };
 
 onMounted(async () => {
   try {
-    await getModules();
+    await getAssignments();
   } catch (error) {
     console.log("Hiba a betöltés során!", error);
   }
 });
+
 </script>
 
 <template>
   <div class="content-body">
-    <h2 class="form-title">Modulok</h2>
-    <div v-if="modules.length <= 0">
-      <h1 class="form-title">Nincsenek elérhető modulok</h1>
+    <h2 class="form-title">Feladatok</h2>
+    <div v-if="assignments.length <= 0">
+      <h1 class="form-title">Nincsenek elérhető feladatok</h1>
     </div>
-    <div v-if="modules.length > 0" class="search-container">
+    <div v-if="assignments.length > 0" class="search-container">
       <input v-model="searchQuery" type="text" placeholder="Keresés" class="search-input" />
     </div>
-    <div v-if="modules.length > 0" class="table-container">
+    <div v-if="assignments.length > 0" class="table-container">
       <table class="category-table">
         <thead>
           <tr>
@@ -70,21 +71,21 @@ onMounted(async () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(module, index) in filteredModules" :key="index">
-            <td>{{ module.id }}</td>
-            <td>{{ module.name }}</td>
-            <td>{{ module.grade }}</td>
-            <td>{{ module.description }}</td>
-            <td>{{ module.categoryName }}</td>
-            <td>{{ module.professionName }}</td>
-            <td>{{ module.createdAt }}</td>
+          <tr v-for="(assignment, index) in filteredAssignments" :key="index">
+            <td>{{ assignment.id }}</td>
+            <td>{{ assignment.name }}</td>
+            <td>{{ assignment.grade }}</td>
+            <td>{{ assignment.description }}</td>
+            <td>{{ assignment.categoryName }}</td>
+            <td>{{ assignment.professionName }}</td>
+            <td>{{ assignment.createdAt }}</td>
             <td>
-              <button @click="editModule(module.id)" class="delete-button">
+              <button @click="editAssignment(assignment.id)" class="delete-button">
                 Edit
               </button>
             </td>
             <td>
-              <button @click="deleteModule(module.id)" class="delete-button">
+              <button @click="deleteAssignment(assignment.id)" class="delete-button">
                 Törlés
               </button>
             </td>

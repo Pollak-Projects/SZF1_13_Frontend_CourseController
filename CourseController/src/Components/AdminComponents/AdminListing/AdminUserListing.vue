@@ -1,44 +1,46 @@
 <script setup>
 import {computed, onMounted, ref} from 'vue';
 
-const modules = ref([]);
+const users = ref([]);
 const searchQuery = ref('');
 
-const filteredModules = computed(() => {
-  return modules.value.filter(module =>
-      module.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+const filteredUsers = computed(() => {
+  return users.value.filter(user =>
+      user.username.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
-const getModules = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/subject`);
-  modules.value  = await response.json();
-
-  // modules.value = [
-  //   { id: 1, name: 'Express alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-  //   { id: 1, name: 'Java alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-  //   { id: 1, name: 'C# alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-  //   { id: 1, name: 'HTML alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-  //   { id: 1, name: 'CSS alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-  //   { id: 1, name: 'PHP alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
-  //   { id: 1, name: 'Random alapok', description: 'almavagyok', grade: '13', createdAt: '2024.06.25 12:00:00', categoryName: 'Backend', professionName: 'Szoftverfejleszto' },
+const getUsers = async () => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/user`);
+  users.value  = await response.json();
+  // users.value = [
+  //   { id: 1, username: 'Geza1', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza2', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza3', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza4', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza5', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza6', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza7', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza8', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza9', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
+  //   { id: 1, username: 'Geza10', displayName: 'almavagyok', email: 'janipatrik138@gmail.com', createdAt: '2024.06.25 12:00:00' },
   // ];
 };
 
-const deleteModule = async (id) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/subject/${id}`, {
+const deleteUser = async (id) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/user/${id}`, {
     method: 'DELETE',
   });
   console.log(await response.json());
 };
 
-const editModule = (id) => {
+const editUser = (id) => {
   // Implement edit logic here
 };
 
 onMounted(async () => {
   try {
-    await getModules();
+    await getUsers();
   } catch (error) {
     console.log("Hiba a betöltés során!", error);
   }
@@ -47,44 +49,40 @@ onMounted(async () => {
 
 <template>
   <div class="content-body">
-    <h2 class="form-title">Modulok</h2>
-    <div v-if="modules.length <= 0">
-      <h1 class="form-title">Nincsenek elérhető modulok</h1>
+    <h2 class="form-title">Felhasználók</h2>
+    <div v-if="users.length <= 0">
+      <h1 class="form-title">Nincsenek elérhető felhasználók</h1>
     </div>
-    <div v-if="modules.length > 0" class="search-container">
+    <div v-if="users.length > 0" class="search-container">
       <input v-model="searchQuery" type="text" placeholder="Keresés" class="search-input" />
     </div>
-    <div v-if="modules.length > 0" class="table-container">
+    <div v-if="users.length > 0" class="table-container">
       <table class="category-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Grade</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Profession</th>
+            <th>Username</th>
+            <th>Displayed Name</th>
+            <th>Email</th>
             <th>CreatedAt</th>
             <th>Operation</th>
             <th>Operation</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(module, index) in filteredModules" :key="index">
-            <td>{{ module.id }}</td>
-            <td>{{ module.name }}</td>
-            <td>{{ module.grade }}</td>
-            <td>{{ module.description }}</td>
-            <td>{{ module.categoryName }}</td>
-            <td>{{ module.professionName }}</td>
-            <td>{{ module.createdAt }}</td>
+          <tr v-for="(user, index) in filteredUsers" :key="index">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.displayName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.createdAt }}</td>
             <td>
-              <button @click="editModule(module.id)" class="delete-button">
+              <button @click="editUser(user.id)" class="delete-button">
                 Edit
               </button>
             </td>
             <td>
-              <button @click="deleteModule(module.id)" class="delete-button">
+              <button @click="deleteUser(user.id)" class="delete-button">
                 Törlés
               </button>
             </td>
