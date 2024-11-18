@@ -19,8 +19,8 @@ generator client {
 
 // Im definitly not gonna use mysql
 datasource db {
-  provider = "sqlite"
-  url      = "file:./db.sqlite"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {

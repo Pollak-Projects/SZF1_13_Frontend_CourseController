@@ -5,7 +5,7 @@ import {validateParseBody} from "@middlewares/ValidateParseMiddleware.ts";
 import {Prisma} from "@prisma/client";
 import TeacherUserDTOs from "@/dtos/TeacherUserDTOs.ts"; // AdminUserDTOs helyett
 import TeacherSubjectDTOs from "@/dtos/TeacherSubjectDTOs.ts"; // AdminSubjectDTOs helyett
-import TeacherTopicDTOs from "@/dtos/TeacherTopicDTOs.ts"; // AdminTopicDTOs helyett
+import TeacherCategoryDTOs from "@/dtos/TeacherCategoryDTOs.ts"; // AdminTopicDTOs helyett
 
 const teacherSubjectController = new TeacherSubjectController(); // AdminSubjectController helyett
 
